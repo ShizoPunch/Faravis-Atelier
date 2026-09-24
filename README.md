@@ -22,7 +22,7 @@ python studio/studio.py gelen/*.jpg --scene golge --format story
 
 | Seçenek | Değerler |
 |---|---|
-| `--scene` | Yandan çekim: `kum` · `keten` · `mermer` · `pudra` · `adacayi` · `golge` · `kemer` · `gece`<br>Üstten çekim (flat-lay): `zeytin` · `kadife` · `kil` · `traverten` · `serme` · `isik` |
+| `--scene` | Yandan çekim: `kum` · `keten` · `mermer` · `pudra` · `adacayi` · `golge` · `kemer` · `gece`<br>Üstten çekim (flat-lay): `zeytin` · `lacivert` · `beton` · `kadife` · `kil` · `traverten` · `serme` · `isik` |
 | `--format` | `portrait` 1080×1350 (varsayılan) · `square` 1080×1080 · `story` 1080×1920 |
 | `--title`, `--subtitle` | Alt kısma serif başlık + harf aralıklı alt başlık |
 | `--no-logo` | FARAVIS ATELIER logosunu kaldırır |
@@ -46,7 +46,9 @@ python studio/studio.py gelen/*.jpg --scene golge --format story
 
 | Sahne | His | En iyi olduğu ürünler |
 |---|---|---|
-| **zeytin** | Derin zeytin yeşili | Açık ahşap + altın (askılar). **Şu an en güçlü sahne** |
+| **zeytin** | Derin zeytin yeşili | Açık ahşap + altın detay. **Altın askılarda en güçlüsü** |
+| **lacivert** | Derin lacivert, terzi dili | Krom/gümüş detaylı ürünler. **Krom askılarda en güçlüsü** |
+| **beton** | Sıcak gri sıva, sade | Krom/gümüş, minimal ürünler |
 | **kadife** | Koyu espresso | Altın/pirinç detaylar, lüks algı |
 | **kil** | Terrakota, sıcak | Açık tonlu ürünler, yaz koleksiyonu |
 | **traverten** · **serme** · **isik** | Açık taş / keten / pencere ışığı | Koyu renkli ürünler (açık ürünlerde kontrast düşer) |

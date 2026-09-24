@@ -309,6 +309,16 @@ def scene_kil(w, h):
     return flat_plaster(w, h, "#B98A6E", PAL["ivory"], 0.7, 43)
 
 
+def scene_beton(w, h):
+    """Sıcak gri mineral sıva — krom/gümüş detaylarla uyumlu, sade."""
+    return flat_plaster(w, h, "#A9A39B", PAL["charcoal"], 0.6, 45)
+
+
+def scene_lacivert(w, h):
+    """Derin lacivert — klasik erkek terzi (tailoring) dili; krom + ahşapla güçlü."""
+    return flat_plaster(w, h, "#2C3440", PAL["ivory"], 0.85, 47)
+
+
 def scene_kadife(w, h):
     """Koyu espresso kadife — altın detayları parlatır."""
     col = flat_light(w, h, "#2F2622", 0.0)
@@ -333,6 +343,8 @@ SCENES = {
     "kadife": scene_kadife,
     "zeytin": scene_zeytin,
     "kil": scene_kil,
+    "beton": scene_beton,
+    "lacivert": scene_lacivert,
 }
 
 
