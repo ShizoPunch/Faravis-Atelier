@@ -2,7 +2,7 @@
 
 Ürün fotoğraflarını markaya uygun Instagram gönderilerine dönüştüren araç.
 
-**Ne yapar:** arka planı yapay zekâyla kaldırır → markanın sahnelerinden birine yerleştirir →
+**Ne yapar:** arka planı yapay zekâyla (BiRefNet) kaldırır → markanın sahnelerinden birine yerleştirir →
 gerçekçi temas + düşen gölge ekler → logo ve başlık basar → Instagram ölçüsünde JPG verir.
 
 ## Kullanım
@@ -22,11 +22,12 @@ python studio/studio.py gelen/*.jpg --scene golge --format story
 
 | Seçenek | Değerler |
 |---|---|
-| `--scene` | `kum` · `keten` · `mermer` · `pudra` · `adacayi` · `golge` · `kemer` · `gece` |
+| `--scene` | Yandan çekim: `kum` · `keten` · `mermer` · `pudra` · `adacayi` · `golge` · `kemer` · `gece`<br>Üstten çekim (flat-lay): `zeytin` · `kadife` · `kil` · `traverten` · `serme` · `isik` |
 | `--format` | `portrait` 1080×1350 (varsayılan) · `square` 1080×1080 · `story` 1080×1920 |
 | `--title`, `--subtitle` | Alt kısma serif başlık + harf aralıklı alt başlık |
 | `--no-logo` | FARAVIS ATELIER logosunu kaldırır |
 | `--scale` | Ürün boyutu çarpanı (ör. `0.85`) |
+| `--rotate` | Eğik çekilmiş ürünü düzeltir, derece cinsinden (ör. `-7`) |
 
 ## Sahneler: hangi ürüne hangisi?
 
@@ -41,9 +42,19 @@ python studio/studio.py gelen/*.jpg --scene golge --format story
 | **kemer** | Editoryal, butik vitrini | Kahraman ürün, kampanya |
 | **gece** | Koyu, dramatik | Açık renkli, parlak ya da altın detaylı ürünler |
 
+**Üstten (flat-lay) çekilmiş fotoğraflar** için ayrı sahneler var. Bunlarda ürün yüzeyin üzerinde yatar ve gölge sağ-alta düşer:
+
+| Sahne | His | En iyi olduğu ürünler |
+|---|---|---|
+| **zeytin** | Derin zeytin yeşili | Açık ahşap + altın (askılar). **Şu an en güçlü sahne** |
+| **kadife** | Koyu espresso | Altın/pirinç detaylar, lüks algı |
+| **kil** | Terrakota, sıcak | Açık tonlu ürünler, yaz koleksiyonu |
+| **traverten** · **serme** · **isik** | Açık taş / keten / pencere ışığı | Koyu renkli ürünler (açık ürünlerde kontrast düşer) |
+
 ## Marka kiti
 
-`brand/brand.json`: renk paleti ve fontlar (Cormorant Garamond + Montserrat, OFL lisanslı).
+`brand/brand.json`: renk paleti, fontlar (Cormorant Garamond + Montserrat, OFL lisanslı) ve logo.
+Logo varsayılan olarak **sol üst köşede, ® tescil işaretiyle** basılır (`wordmark.position`, `wordmark.symbol`).
 Logo dosyanız varsa `brand/` klasörüne eklenir, yazı logosunun yerine o kullanılır.
 
 ## Fotoğraf çekim ipuçları (sonucu en çok bunlar belirler)
@@ -60,6 +71,7 @@ Logo dosyanız varsa `brand/` klasörüne eklenir, yazı logosunun yerine o kull
 - [x] Otomatik dekupe (ISNet), ana ürün dışındaki parçaları temizleme
 - [x] 8 prosedürel sahne, temas + düşen gölge, pencere ışığının ürüne de düşmesi
 - [x] 4:5 / kare / story formatları, karşılaştırma panosu
+- [x] Flat-lay (üstten çekim) sahneleri, eğim düzeltme, sol üstte ® logo
 - [ ] Ürün rengine göre **otomatik sahne önerisi** (renk uyumu analizi)
 - [ ] **Carousel şablonları**: kapak → detay → ölçü/malzeme → fiyat/CTA
 - [ ] Feed ızgarası önizlemesi (9'lu profil görünümü, ton dengesi)

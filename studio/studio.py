@@ -89,6 +89,7 @@ class Scene:
     ink: str  # yazı rengi
     light: Image.Image | None = None  # ürünün üstüne de düşecek ışık/gölge deseni (L, 0..255, 128=nötr)
     fixed_floor: bool = False  # podyumlu sahnelerde zemin yazı için kaydırılmaz
+    mode: str = "stand"  # stand: ürün zeminde duruyor (yandan çekim) · flat: üstten çekim (flat-lay)
 
 
 def studio_sweep(w, h, wall, floor, horizon=0.66, glow=0.10) -> np.ndarray:
@@ -236,6 +237,86 @@ def scene_kemer(w, h):
     return Scene(img, ey / h + 0.004, 0.44, 0.44, 0.5, PAL["espresso"], fixed_floor=True)
 
 
+# ---- üstten çekim (flat-lay) sahneleri: ürün yüzeyin üzerinde yatıyor
+def flat_light(w, h, base, glow=0.10):
+    col = np.broadcast_to(hex_rgb(base)[None, None], (h, w, 3)).astype(np.float32)
+    v = vignette(w, h, 0.42, 0.38, 0.8)[..., None]  # sol üstten gelen ışık
+    return col * (1 - glow) + col * glow * 2 * v
+
+
+def scene_traverten(w, h):
+    """Açık traverten taş — sıcak, doğal, mimari."""
+    col = flat_light(w, h, "#E9DECD", 0.12)
+    bands = fractal_noise(w // 8, h, 5, 6, 31)  # yatay katmanlaşma
+    bands = np.asarray(Image.fromarray((bands * 255).astype(np.uint8)).resize((w, h), Image.BICUBIC), np.float32) / 255
+    col += ((bands - 0.5) * 26)[..., None] * np.array([1.0, 0.95, 0.85])
+    col += ((fractal_noise(w, h, 6, 12, 8) - 0.5) * 10)[..., None]
+    # travertene özgü küçük gözenekler
+    pits = Image.new("L", (w, h), 0)
+    pd = ImageDraw.Draw(pits)
+    rng = np.random.default_rng(5)
+    for _ in range(int(w * h / 16000)):
+        x, y = rng.uniform(0, w), rng.uniform(0, h)
+        L, T = rng.gamma(1.5, w * 0.0025), rng.uniform(0.5, 1.6)
+        pts = [(x + L * math.cos(t) * rng.uniform(0.6, 1.3), y + T * math.sin(t) * rng.uniform(0.5, 1.4))
+               for t in np.linspace(0, 2 * math.pi, 9)[:-1]]
+        pd.polygon(pts, fill=int(rng.uniform(40, 120)))
+    pits = np.asarray(pits.filter(ImageFilter.GaussianBlur(0.9)), np.float32) / 255
+    col -= (pits * 34)[..., None] * np.array([0.8, 1.0, 1.2])
+    return Scene(Image.fromarray(np.clip(col, 0, 255).astype(np.uint8)), 0.5, 0.64, 0.84, 0.5, PAL["espresso"], mode="flat")
+
+
+def scene_serme(w, h):
+    """Üstten keten kumaş."""
+    col = flat_light(w, h, "#EEE6DA", 0.12)
+    rng = np.random.default_rng(12)
+    weave = rng.normal(0, 1, (1, w)).astype(np.float32) + rng.normal(0, 1, (h, 1)).astype(np.float32)
+    weave = np.asarray(Image.fromarray(np.uint8(np.clip(weave * 26 + 128, 0, 255))).filter(ImageFilter.GaussianBlur(0.7)), np.float32)
+    col += ((weave - 128) / 20 * 1.3)[..., None]
+    col += ((fractal_noise(w, h, 5, 10, 6) - 0.5) * 12)[..., None]
+    # hafif kumaş kırışıklıkları
+    folds = fractal_noise(w, h, 3, 2, 17)
+    col += (np.sin(folds * 9) * 5)[..., None]
+    return Scene(Image.fromarray(np.clip(col, 0, 255).astype(np.uint8)), 0.5, 0.64, 0.84, 0.45, PAL["espresso"], mode="flat")
+
+
+def scene_isik(w, h):
+    """Üstten çekim + pencere ışığı; gölge ürünün üstüne de düşer."""
+    sc = scene_traverten(w, h)
+    col = np.asarray(sc.bg, np.float32)
+    light = window_light(w, h, seed=4)
+    lf = (np.asarray(light, np.float32) - 128) / 128.0
+    col = col * (1 + lf[..., None] * np.array([0.26, 0.23, 0.18])) + (lf.clip(0) * 16)[..., None] * np.array([1.0, 0.8, 0.5])
+    sc.bg, sc.light = Image.fromarray(np.clip(col, 0, 255).astype(np.uint8)), light
+    return sc
+
+
+def flat_plaster(w, h, base, ink, shadow, seed):
+    """Düz renk, mineral sıva / kağıt dokulu yüzey."""
+    col = flat_light(w, h, base, 0.16)
+    col += ((fractal_noise(w, h, 6, 6, seed) - 0.5) * 16)[..., None]
+    col += ((fractal_noise(w, h, 3, 24, seed + 1) - 0.5) * 6)[..., None]
+    return Scene(Image.fromarray(np.clip(col, 0, 255).astype(np.uint8)), 0.5, 0.64, 0.84, shadow, ink, mode="flat")
+
+
+def scene_zeytin(w, h):
+    """Derin zeytin yeşili — doğal ahşapla tamamlayıcı kontrast."""
+    return flat_plaster(w, h, "#5F604A", PAL["ivory"], 0.8, 41)
+
+
+def scene_kil(w, h):
+    """Pişmiş toprak / terrakota — sıcak, Akdeniz."""
+    return flat_plaster(w, h, "#B98A6E", PAL["ivory"], 0.7, 43)
+
+
+def scene_kadife(w, h):
+    """Koyu espresso kadife — altın detayları parlatır."""
+    col = flat_light(w, h, "#2F2622", 0.0)
+    col += (vignette(w, h, 0.45, 0.42, 1.1) ** 1.5 * 38)[..., None] * np.array([1.0, 0.85, 0.72])
+    col += ((fractal_noise(w, h, 6, 16, 9) - 0.5) * 9)[..., None]  # kadife havı
+    return Scene(Image.fromarray(np.clip(col, 0, 255).astype(np.uint8)), 0.5, 0.64, 0.84, 0.8, PAL["ivory"], mode="flat")
+
+
 SCENES = {
     "kum": scene_kum,
     "keten": scene_keten,
@@ -245,6 +326,13 @@ SCENES = {
     "golge": scene_golge,
     "kemer": scene_kemer,
     "gece": scene_gece,
+    # üstten çekim (flat-lay) fotoğraflar için
+    "traverten": scene_traverten,
+    "serme": scene_serme,
+    "isik": scene_isik,
+    "kadife": scene_kadife,
+    "zeytin": scene_zeytin,
+    "kil": scene_kil,
 }
 
 
@@ -261,7 +349,7 @@ def cutout(path: Path, cache_dir: Path) -> Image.Image:
     from rembg import new_session, remove
 
     if _session is None:
-        _session = new_session("isnet-general-use")
+        _session = new_session("birefnet-general")  # ince tel/mandal detaylarında en iyisi
     src = ImageOps.exif_transpose(Image.open(path)).convert("RGB")
     src.thumbnail((2400, 2400), Image.LANCZOS)
     out = remove(src, session=_session, post_process_mask=True)
@@ -300,7 +388,40 @@ def enhance(prod: Image.Image) -> Image.Image:
     return rgb
 
 
+def apply_light(prod_rgb: Image.Image, scene: Scene, x: int, y: int, k: float = 0.22) -> Image.Image:
+    if scene.light is None:
+        return prod_rgb
+    pw, ph = prod_rgb.size
+    lf = (np.asarray(scene.light.crop((x, y, x + pw, y + ph)), np.float32) - 128) / 128.0
+    arr = np.asarray(prod_rgb, np.float32) * (1 + lf[..., None] * k)
+    return Image.fromarray(np.clip(arr, 0, 255).astype(np.uint8))
+
+
+def compose_flat(prod: Image.Image, scene: Scene, W: int, H: int, scale: float = 1.0) -> Image.Image:
+    """Üstten çekim: ürün yüzeye yatık; gölge sağ-alta, iki katmanlı."""
+    canvas = scene.bg.convert("RGB").copy()
+    pw, ph = prod.size
+    s = min(scene.max_h * H / ph, scene.max_w * W / pw) * scale
+    prod = prod.resize((max(1, int(pw * s)), max(1, int(ph * s))), Image.LANCZOS)
+    pw, ph = prod.size
+    x, y = (W - pw) // 2, int(scene.floor_y * H - ph / 2)
+    alpha = prod.getchannel("A")
+    u = W / 1080
+    shadow = Image.new("L", (W, H), 0)
+    for dx, dy, blur, op in ((14, 20, 16, 0.55), (4, 6, 3.5, 0.6)):  # yumuşak + temas
+        lay = Image.new("L", (W, H), 0)
+        lay.paste(alpha, (x + int(dx * u), y + int(dy * u)))
+        lay = lay.filter(ImageFilter.GaussianBlur(blur * u)).point(lambda v, op=op: int(v * op))
+        shadow = ImageChops.lighter(shadow, lay)
+    shadow = shadow.point(lambda v: int(v * scene.shadow))
+    canvas = Image.composite(Image.new("RGB", (W, H), (35, 26, 20)), canvas, shadow)
+    canvas.paste(apply_light(prod.convert("RGB"), scene, x, y), (x, y), alpha)
+    return canvas
+
+
 def compose(prod: Image.Image, scene: Scene, W: int, H: int, scale: float = 1.0) -> Image.Image:
+    if scene.mode == "flat":
+        return compose_flat(prod, scene, W, H, scale)
     canvas = scene.bg.convert("RGB").copy()
     pw, ph = prod.size
     s = min(scene.max_h * H / ph, scene.max_w * W / pw) * scale
@@ -334,18 +455,17 @@ def compose(prod: Image.Image, scene: Scene, W: int, H: int, scale: float = 1.0)
     canvas = Image.composite(dark, canvas, shadow)
 
     # ürün
-    prod_rgb = prod.convert("RGB")
-    if scene.light is not None:  # pencere ışığı ürünün üzerine de düşsün
-        lf = (np.asarray(scene.light.crop((x, y, x + pw, y + ph)), np.float32) - 128) / 128.0
-        arr = np.asarray(prod_rgb, np.float32) * (1 + lf[..., None] * 0.22)
-        prod_rgb = Image.fromarray(np.clip(arr, 0, 255).astype(np.uint8))
-    canvas.paste(prod_rgb, (x, y), alpha)
+    canvas.paste(apply_light(prod.convert("RGB"), scene, x, y), (x, y), alpha)  # pencere ışığı ürüne de düşer
     return canvas
 
 
 # ---------------------------------------------------------------- tipografi
 def spaced(draw, xy, text, fnt, fill, tracking, anchor="center"):
     """Harf aralıklı metin (Instagram'da lüks marka dili)."""
+    return _spaced(draw, xy, text, fnt, fill, tracking, anchor)
+
+
+def _spaced(draw, xy, text, fnt, fill, tracking, anchor):
     widths = [draw.textlength(c, font=fnt) for c in text]
     total = sum(widths) + tracking * (len(text) - 1)
     x, y = xy
@@ -362,8 +482,18 @@ def add_type(img: Image.Image, scene: Scene, title: str | None, subtitle: str | 
     ink = scene.ink
     if logo:
         u = W / 1080
-        spaced(d, (W / 2, 92 * u), BRAND["wordmark"]["primary"], font("display_medium", int(40 * u)), ink, 14 * u)
-        spaced(d, (W / 2, 124 * u), BRAND["wordmark"]["secondary"], font("sans_light", int(13 * u)), ink, 9 * u)
+        mark = BRAND["wordmark"]
+        if mark.get("position", "topleft") == "topleft":
+            x0, y0 = 64 * u, 104 * u
+            tw = spaced(d, (x0, y0), mark["primary"], font("display_medium", int(38 * u)), ink, 11 * u, anchor="left")
+            if mark.get("symbol"):  # tescil işareti, üst simge olarak
+                d.text((x0 + tw + 5 * u, y0 - 24 * u), mark["symbol"], font=font("sans_light", int(14 * u)), fill=ink, anchor="ls")
+            spaced(d, (x0 + 2 * u, y0 + 30 * u), mark["secondary"], font("sans_light", int(12 * u)), ink, 12.4 * u, anchor="left")
+        else:
+            tw = spaced(d, (W / 2, 92 * u), mark["primary"], font("display_medium", int(40 * u)), ink, 14 * u)
+            if mark.get("symbol"):
+                d.text((W / 2 + tw / 2 + 5 * u, 92 * u - 24 * u), mark["symbol"], font=font("sans_light", int(14 * u)), fill=ink, anchor="ls")
+            spaced(d, (W / 2, 124 * u), mark["secondary"], font("sans_light", int(13 * u)), ink, 9 * u)
     if title:
         u = W / 1080
         ty = H - 128 * u
@@ -377,15 +507,18 @@ def add_type(img: Image.Image, scene: Scene, title: str | None, subtitle: str | 
 
 
 # ---------------------------------------------------------------- çıktı
-def render(path: Path, scene_name: str, fmt: str, out_dir: Path, title=None, subtitle=None, logo=True, scale=1.0):
+def render(path: Path, scene_name: str, fmt: str, out_dir: Path, title=None, subtitle=None, logo=True, scale=1.0, rotate=0.0):
     W, H = FORMATS[fmt]
     scene = SCENES[scene_name](W, H)
     if fmt == "story":  # dikey kadrajda ürün nefes alsın
-        scene.max_h, scene.max_w = scene.max_h * 0.82, scene.max_w * 0.8
+        scene.max_h *= 0.82  # yalnızca yükseklik; geniş ürünler zaten enden sınırlı
     if (title or subtitle) and not scene.fixed_floor:  # yazıya yer aç
         scene.floor_y -= 0.05
         scene.max_h -= 0.06
     prod = enhance(cutout(path, out_dir / ".cache"))
+    if rotate:  # eğik çekilmiş ürünü düzelt (derece, + saat yönünün tersi)
+        prod = prod.rotate(rotate, Image.BICUBIC, expand=True)
+        prod = prod.crop(prod.getchannel("A").point(lambda v: 255 if v > 10 else 0).getbbox())
     img = compose(prod, scene, W, H, scale)
     img = grain(img, 3.2)
     img = add_type(img, scene, title, subtitle, logo, W, H)
@@ -423,12 +556,13 @@ def main():
     ap.add_argument("--subtitle")
     ap.add_argument("--no-logo", action="store_true")
     ap.add_argument("--scale", type=float, default=1.0, help="ürün boyutu çarpanı")
+    ap.add_argument("--rotate", type=float, default=0.0, help="ürünü döndür (derece)")
     ap.add_argument("--out", type=Path, default=ROOT / "output")
     a = ap.parse_args()
 
     for p in a.images:
         scenes = list(SCENES) if a.all else [a.scene]
-        outs = [render(p, s, a.format, a.out, a.title, a.subtitle, not a.no_logo, a.scale) for s in scenes]
+        outs = [render(p, s, a.format, a.out, a.title, a.subtitle, not a.no_logo, a.scale, a.rotate) for s in scenes]
         for o in outs:
             print(o.relative_to(ROOT) if o.is_relative_to(ROOT) else o)
         if a.all:
