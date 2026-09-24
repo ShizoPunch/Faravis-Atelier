@@ -1,0 +1,23 @@
+{
+  "name": "Faravis Atelier",
+  "wordmark": { "primary": "FARAVIS", "secondary": "ATELIER" },
+  "palette": {
+    "ivory":    "#F4EFE8",
+    "sand":     "#E6DACB",
+    "taupe":    "#B8A48E",
+    "clay":     "#C9A38A",
+    "blush":    "#EBD5CC",
+    "sage":     "#B9BFA8",
+    "olive":    "#6B6A4E",
+    "espresso": "#3B2F2A",
+    "charcoal": "#2A2826",
+    "gold":     "#B08D57"
+  },
+  "fonts": {
+    "display": "brand/fonts/CormorantGaramond-Regular.ttf",
+    "display_medium": "brand/fonts/CormorantGaramond-Medium.ttf",
+    "display_italic": "brand/fonts/CormorantGaramond-Italic.ttf",
+    "sans_light": "brand/fonts/Montserrat-Light.ttf",
+    "sans_medium": "brand/fonts/Montserrat-Medium.ttf"
+  }
+}

@@ -1,0 +1,4 @@
+pillow>=10
+numpy>=1.26
+scipy>=1.11
+rembg[cpu]>=2.0.50
