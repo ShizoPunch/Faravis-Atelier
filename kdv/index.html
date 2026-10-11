@@ -146,6 +146,12 @@ select.chip-sel.on { color: var(--accent-ink); border-color: var(--accent); back
 .nm-line .name-wrap { flex: 1; }
 .c-info { display: flex; gap: 10px; align-items: center; min-width: 0; }
 .opt .o-l { display: flex; gap: 8px; align-items: center; min-width: 0; }
+.opt .o-l { flex: 1; }
+.nm-line .suggest { left: -44px; }
+@media (max-width: 639px) {
+  .opt { flex-direction: column; gap: 2px; }
+  .opt .op { padding-left: 36px; font-size: 12px; }
+}
 .check { display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--muted); cursor: pointer; }
 .doc-chip { font-size: 12px; font-weight: 500; color: var(--muted); margin-left: 8px; }
 .cust-x { border: 0; background: transparent; color: var(--muted); padding: 0 4px; font-size: 16px; line-height: 1; }
@@ -819,7 +825,7 @@ details.more .form { padding-bottom: 6px; }
 
   // ---------- Ürün görselleri (ikas görsel sunucusundan) ----------
   // Küçük boy için ikas'ın image_180 sürümü denenir, olmazsa asıl görsel; o da olmazsa baş harf gösterilir
-  const imgOf = (it) => it.img || (it.catId && catalog.items.find((x) => x.id === it.catId)?.img) || "";
+  const imgOf = (it) => (it.catId && catalog.items.find((x) => x.id === it.catId)?.img) || it.img || "";
   const thumbUrl = (u, w = 180) => String(u).replace(/image_\d+\.(webp|jpe?g|png)$/i, `image_${w}.$1`);
   const initial = (t) => esc(String(t || "?").trim().charAt(0).toLocaleUpperCase("tr-TR") || "?");
   const thumb = (u, alt, cls = "") => u
@@ -1494,14 +1500,16 @@ details.more .form { padding-bottom: 6px; }
     try {
       const r = await fetch("katalog.json", { cache: "no-cache" }); if (!r.ok) throw 0;
       const j = await r.json(); if (!j.items?.length) throw 0;
+      if (silent && catalog.items.length && j.version && catalog.siteVersion === j.version) return;
       merge(j.items, j.source || "faravisatelier.com", silent);
-      if (j.updated) { catalog.updated = j.updated; saveCatalog(); }
+      catalog.siteVersion = j.version || ""; if (j.updated) catalog.updated = j.updated; saveCatalog();
+      if (silent) renderAll();
     } catch (e) { if (!silent) $("#catStatus").textContent = "Site listesi henüz hazır değil. Şimdilik ikas'tan aldığınız Excel/CSV dosyasını yükleyebilirsiniz."; }
   }
   $("#btnSite").addEventListener("click", () => loadSite(false));
 
   renderAll();
-  if (!catalog.items.length) loadSite(true);
+  loadSite(true); // ilk açılışta ya da uygulamayla yeni ürün listesi geldiyse
   if (!embedded && "serviceWorker" in navigator && /^https?:$/.test(location.protocol)) navigator.serviceWorker.register("sw.js").catch(() => {});
 })();
 </script>
