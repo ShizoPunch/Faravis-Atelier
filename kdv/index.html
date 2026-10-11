@@ -691,6 +691,8 @@ details.more .form { padding-bottom: 6px; }
   }
   function updateRow(it) {
     const el = linesEl.querySelector(`[data-id="${it.id}"]`); if (!el) return;
+    const th = el.querySelector(".nm-line .thumb"), want = imgOf(it);
+    if (th && (th.dataset.full || "") !== want) th.outerHTML = thumb(want, it.name);
     const c = calc(it);
     el.querySelector('[data-out="tot"]').textContent = fm(c.gross);
     let sub = `<span>KDV hariç <b>${fm(c.net)}</b></span><span>KDV <b>${fm(c.vat)}</b></span><span class="m-only">KDV dahil <b>${fm(c.gross)}</b></span>`;
@@ -834,7 +836,11 @@ details.more .form { padding-bottom: 6px; }
 
   // ---------- Ürün görselleri (ikas görsel sunucusundan) ----------
   // Küçük boy için ikas'ın image_180 sürümü denenir, olmazsa asıl görsel; o da olmazsa baş harf gösterilir
-  const imgOf = (it) => (it.catId && catalog.items.find((x) => x.id === it.catId)?.img) || it.img || "";
+  const imgOf = (it) => {
+    const c = it.catId && catalog.items.find((x) => x.id === it.catId);
+    const v = c?.imgs || {};
+    return v[`${it.color}|${it.hook}`] || v[it.color] || v[it.hook] || c?.img || it.img || "";
+  };
   const thumbUrl = (u, w = 180) => String(u).replace(/image_\d+\.(webp|jpe?g|png)$/i, `image_${w}.$1`);
   const initial = (t) => esc(String(t || "?").trim().charAt(0).toLocaleUpperCase("tr-TR") || "?");
   const thumb = (u, alt, cls = "") => u
@@ -845,7 +851,7 @@ details.more .form { padding-bottom: 6px; }
     if (im.tagName !== "IMG" || !im.classList.contains("thumb")) return;
     if (im.dataset.full && !im.dataset.tried) { im.dataset.tried = "1"; im.src = im.dataset.full; return; }
     const ph = document.createElement("span"); ph.className = im.className.replace("thumb", "thumb ph"); ph.setAttribute("aria-hidden", "true");
-    ph.textContent = (im.dataset.alt || "?").trim().charAt(0).toLocaleUpperCase("tr-TR") || "?"; im.replaceWith(ph);
+    ph.textContent = (im.dataset.alt || "?").trim().charAt(0).toLocaleUpperCase("tr-TR") || "?"; ph.dataset.full = im.dataset.full || ""; im.replaceWith(ph);
   }, true);
 
   // ---------- Ürün listesinden öneri ----------
@@ -907,6 +913,7 @@ details.more .form { padding-bottom: 6px; }
   const menuHTML = () => `<button type="button" data-m="hist">Proformalar${hist.length ? ` (${hist.length})` : ""}</button>
       <button type="button" data-m="cat">Ürün listesi${catalog.items.length ? ` (${catalog.items.length})` : ""}</button>
       <button type="button" data-m="profit">${settings.profit ? "Kâr hesabını gizle" : "Kâr hesabını göster"}</button>
+      <button type="button" data-m="sound">${settings.sound === false ? "Sesi aç" : "Sesi kapat"}</button>
       <hr><button type="button" data-m="copy">Özeti kopyala</button>
       <button type="button" data-m="csv">Excel'e aktar (CSV)</button>
       <hr><button type="button" data-m="bak">Yedek al</button>
@@ -921,6 +928,7 @@ details.more .form { padding-bottom: 6px; }
     if (m === "hist") openHist();
     else if (m === "cat") openCatalog();
     else if (m === "profit") { settings.profit = !settings.profit; saveSettings(); renderAll(); }
+    else if (m === "sound") { settings.sound = settings.sound === false; saveSettings(); toast(settings.sound ? "Ses açıldı" : "Ses kapatıldı"); if (settings.sound) chime(); }
     else if (m === "copy") copyText(summaryText());
     else if (m === "csv") exportCsv();
     else if (m === "bak") backup();
@@ -1105,7 +1113,28 @@ details.more .form { padding-bottom: 6px; }
     $("#qStatus").textContent = settings.seller.owner ? "" : "Firma bilgilerime ad soyadınızı yazın; proformada satıcı ve hesap sahibi olarak görünür.";
     dlgQ.showModal(); renderQuote();
   }
-  ["#btnQuote", "#btnQuote2", "#btnQuote3"].forEach((s) => $(s).addEventListener("click", openQuote));
+  // Proforma açılış sesi: kısa kâğıt hışırtısı + iki notalı yumuşak zil (dosya yok, Web Audio ile üretilir)
+  let actx = null;
+  function chime() {
+    if (settings.sound === false) return;
+    try {
+      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      if (actx.state === "suspended") actx.resume();
+      const t = actx.currentTime, out = actx.createGain(); out.gain.value = 0.22; out.connect(actx.destination);
+      const n = actx.createBuffer(1, actx.sampleRate * 0.25, actx.sampleRate), d = n.getChannelData(0);
+      for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 3);
+      const ns = actx.createBufferSource(), bp = actx.createBiquadFilter(), ng = actx.createGain();
+      ns.buffer = n; bp.type = "bandpass"; bp.frequency.setValueAtTime(1800, t); bp.frequency.exponentialRampToValueAtTime(5200, t + 0.2); bp.Q.value = 0.8;
+      ng.gain.setValueAtTime(0.35, t); ns.connect(bp).connect(ng).connect(out); ns.start(t);
+      [[1318.5, 0.04], [1975.5, 0.13]].forEach(([f, dt]) => {
+        const o = actx.createOscillator(), g = actx.createGain();
+        o.type = "sine"; o.frequency.value = f;
+        g.gain.setValueAtTime(0.0001, t + dt); g.gain.exponentialRampToValueAtTime(0.5, t + dt + 0.012); g.gain.exponentialRampToValueAtTime(0.0001, t + dt + 0.65);
+        o.connect(g).connect(out); o.start(t + dt); o.stop(t + dt + 0.7);
+      });
+    } catch (e) {}
+  }
+  ["#btnQuote", "#btnQuote2", "#btnQuote3"].forEach((s) => $(s).addEventListener("click", () => { chime(); openQuote(); }));
   $("#qForm").addEventListener("input", (e) => {
     const el = e.target;
     if (el.dataset.q) { setP(state.quote, el.dataset.q, el.value); save(); }
@@ -1434,8 +1463,9 @@ details.more .form { padding-bottom: 6px; }
       const sigs = new Map();
       for (const [k, xs] of byAttr) {
         const sig = xs.map((x) => `${x.qty}:${x.price}`).sort().join("|");
-        if (!sigs.has(sig)) sigs.set(sig, { xs, attrs: [] });
+        if (!sigs.has(sig)) sigs.set(sig, { xs, attrs: [], all: [] });
         sigs.get(sig).attrs.push(Object.fromEntries(JSON.parse(k)));
+        sigs.get(sig).all.push(...xs); // birleşen tüm renk/kanca satırları (varyant görselleri için)
       }
       const all = [...sigs.values()].flatMap((x) => x.attrs);
       const types = [...new Set(all.flatMap((a) => Object.keys(a)))];
@@ -1453,8 +1483,18 @@ details.more .form { padding-bottom: 6px; }
         const item = packs.length
           ? { price: unit(packs[0]), tiers: packs.slice(1).map((x) => ({ min: x.qty, price: unit(x) })), note: "Paket: " + packs.map((x) => x.qty).join(", ") + " adet" }
           : { price: sg.xs[0].price, tiers: [], note: "Paket fiyatı" };
+        // Renk ve kanca varyantlarının kendi görselleri: "Renk", "Kanca" ve "Renk|Kanca" anahtarlarıyla
+        const imgs = {};
+        const colorT = types.filter((t) => /askı renk|aski renk/.test(norm(t))), hookT = types.filter((t) => /kanca|lama/.test(norm(t)));
+        for (const x of sg.all) {
+          if (!x.img) continue;
+          const c = colorT.map((t) => x.attrs[t]).find(Boolean), h = hookT.map((t) => x.attrs[t] && hookName(t, x.attrs[t])).find(Boolean);
+          if (c && h && !imgs[c + "|" + h]) imgs[c + "|" + h] = x.img;
+          if (c && !imgs[c]) imgs[c] = x.img;
+          if (h && !imgs[h]) imgs[h] = x.img;
+        }
         const slug = rs[0]["Slug"];
-        out.push({ name, sku: "", rate: 20, mode: "gross", cost: sg.xs.find((x) => x.cost)?.cost ?? null, url: slug ? "https://faravisatelier.com/" + slug : "",
+        out.push({ imgs, name, sku: "", rate: 20, mode: "gross", cost: sg.xs.find((x) => x.cost)?.cost ?? null, url: slug ? "https://faravisatelier.com/" + slug : "",
           colors: [...new Set(colors)], hooks: [...new Set(hooks)], img: sg.xs.find((x) => x.img)?.img || "", ...item });
       }
     }
