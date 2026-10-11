@@ -79,6 +79,22 @@ def vignette(w: int, h: int, cx=0.5, cy=0.45, power=1.0) -> np.ndarray:
     return np.clip(1 - d * power, 0, 1)
 
 
+def to_lab(rgb: np.ndarray) -> np.ndarray:
+    """sRGB (0..255, ...x3) → CIE Lab (D65). Renk uyumu ve kontrast ölçümü için."""
+    c = np.asarray(rgb, np.float32) / 255.0
+    c = np.where(c > 0.04045, ((c + 0.055) / 1.055) ** 2.4, c / 12.92)
+    xyz = c @ np.array([[0.4124, 0.2126, 0.0193], [0.3576, 0.7152, 0.1192], [0.1805, 0.0722, 0.9505]], np.float32)
+    xyz /= np.array([0.95047, 1.0, 1.08883], np.float32)
+    f = np.where(xyz > 0.008856, np.cbrt(xyz), 7.787 * xyz + 16 / 116)
+    L = 116 * f[..., 1] - 16
+    return np.stack([L, 500 * (f[..., 0] - f[..., 1]), 200 * (f[..., 1] - f[..., 2])], -1)
+
+
+def lch(lab: np.ndarray) -> tuple[float, float, float]:
+    L, a, b = (float(v) for v in lab)
+    return L, math.hypot(a, b), math.degrees(math.atan2(b, a)) % 360
+
+
 # ---------------------------------------------------------------- sahneler
 @dataclass
 class Scene:
@@ -91,6 +107,7 @@ class Scene:
     light: Image.Image | None = None  # ürünün üstüne de düşecek ışık/gölge deseni (L, 0..255, 128=nötr)
     fixed_floor: bool = False  # podyumlu sahnelerde zemin yazı için kaydırılmaz
     mode: str = "stand"  # stand: ürün zeminde duruyor (yandan çekim) · flat: üstten çekim (flat-lay)
+    reflect: float = 0.0  # cilalı zeminde ürünün yansıma opaklığı (mermer)
 
 
 def studio_sweep(w, h, wall, floor, horizon=0.66, glow=0.10) -> np.ndarray:
@@ -149,7 +166,7 @@ def scene_mermer(w, h):
     yy = np.linspace(0, 1, h, dtype=np.float32)[:, None, None]
     t = np.clip((yy - 0.58) / 0.08, 0, 1)
     col = mix(base, marble, t)
-    return Scene(Image.fromarray(np.clip(col, 0, 255).astype(np.uint8)), 0.80, 0.60, 0.78, 0.5, PAL["charcoal"])
+    return Scene(Image.fromarray(np.clip(col, 0, 255).astype(np.uint8)), 0.80, 0.60, 0.78, 0.5, PAL["charcoal"], reflect=0.22)
 
 
 def scene_gece(w, h):
@@ -359,13 +376,24 @@ def cutout(path: Path, cache_dir: Path) -> Image.Image:
     cache = cache_dir / f"{path.stem}_cutout.png"
     if cache.exists() and cache.stat().st_mtime > path.stat().st_mtime:
         return Image.open(cache).convert("RGBA")
-    from rembg import new_session, remove
-
-    if _session is None:
-        _session = new_session("birefnet-general")  # ince tel/mandal detaylarında en iyisi
-    src = ImageOps.exif_transpose(Image.open(path)).convert("RGB")
-    src.thumbnail((2400, 2400), Image.LANCZOS)
-    out = remove(src, session=_session, post_process_mask=True)
+    raw = ImageOps.exif_transpose(Image.open(path))
+    if raw.mode in ("RGBA", "LA", "PA") and np.asarray(raw.getchannel("A")).min() < 250:
+        out = raw.convert("RGBA")  # zaten dekupe edilmiş (şeffaf PNG / WEBP)
+        out.thumbnail((2400, 2400), Image.LANCZOS)
+    else:
+        src = raw.convert("RGB")
+        src.thumbnail((2400, 2400), Image.LANCZOS)
+        try:
+            from rembg import new_session, remove
+        except ImportError:
+            if not white_background(src):
+                raise SystemExit("rembg kurulu değil ve fotoğrafın fonu beyaz değil. Kurulum: pip install -r requirements.txt")
+            print(f"  (rembg yok — {path.name} beyaz fon dekupesiyle ayrıldı)")
+            out = white_cutout(src)
+        else:
+            if _session is None:
+                _session = new_session("birefnet-general")  # ince tel/mandal detaylarında en iyisi
+            out = remove(src, session=_session, post_process_mask=True)
     # yalnızca ana ürünü tut: arka plandaki küçük parçaları at
     a = keep_main(out.getchannel("A"))
     # kenar hâlesini azalt: alfa'yı çok hafif daralt
@@ -375,6 +403,47 @@ def cutout(path: Path, cache_dir: Path) -> Image.Image:
     out = out.crop(bbox)
     cache_dir.mkdir(parents=True, exist_ok=True)
     out.save(cache)
+    return out
+
+
+def white_background(src: Image.Image) -> bool:
+    """Kenarlar neredeyse beyazsa (ikas / e-ticaret ürün fotoğrafları) True."""
+    arr = np.asarray(src, np.float32)
+    edge = np.concatenate([arr[:4].reshape(-1, 3), arr[-4:].reshape(-1, 3), arr[:, :4].reshape(-1, 3), arr[:, -4:].reshape(-1, 3)])
+    return float(np.median(np.sqrt(((255 - edge) ** 2).sum(-1)))) < 18
+
+
+def white_cutout(src: Image.Image) -> Image.Image:
+    """Beyaz fonlu fotoğrafı yapay zekâ modeli olmadan ayırır: kenara bağlı beyaz alan fon sayılır,
+    geçiş yumuşak tutulur. Beyaz ürünlerde (beyaz askı) sonuç modele göre zayıf kalabilir."""
+    from scipy import ndimage
+
+    arr = np.asarray(src, np.float32)
+    dist = np.sqrt(((255 - arr) ** 2).sum(-1))
+    lab, _ = ndimage.label(dist < 26)
+    border = np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))
+    bg = np.isin(lab, border[border > 0])
+    # Fotoğrafın kendi yumuşak gölgesi: açık, renksiz ve pürüzsüz pikseller fondan içeri doğru yayılarak atılır
+    # (stüdyo kendi gölgesini ekler). Ürün kenarındaki keskin geçiş bu yayılmayı durdurur.
+    gray = arr.mean(-1)
+    chroma = arr.max(-1) - arr.min(-1)
+    rough = ndimage.uniform_filter(np.abs(ndimage.sobel(gray, 0)) + np.abs(ndimage.sobel(gray, 1)), 5)
+    shade = (gray > 150) & (chroma < 14) & (rough < 40)
+    whiteish = (~bg & shade).sum() / max(1, (~bg).sum())
+    if whiteish < 0.35:  # ürünün kendisi beyazsa (beyaz askı) gölge ayıklama ürünü de yer; atlanır
+        bg = ndimage.binary_propagation(bg, mask=bg | shade)
+    # Ürünün içinde kalan saf beyaz boşluklar (askı üçgeninin içi) da fondur
+    holes, n = ndimage.label(~bg & (dist < 8))
+    if n:
+        sizes = ndimage.sum(np.ones_like(holes), holes, range(1, n + 1))
+        means = ndimage.mean(dist, holes, range(1, n + 1))
+        big = 1 + np.where((sizes > arr.shape[0] * arr.shape[1] * 0.002) & (means < 4))[0]
+        bg |= np.isin(holes, big)
+    bg = ndimage.binary_opening(bg, iterations=1)
+    soft = np.clip((dist - 6) / 22, 0, 1)  # fona yakın açık pikseller yarı saydam (kenar yumuşaklığı)
+    a = np.where(bg, soft * (ndimage.binary_dilation(~bg, iterations=2)), 1.0)
+    out = src.convert("RGBA")
+    out.putalpha(Image.fromarray((a * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(0.5)))
     return out
 
 
@@ -393,12 +462,50 @@ def keep_main(a: Image.Image, keep_ratio: float = 0.10) -> Image.Image:
 
 
 def enhance(prod: Image.Image) -> Image.Image:
-    """Hafif rötuş: yalnızca mikro keskinlik. Ürün rengine dokunmuyoruz —
-    müşterinin gördüğü renk, eline gelen renk olmalı."""
+    """Hafif rötuş: yalnızca mikro keskinlik. Ürünün kendi rengine dokunmuyoruz —
+    müşterinin gördüğü renk, eline gelen renk olmalı. Sahneyle uyum match_light'ta,
+    yalnızca kenarlarda ve çok hafif."""
     rgb, a = prod.convert("RGB"), prod.getchannel("A")
     rgb = rgb.filter(ImageFilter.UnsharpMask(radius=1.4, percent=45, threshold=2))
     rgb.putalpha(a)
     return rgb
+
+
+MATCH = {"on": True}  # --renk-sabit ile kapanır
+
+
+def match_light(prod_rgb: Image.Image, alpha: Image.Image, canvas: Image.Image, x: int, y: int) -> Image.Image:
+    """Sahne ışığı uyumu: (1) kenar ışığı — fonun bulanık rengi ürünün kenarlarına %30'a kadar sızar,
+    ürün 'yapıştırılmış' durmaz; (2) ortam tonu — ürün rengi sahnenin renk sıcaklığına %6 yaklaşır.
+    Ürünün iç kısımlarındaki renk korunur."""
+    if not MATCH["on"]:
+        return prod_rgb
+    pw, ph = prod_rgb.size
+    u = max(1.0, (pw + ph) / 900)
+    bg = canvas.crop((x, y, x + pw, y + ph)).filter(ImageFilter.GaussianBlur(10 * u))
+    a = np.asarray(alpha, np.float32) / 255
+    inner = np.asarray(alpha.filter(ImageFilter.GaussianBlur(5 * u)), np.float32) / 255
+    wrap = np.clip((1 - inner) * a * 1.6, 0, 1)[..., None] * 0.30
+    p, b = np.asarray(prod_rgb, np.float32), np.asarray(bg, np.float32)
+    amb = b.reshape(-1, 3).mean(0)
+    tint = amb / max(amb.mean(), 1)
+    p = p * (1 + (tint - 1) * 0.06)
+    p = p * (1 - wrap) + b * wrap
+    return Image.fromarray(np.clip(p, 0, 255).astype(np.uint8))
+
+
+def reflection(canvas: Image.Image, prod: Image.Image, x: int, y: int, strength: float) -> Image.Image:
+    """Cilalı zeminde yansıma: ters çevrilmiş ürün, temas çizgisinden aşağı solarak ve bulanıklaşarak."""
+    pw, ph = prod.size
+    rh = max(2, int(ph * 0.5))
+    ref = prod.transpose(Image.FLIP_TOP_BOTTOM).crop((0, 0, pw, rh))
+    ref = ref.resize((pw, max(2, int(rh * 0.85))), Image.BICUBIC)  # perspektifte zemin kısalır
+    rh = ref.height
+    fade = (np.linspace(1, 0, rh, dtype=np.float32) ** 1.8)[:, None] * strength
+    ra = Image.fromarray((np.asarray(ref.getchannel("A"), np.float32) * fade).astype(np.uint8))
+    rgb = ref.convert("RGB").filter(ImageFilter.GaussianBlur(max(1.5, pw * 0.004)))
+    canvas.paste(rgb, (x, y + ph - 1), ra.filter(ImageFilter.GaussianBlur(1)))
+    return canvas
 
 
 def apply_light(prod_rgb: Image.Image, scene: Scene, x: int, y: int, k: float = 0.22) -> Image.Image:
@@ -428,7 +535,8 @@ def compose_flat(prod: Image.Image, scene: Scene, W: int, H: int, scale: float =
         shadow = ImageChops.lighter(shadow, lay)
     shadow = shadow.point(lambda v: int(v * scene.shadow))
     canvas = Image.composite(Image.new("RGB", (W, H), (35, 26, 20)), canvas, shadow)
-    canvas.paste(apply_light(prod.convert("RGB"), scene, x, y), (x, y), alpha)
+    rgb = match_light(prod.convert("RGB"), alpha, canvas, x, y)
+    canvas.paste(apply_light(rgb, scene, x, y), (x, y), alpha)
     return canvas
 
 
@@ -464,11 +572,15 @@ def compose(prod: Image.Image, scene: Scene, W: int, H: int, scale: float = 1.0)
     contact = contact.filter(ImageFilter.GaussianBlur(max(3, eh * 0.6)))
     shadow = ImageChops.lighter(layer.point(lambda v: v * 0.55), contact.point(lambda v: v * 0.9))
     shadow = shadow.point(lambda v: int(v * scene.shadow))
+    if scene.reflect:  # cilalı zemin: önce yansıma, gölge onun üstüne hafifçe
+        canvas = reflection(canvas, prod, x, y, scene.reflect)
+        shadow = shadow.point(lambda v: int(v * 0.7))
     dark = Image.new("RGB", (W, H), (40, 30, 25))
     canvas = Image.composite(dark, canvas, shadow)
 
     # ürün
-    canvas.paste(apply_light(prod.convert("RGB"), scene, x, y), (x, y), alpha)  # pencere ışığı ürüne de düşer
+    rgb = match_light(prod.convert("RGB"), alpha, canvas, x, y)
+    canvas.paste(apply_light(rgb, scene, x, y), (x, y), alpha)  # pencere ışığı ürüne de düşer
     return canvas
 
 
