@@ -70,20 +70,17 @@ Logo dosyanız varsa `brand/` klasörüne eklenir, yazı logosunun yerine o kull
 
 ## KDV Hesap Defteri (`kdv/`)
 
-Telefonda ve bilgisayarda çalışan, kurulum gerektirmeyen KDV hesaplayıcı. `kdv/index.html` dosyasını tarayıcıda açmanız yeterli.
+Telefonda ve bilgisayarda çalışan, kurulum gerektirmeyen KDV hesaplayıcı ve teklif aracı. `kdv/index.html` dosyasını tarayıcıda açmanız yeterli.
+Fatura düzenleyicileri gibi tek tablo: her satır bir ürün (ad, adet, birim fiyat, KDV oranı), satırın altında KDV hariç ve KDV tutarı,
+sağda ara toplam, oranlara göre KDV ve genel toplam.
 
-- Her ürün için: ad, birim fiyat (**KDV hariç** ya da **KDV dahil** girilebilir), adet, KDV oranı (%0 · %1 · %10 · %20 ya da elle), iskonto %
-- Her ürünün kendi KDV hariç / KDV / KDV dahil toplamı ve birim fiyatları
-- Yanda (telefonda altta) genel toplam: KDV hariç, oran bazında KDV + matrah, genel toplam
-- Liste cihazda otomatik kaydedilir; ürün kopyalama, silmeyi geri alma
-- **Teklif / PDF:** müşteri bilgileri, otomatik teklif no (FA-2026-0001), geçerlilik, notlar, IBAN, tutarın yazıyla
-  yazılışı; logolu A4 PDF olarak indirilir, telefonda doğrudan WhatsApp'a paylaşılabilir. Maliyet ve kâr teklifte yer almaz.
-- **Ürün kataloğu:** ürün adını yazarken öneri çıkar, seçince fiyat, KDV ve maliyet dolar. Katalog siteden
-  (`katalog.json`), ikas'tan alınan Excel/CSV dışa aktarımından ya da ürün XML'inden yüklenir; kartlardan tek tek kaydedilebilir.
-- **Kâr marjı:** birim maliyet girilince ürün başına kâr, marj ve maliyet üstü oran; özette toplam maliyet ve brüt kâr.
-  "Kâr" düğmesiyle müşteri yanındayken gizlenir.
-- Özeti kopyalama / paylaşma (WhatsApp vb.), Excel'e (CSV) aktarma
-- Ana ekrana eklenebilir ve internetsiz çalışır (GitHub Pages gibi bir adresten yayınlandığında)
+- **Fiyatlar KDV hariç / KDV dahil:** tablonun üstünde tek ayar; değiştirince fiyatlar çevrilir, toplam aynı kalır.
+- **Teklif PDF:** müşteri adı ve not yeterli; teklif no, tarih, geçerlilik, firma bilgileri ve IBAN açılır bölümlerde.
+  Logolu A4 PDF, tutar yazıyla. Maliyet ve kâr teklifte yer almaz.
+- **Ürün listesi** (⋯ menüsü): ürün adını yazarken öneri çıkar, seçince fiyat ve KDV dolar. Siteden (`katalog.json`) ya da
+  ikas'tan indirilen Excel/CSV dosyasından yüklenir.
+- **Kâr hesabı** (⋯ menüsü, varsayılan kapalı): maliyet sütunu açılır; satır başına ve toplam kâr / marj.
+- Özeti kopyalama, Excel'e (CSV) aktarma. Liste cihazda otomatik kaydedilir.
 
 Hesap, faturadaki gibi satır bazında kuruşa yuvarlanır; toplamlar satırların toplamıdır.
 
