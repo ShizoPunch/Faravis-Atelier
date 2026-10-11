@@ -90,6 +90,9 @@ sağda ara toplam, oranlara göre KDV ve genel toplam.
 - **Ürün listesi ve kademeli fiyat:** `kdv/katalog.json` ikas ürün Excel'inden üretilir (80 ürün). ikas'taki adet paketleri
   (12, 25, 50, 100, 250, 500) adet başı fiyata ve kademelere dönüşür; adet yazınca uygun kademe fiyatı kendiliğinden gelir.
   Yeni Excel uygulamadan da yüklenebilir: ⋯ → Ürün listesi → Excel / CSV yükle.
+- **Ürün görselleri:** ikas Excel'indeki ilk görsel; tabloda, ürün listesinde, önerilerde ve (isteğe bağlı) proformada.
+  Görseller doğrudan ikas'ın görsel sunucusundan (cdn.myikas.com) yüklenir; erişilemezse ürün adının baş harfi gösterilir,
+  PDF'e eklenemeyen görseller için proforma ekranında not çıkar.
 - **Kâr hesabı**, özeti kopyalama, Excel'e (CSV) aktarma, **yedek al / yedekten yükle** (tüm veriler tek JSON dosyasında;
   telefon ile bilgisayar arasında taşımak için de kullanılır). Veriler cihazda saklanır.
 

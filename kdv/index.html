@@ -136,6 +136,17 @@ select.chip-sel {
 select.chip-sel.on { color: var(--accent-ink); border-color: var(--accent); background: var(--surface); }
 .c-sub .warn { color: var(--danger); font-weight: 500; }
 .c-sub .tier { color: var(--accent-ink); }
+.thumb {
+  width: 36px; height: 36px; border-radius: 7px; object-fit: cover; background: var(--sunken); border: 1px solid var(--line);
+  flex: none; display: inline-grid; place-items: center; font-size: 13px; font-weight: 600; color: var(--muted);
+}
+.thumb.sm { width: 28px; height: 28px; font-size: 11px; border-radius: 6px; }
+.thumb.lg { width: 44px; height: 44px; }
+.nm-line { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.nm-line .name-wrap { flex: 1; }
+.c-info { display: flex; gap: 10px; align-items: center; min-width: 0; }
+.opt .o-l { display: flex; gap: 8px; align-items: center; min-width: 0; }
+.check { display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--muted); cursor: pointer; }
 .doc-chip { font-size: 12px; font-weight: 500; color: var(--muted); margin-left: 8px; }
 .cust-x { border: 0; background: transparent; color: var(--muted); padding: 0 4px; font-size: 16px; line-height: 1; }
 .cust-x:hover { color: var(--danger); }
@@ -303,6 +314,8 @@ details.more .form { padding-bottom: 6px; }
 .a4 td { padding: 10px 8px; text-align: right; border-bottom: 1px solid var(--p-line); vertical-align: top; }
 .a4 th:nth-child(2), .a4 td:nth-child(2) { text-align: left; }
 .a4 th:first-child, .a4 td:first-child { width: 26px; text-align: left; color: var(--p-muted); }
+.a4 .pi { display: flex; gap: 10px; align-items: center; }
+.a4 .pimg { width: 42px; height: 42px; object-fit: cover; border-radius: 4px; border: 1px solid var(--p-line); flex: none; }
 .a4 td .sku { color: var(--p-muted); font-size: 9.5px; margin-top: 1px; }
 .a4 tr.ext td { padding-top: 0; color: var(--p-muted); font-size: 11px; }
 .a4 tr.has-ext td { border-bottom: 0; }
@@ -422,6 +435,7 @@ details.more .form { padding-bottom: 6px; }
           <label class="field"><span>Ön ödeme (%)</span><input id="q_dep" data-q="depositPct" inputmode="decimal" placeholder="Örn. 50"></label>
           <label class="field"><span>Termin (iş günü)</span><input id="q_lead" data-q="leadDays" inputmode="numeric" placeholder="Örn. 7"></label>
         </div>
+        <label class="check"><input type="checkbox" id="q_img"> Ürün görsellerini proformada göster</label>
         <label class="field"><span>Not</span><textarea id="q_notes" data-q="notes" rows="2" placeholder="Ölçü, renk, baskı detayı…"></textarea></label>
         <details class="more">
           <summary>Proforma ayrıntıları</summary>
@@ -537,7 +551,7 @@ details.more .form { padding-bottom: 6px; }
   const rid = () => "i" + Date.now().toString(36) + (uid++).toString(36);
   const read = (k) => { try { const r = localStorage.getItem(k); return r ? JSON.parse(r) : null; } catch (e) { return null; } };
   const write = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
-  const newItem = (o = {}) => ({ id: rid(), name: "", sku: "", price: "", qty: "1", rate: "20", cost: "", color: "", hook: "", pers: "", catId: "", manual: false, ...o });
+  const newItem = (o = {}) => ({ id: rid(), name: "", sku: "", price: "", qty: "1", rate: "20", cost: "", color: "", hook: "", pers: "", catId: "", img: "", manual: false, ...o });
   const clone = (o) => JSON.parse(JSON.stringify(o));
   const SAMPLE = () => [
     newItem({ name: "Ceviz askı 100 adet (örnek)", price: "4.500,00", qty: "2", cost: "2.600,00" }),
@@ -630,9 +644,9 @@ details.more .form { padding-bottom: 6px; }
     const id = it.id, r = num0(it.rate);
     const opts = (RATES.includes(r) ? RATES : [...RATES, r].sort((a, b) => a - b)).map((v) => `<option value="${v}"${v === r ? " selected" : ""}>%${nf.format(v)}</option>`).join("");
     return `<div class="li" data-id="${id}">
-      <div class="c-name"><label class="ml" for="n-${id}">Ürün</label><div class="name-wrap">
+      <div class="c-name"><label class="ml" for="n-${id}">Ürün</label><div class="nm-line">${thumb(imgOf(it), it.name)}<div class="name-wrap">
         <input class="in name" id="n-${id}" data-f="name" value="${esc(it.name)}" placeholder="Ürün adı" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="s-${id}">
-        <div class="suggest" id="s-${id}" role="listbox" hidden></div></div></div>
+        <div class="suggest" id="s-${id}" role="listbox" hidden></div></div></div></div>
       <div class="c-qty"><label class="ml" for="q-${id}">Adet</label><input class="in n" id="q-${id}" data-f="qty" inputmode="decimal" value="${esc(it.qty)}" aria-label="Adet"></div>
       <div class="c-price"><label class="ml" for="p-${id}">Birim fiyat</label><input class="in n" id="p-${id}" data-f="price" inputmode="decimal" value="${esc(it.price)}" placeholder="0,00" aria-label="Birim fiyat"></div>
       <div class="c-rate"><label class="ml" for="r-${id}">KDV</label><select class="in" id="r-${id}" data-f="rate" aria-label="KDV oranı">${opts}</select></div>
@@ -719,7 +733,7 @@ details.more .form { padding-bottom: 6px; }
       updateRow(it); updateTotals(); touched(); return;
     }
     it[f] = e.target.value;
-    if (f === "name") { it.sku = ""; it.catId = ""; openSuggest(e.target, it); }
+    if (f === "name") { it.sku = ""; it.catId = ""; it.img = ""; openSuggest(e.target, it); }
     if (f === "price") it.manual = true;
     if (f === "qty" && applyTier(it)) { const pe = document.getElementById("p-" + it.id); if (pe) pe.value = it.price; }
     updateRow(it); updateTotals(); touched();
@@ -803,6 +817,22 @@ details.more .form { padding-bottom: 6px; }
     state.mode = m; touched(); renderAll();
   }));
 
+  // ---------- Ürün görselleri (ikas görsel sunucusundan) ----------
+  // Küçük boy için ikas'ın image_180 sürümü denenir, olmazsa asıl görsel; o da olmazsa baş harf gösterilir
+  const imgOf = (it) => it.img || (it.catId && catalog.items.find((x) => x.id === it.catId)?.img) || "";
+  const thumbUrl = (u, w = 180) => String(u).replace(/image_\d+\.(webp|jpe?g|png)$/i, `image_${w}.$1`);
+  const initial = (t) => esc(String(t || "?").trim().charAt(0).toLocaleUpperCase("tr-TR") || "?");
+  const thumb = (u, alt, cls = "") => u
+    ? `<img class="thumb ${cls}" src="${esc(thumbUrl(u))}" data-full="${esc(u)}" data-alt="${esc(alt || "")}" alt="" loading="lazy" decoding="async">`
+    : `<span class="thumb ph ${cls}" aria-hidden="true">${initial(alt)}</span>`;
+  document.addEventListener("error", (e) => {
+    const im = e.target;
+    if (im.tagName !== "IMG" || !im.classList.contains("thumb")) return;
+    if (im.dataset.full && !im.dataset.tried) { im.dataset.tried = "1"; im.src = im.dataset.full; return; }
+    const ph = document.createElement("span"); ph.className = im.className.replace("thumb", "thumb ph"); ph.setAttribute("aria-hidden", "true");
+    ph.textContent = (im.dataset.alt || "?").trim().charAt(0).toLocaleUpperCase("tr-TR") || "?"; im.replaceWith(ph);
+  }, true);
+
   // ---------- Ürün listesinden öneri ----------
   let sel = -1;
   const findCat = (q) => { const w = norm(q).split(" ").filter(Boolean); return catalog.items.filter((c) => { const h = norm(c.name + " " + (c.sku || "")); return w.every((x) => h.includes(x)); }); };
@@ -814,7 +844,7 @@ details.more .form { padding-bottom: 6px; }
     const list = findCat(input.value).slice(0, 8);
     if (!list.length) { closeSuggest(input); return; }
     sel = -1;
-    box.innerHTML = list.map((c) => `<div class="opt" role="option" id="o-${it.id}-${c.id}" data-cat="${c.id}" aria-selected="false"><span>${esc(c.name)}</span><span class="op">${c.price ? fm(toK(catPrice(c))) + (perUnit(c) ? " / adet" : "") : ""}</span></div>`).join("");
+    box.innerHTML = list.map((c) => `<div class="opt" role="option" id="o-${it.id}-${c.id}" data-cat="${c.id}" aria-selected="false"><span class="o-l">${thumb(c.img, c.name, "sm")}<span>${esc(c.name)}</span></span><span class="op">${c.price ? fm(toK(catPrice(c))) + (perUnit(c) ? " / adet" : "") : ""}</span></div>`).join("");
     box.hidden = false; input.setAttribute("aria-expanded", "true");
   }
   function closeSuggest(input) {
@@ -850,7 +880,7 @@ details.more .form { padding-bottom: 6px; }
     it.price = plain.format(price); return true;
   }
   function pick(it, c) {
-    Object.assign(it, { name: c.name, sku: c.sku || "", catId: c.id, manual: false, price: c.price ? plain.format(catPrice(c)) : it.price, rate: String(c.rate ?? 20), cost: c.cost != null ? plain.format(c.cost) : it.cost });
+    Object.assign(it, { name: c.name, sku: c.sku || "", catId: c.id, img: c.img || "", manual: false, price: c.price ? plain.format(catPrice(c)) : it.price, rate: String(c.rate ?? 20), cost: c.cost != null ? plain.format(c.cost) : it.cost });
     if (c.colors?.length === 1) { it.color = c.colors[0]; it.colorCustom = !COLORS.includes(c.colors[0]); }
     if (c.hooks?.length === 1) it.hook = c.hooks[0];
     applyTier(it);
@@ -1048,6 +1078,7 @@ details.more .form { padding-bottom: 6px; }
     save();
     dlgQ.querySelectorAll("[data-q]").forEach((el) => { el.value = getP(q, el.dataset.q) ?? ""; });
     dlgQ.querySelectorAll("[data-s]").forEach((el) => { el.value = settings.seller[el.dataset.s] ?? ""; });
+    $("#q_img").checked = settings.pdfImg !== false;
     $("#sellerBox").open = !settings.seller.owner;
     $("#qStatus").textContent = settings.seller.owner ? "" : "Firma bilgilerime ad soyadınızı yazın; proformada satıcı ve hesap sahibi olarak görünür.";
     dlgQ.showModal(); renderQuote();
@@ -1061,6 +1092,7 @@ details.more .form { padding-bottom: 6px; }
     renderQuote();
   });
   $("#qForm").addEventListener("submit", (e) => e.preventDefault());
+  $("#q_img").addEventListener("change", (e) => { settings.pdfImg = e.target.checked; saveSettings(); renderQuote(); });
 
   // Tutarın yazıyla gösterimi ("Yalnız: …")
   function words(n) {
@@ -1114,6 +1146,11 @@ details.more .form { padding-bottom: 6px; }
     saveCusts();
   }
 
+  // Proformada ürün görseli (ayar kapalıysa ya da görsel yoksa eklenmez)
+  const pdfImg = (it) => {
+    const u = settings.pdfImg !== false && imgOf(it);
+    return u ? `<div class="pi"><img class="pimg" src="${esc(thumbUrl(u, 360))}" data-full="${esc(u)}" alt=""><div>` : "";
+  };
   function quoteHTML() {
     const q = state.quote, s = settings.seller, c = q.cust || {}, t = totals();
     const seller = [s.owner, s.address, [s.phone, s.email].filter(Boolean).join(" · "), s.web, s.tax].filter(Boolean).join("\n");
@@ -1141,7 +1178,7 @@ details.more .form { padding-bottom: 6px; }
       </div>
       <table>
         <thead><tr><th>#</th><th>AÇIKLAMA</th><th>MİKTAR</th><th>BİRİM FİYAT</th><th>KDV</th><th>TUTAR</th></tr></thead>
-        <tbody>${lines.map(({ it, c }) => `<tr${c.ext ? ' class="has-ext"' : ""}><td>${++n}</td><td>${esc(it.name || "Ürün")}${[it.color, it.hook, it.sku].some(Boolean) ? `<div class="sku">${esc([it.color, it.hook, it.sku].filter(Boolean).join(" · "))}</div>` : ""}</td><td>${nf.format(c.q)}</td><td>${fm(c.unitNet)}</td><td>%${nf.format(c.rate)}</td><td>${fm(c.p.net)}</td></tr>` +
+        <tbody>${lines.map(({ it, c }) => `<tr${c.ext ? ' class="has-ext"' : ""}><td>${++n}</td><td>${pdfImg(it)}${esc(it.name || "Ürün")}${[it.color, it.hook, it.sku].some(Boolean) ? `<div class="sku">${esc([it.color, it.hook, it.sku].filter(Boolean).join(" · "))}</div>` : ""}${settings.pdfImg !== false && imgOf(it) ? "</div></div>" : ""}</td><td>${nf.format(c.q)}</td><td>${fm(c.unitNet)}</td><td>%${nf.format(c.rate)}</td><td>${fm(c.p.net)}</td></tr>` +
           (c.ext ? `<tr class="ext"><td></td><td>+ ${esc(c.ext.label)} (logo uygulaması)</td><td>${nf.format(c.q)}</td><td>${fm(c.ext.unitNet)}</td><td>%${nf.format(c.rate)}</td><td>${fm(c.ext.net)}</td></tr>` : "")).join("")}</tbody>
       </table>
       <div class="q-bottom">
@@ -1173,6 +1210,15 @@ details.more .form { padding-bottom: 6px; }
     const c = (state.quote.cust?.name || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/ı/g, "i").replace(/[^\w]+/g, "-").replace(/^-|-$/g, "");
     return `Proforma-${state.quote.no}${c ? "-" + c : ""}.pdf`;
   };
+  let imgMiss = 0;
+  async function toDataUrl(u) {
+    const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), 8000);
+    try {
+      const r = await fetch(u, { mode: "cors", signal: ctl.signal }); if (!r.ok) throw new Error(r.status);
+      const b = await r.blob();
+      return await new Promise((ok, no) => { const fr = new FileReader(); fr.onload = () => ok(fr.result); fr.onerror = no; fr.readAsDataURL(b); });
+    } finally { clearTimeout(tm); }
+  }
   async function makePdf() {
     $("#qStatus").textContent = "PDF hazırlanıyor…";
     try { await loadScript(LIB_PDF); } catch (e) { $("#qStatus").textContent = "PDF aracı yüklenemedi; internet bağlantısını kontrol edin."; return null; }
@@ -1182,11 +1228,20 @@ details.more .form { padding-bottom: 6px; }
     document.body.appendChild(host);
     try {
       await document.fonts?.ready;
+      const imgs = [...host.querySelectorAll("img.pimg")];
+      let miss = 0;
+      await Promise.all(imgs.map(async (im) => {
+        for (const u of [im.getAttribute("src"), im.dataset.full]) {
+          try { im.src = await toDataUrl(u); await im.decode(); return; } catch (e) {}
+        }
+        miss++; im.remove();
+      }));
+      imgMiss = miss;
       const blob = await window.html2pdf().set({
         margin: 0, image: { type: "jpeg", quality: 0.95 }, html2canvas: { scale: 2, backgroundColor: "#ffffff", letterRendering: true },
         jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }, pagebreak: { mode: ["css", "legacy"], avoid: "tr" },
       }).from(host.firstElementChild).outputPdf("blob");
-      $("#qStatus").textContent = "";
+      $("#qStatus").textContent = imgMiss ? `${imgMiss} ürün görseli PDF'e eklenemedi (görsel sunucusuna erişilemedi).` : "";
       return blob;
     } catch (e) { $("#qStatus").textContent = "PDF oluşturulamadı."; return null; }
     finally { host.remove(); }
@@ -1200,7 +1255,7 @@ details.more .form { padding-bottom: 6px; }
     if (pdfBusy?.key === key) return pdfBusy.p;
     const p = makePdf(); pdfBusy = { key, p };
     const blob = await p; if (pdfBusy?.p === p) pdfBusy = null;
-    if (blob) { pdfCache = { key, blob }; $("#qStatus").textContent = ""; upsertHist("gonderildi"); upsertCust(); }
+    if (blob) { pdfCache = { key, blob }; upsertHist("gonderildi"); upsertCust(); }
     return blob;
   }
 
@@ -1255,7 +1310,7 @@ details.more .form { padding-bottom: 6px; }
       return;
     }
     $("#catList").innerHTML = list.slice(0, 300).map((c) => `<div class="c-row" data-cat="${c.id}">
-        <div><div class="cn">${esc(c.name)}</div><div class="cm">${c.price ? fm(toK(c.price)) + (perUnit(c) ? "/adet" : "") + (c.mode === "net" ? " + KDV" : " KDV dahil") : "Fiyat yok"}${c.sku ? " · " + esc(c.sku) : ""}${c.note ? " · " + esc(c.note) : ""}${c.colors?.length ? " · " + esc(c.colors.join("/")) : ""}${c.hooks?.length ? " · " + esc(c.hooks.join("/")) : ""}</div></div>
+        <div class="c-info">${thumb(c.img, c.name, "lg")}<div><div class="cn">${esc(c.name)}</div><div class="cm">${c.price ? fm(toK(c.price)) + (perUnit(c) ? "/adet" : "") + (c.mode === "net" ? " + KDV" : " KDV dahil") : "Fiyat yok"}${c.sku ? " · " + esc(c.sku) : ""}${c.note ? " · " + esc(c.note) : ""}${c.colors?.length ? " · " + esc(c.colors.join("/")) : ""}${c.hooks?.length ? " · " + esc(c.hooks.join("/")) : ""}</div></div></div>
         <div class="c-acts">
           ${settings.profit ? `<label class="cost"><input data-cc inputmode="decimal" placeholder="Maliyet" value="${c.cost != null ? esc(plain.format(c.cost)) : ""}" aria-label="Birim maliyet (KDV hariç)"></label>` : ""}
           <button class="btn" type="button" data-tiers aria-expanded="${openTiers.has(c.id)}">Kademe${c.tiers?.length ? ` (${c.tiers.length})` : ""}</button>
@@ -1348,7 +1403,8 @@ details.more .form { padding-bottom: 6px; }
         }
         if (!qty) qty = parseNum(r["Satılan Ürün Miktarı"]) || 0;
         const sale = parseNum(r["İndirimli Fiyatı"]), base = parseNum(r["Satış Fiyatı"]), cost = parseNum(r["Alış Fiyatı"]);
-        return { qty, price: sale > 0 ? sale : base, attrs, cost: cost > 0 ? cost : null };
+        const img = String(r["Resim URL"] ?? "").split(";")[0].trim();
+        return { qty, price: sale > 0 ? sale : base, attrs, cost: cost > 0 ? cost : null, img };
       }).filter((x) => x.price > 0);
       // Aynı fiyat dizisine sahip renk/kanca kombinasyonları tek kayıtta toplanır
       const byAttr = new Map();
@@ -1377,7 +1433,7 @@ details.more .form { padding-bottom: 6px; }
           : { price: sg.xs[0].price, tiers: [], note: "Paket fiyatı" };
         const slug = rs[0]["Slug"];
         out.push({ name, sku: "", rate: 20, mode: "gross", cost: sg.xs.find((x) => x.cost)?.cost ?? null, url: slug ? "https://faravisatelier.com/" + slug : "",
-          colors: [...new Set(colors)], hooks: [...new Set(hooks)], ...item });
+          colors: [...new Set(colors)], hooks: [...new Set(hooks)], img: sg.xs.find((x) => x.img)?.img || "", ...item });
       }
     }
     return out.sort((a, b) => a.name.localeCompare(b.name, "tr"));
