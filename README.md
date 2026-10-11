@@ -70,19 +70,30 @@ Logo: `brand/logo.png` (şeffaf zemin) ve `brand/logo.svg` (vektör). Stüdyo, `
 
 ## KDV Hesap Defteri (`kdv/`)
 
-Telefonda ve bilgisayarda çalışan, kurulum gerektirmeyen KDV hesaplayıcı ve teklif aracı. `kdv/index.html` dosyasını tarayıcıda açmanız yeterli.
+Telefonda ve bilgisayarda çalışan KDV hesaplayıcı ve proforma aracı.
 Fatura düzenleyicileri gibi tek tablo: her satır bir ürün (ad, adet, birim fiyat, KDV oranı), satırın altında KDV hariç ve KDV tutarı,
 sağda ara toplam, oranlara göre KDV ve genel toplam.
 
 - **Fiyatlar KDV hariç / KDV dahil:** tablonun üstünde tek ayar; değiştirince fiyatlar çevrilir, toplam aynı kalır.
-- **Teklif PDF:** müşteri adı ve not yeterli; teklif no, tarih, geçerlilik, firma bilgileri ve IBAN açılır bölümlerde.
-  Logolu A4 PDF, tutar yazıyla. Maliyet ve kâr teklifte yer almaz.
-- **Ürün listesi** (⋯ menüsü): ürün adını yazarken öneri çıkar, seçince fiyat ve KDV dolar. Siteden (`katalog.json`) ya da
-  ikas'tan indirilen Excel/CSV dosyasından yüklenir.
-- **Kâr hesabı** (⋯ menüsü, varsayılan kapalı): maliyet sütunu açılır; satır başına ve toplam kâr / marj.
-- Özeti kopyalama, Excel'e (CSV) aktarma. Liste cihazda otomatik kaydedilir.
+- **Logo uygulaması:** her satırda "Lazer kazıma" ya da "Metal plaka" seçilir; adet fiyatları tablonun altındaki alana bir kez girilir.
+  Ürünle aynı adet ve KDV oranıyla hesaplanır, proformada ürünün altında ayrı satır olarak görünür.
+- **Proforma PDF:** logolu A4; satıcı (ad soyad dahil) ve alıcı blokları, ödeme ve teslim şekli, banka bilgileri (hesap sahibi, banka, IBAN),
+  tutar yazıyla, "resmi fatura yerine geçmez" notu ve imza alanı. Maliyet ve kâr proformada yer almaz.
+  - Telefonda **Gönder:** paylaşım menüsü açılır (WhatsApp, Mail, Dosyalara Kaydet…).
+  - Bilgisayarda **PDF kaydet:** Chrome / Edge kayıt yerini sorar; diğer tarayıcılar İndirilenler'e kaydeder.
+- **Ürün listesi** ve **kâr hesabı** (⋯ menüsü), özeti kopyalama, Excel'e (CSV) aktarma. Veriler cihazda saklanır.
 
 Hesap, faturadaki gibi satır bazında kuruşa yuvarlanır; toplamlar satırların toplamıdır.
+
+### Telefonda ve bilgisayarda açmak
+
+Uygulama GitHub Pages'ten yayınlanır (bir kez: GitHub → Settings → Pages → *Deploy from a branch* → dal ve `/ (root)` → Save).
+Adres: `https://shizopunch.github.io/Faravis-Atelier/kdv/`
+
+- **iPhone:** adresi Safari'de açın → Paylaş → **Ana Ekrana Ekle**. Uygulama gibi açılır, internetsiz de çalışır.
+- **Bilgisayar:** Chrome ya da Edge'de açın → adres çubuğundaki **Yükle** simgesi. Masaüstü uygulaması gibi açılır.
+
+Listeler, ürün listesi ve firma bilgileri her cihazın kendi tarayıcısında saklanır (cihazlar arası eşitlenmez).
 
 ### Siteden ürün listesini çekmek
 

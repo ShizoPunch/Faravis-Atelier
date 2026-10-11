@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>KDV Hesap Defteri</title>
-<meta name="description" content="Ürün ürün KDV hariç / KDV dahil hesap ve teklif. Telefonda ve bilgisayarda çalışır.">
+<meta name="description" content="Ürün ürün KDV hariç / KDV dahil hesap ve proforma. Telefonda ve bilgisayarda çalışır.">
 <meta name="theme-color" content="#3B2F2A">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="KDV Hesabı">
@@ -126,6 +126,25 @@ select.in { cursor: pointer; padding-right: 4px; }
 .c-sub .neg { color: var(--danger); }
 .c-sub .pos { color: var(--ok); }
 .m-only { display: none; }
+.sub-txt { display: contents; }
+select.pers {
+  height: 26px; border: 1px solid var(--line); border-radius: 999px; background: var(--sunken); color: var(--muted);
+  font-size: 12px; font-weight: 500; padding: 0 8px; margin-right: 4px; cursor: pointer; max-width: 100%;
+}
+select.pers.on { color: var(--accent-ink); border-color: var(--accent); background: var(--surface); }
+.c-sub .warn { color: var(--danger); font-weight: 500; }
+.pers-panel { border-top: 1px solid var(--line); background: var(--sunken); padding: 12px 16px; display: grid; gap: 8px; }
+.pp-head { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.pp-head span { text-transform: none; letter-spacing: 0; font-weight: 500; }
+.pp-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); }
+.pp { display: grid; gap: 4px; font-size: 12px; color: var(--muted); }
+.pp.cost-col { display: none; } .profit-on .pp.cost-col { display: grid; }
+.pp-box { display: flex; align-items: center; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.pp-box:focus-within { border-color: var(--accent); }
+.pp-box input { flex: 1; min-width: 0; border: 0; background: transparent; height: 36px; padding: 0 8px; text-align: right; font-size: 14px; }
+.pp-box input:focus { outline: none; }
+.pp-box i { font-style: normal; font-size: 11px; color: var(--muted); padding-right: 8px; white-space: nowrap; }
+.pp-box.need { border-color: var(--danger); }
 
 .t-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 10px; border-top: 1px solid var(--line); flex-wrap: wrap; }
 .hint { font-size: 12px; color: var(--muted); padding: 0 8px; }
@@ -235,34 +254,42 @@ details.more .form { padding-bottom: 6px; }
   width: 794px; min-height: 1123px; background: #FFFFFF; color: var(--p-ink); padding: 60px 64px 52px;
   font: 400 12px/1.5 var(--font-body); font-variant-numeric: lining-nums tabular-nums; display: flex; flex-direction: column; gap: 30px;
 }
-.a4 .q-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; }
+.a4 .q-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; padding-bottom: 18px; border-bottom: 2px solid var(--p-ink); }
 .a4 .mark { color: #1E1B19; line-height: 0; }
-.a4 .mark svg, .a4 .mark img { height: 58px; width: auto; display: block; }
-.a4 .seller { margin-top: 14px; font-size: 10.5px; color: var(--p-muted); white-space: pre-line; line-height: 1.6; }
+.a4 .mark svg, .a4 .mark img { height: 62px; width: auto; display: block; }
 .a4 .q-title { text-align: right; }
-.a4 .q-title h3 { margin: 0 0 12px; font-size: 22px; font-weight: 700; letter-spacing: .28em; }
-.a4 .meta { display: grid; grid-template-columns: auto auto; gap: 3px 16px; justify-content: end; font-size: 11px; }
+.a4 .q-title h3 { margin: 0 0 10px; font-size: 26px; font-weight: 700; letter-spacing: .32em; margin-right: -.32em; }
+.a4 .meta { display: grid; grid-template-columns: auto auto; gap: 3px 14px; justify-content: end; font-size: 11px; }
 .a4 .meta span:nth-child(odd) { color: var(--p-muted); text-align: right; }
-.a4 .lab { font-size: 9px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--p-gold); margin-bottom: 4px; }
-.a4 .to .nm { font-size: 16px; font-weight: 600; }
-.a4 .to .dt { color: var(--p-muted); white-space: pre-line; font-size: 11px; margin-top: 2px; }
+.a4 .lab { font-size: 8.5px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--p-gold); margin-bottom: 6px; }
+.a4 .parties { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.a4 .party { border: 1px solid var(--p-line); border-radius: 6px; padding: 14px 16px; }
+.a4 .party .nm { font-size: 14px; font-weight: 600; }
+.a4 .party .dt { color: var(--p-muted); white-space: pre-line; font-size: 10.5px; line-height: 1.6; margin-top: 3px; }
 .a4 table { width: 100%; border-collapse: collapse; }
-.a4 th { font-size: 9px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--p-muted); text-align: right; padding: 0 6px 8px; border-bottom: 1px solid var(--p-ink); }
-.a4 td { padding: 10px 6px; text-align: right; border-bottom: 1px solid var(--p-line); vertical-align: top; }
-.a4 th:first-child, .a4 td:first-child { text-align: left; padding-left: 0; }
-.a4 th:last-child, .a4 td:last-child { padding-right: 0; }
-.a4 td .sku { color: var(--p-muted); font-size: 10px; }
-.a4 td:first-child, .a4 .words, .a4 .notes, .a4 .sign { font-variant-numeric: normal; } /* PDF aracı eşit genişlikli rakamlarda kelime aralığını kaydırıyor */
+.a4 th { font-size: 8.5px; font-weight: 700; letter-spacing: .14em; color: var(--p-ink); text-align: right; padding: 9px 8px; background: var(--p-band); }
+.a4 td { padding: 10px 8px; text-align: right; border-bottom: 1px solid var(--p-line); vertical-align: top; }
+.a4 th:nth-child(2), .a4 td:nth-child(2) { text-align: left; }
+.a4 th:first-child, .a4 td:first-child { width: 26px; text-align: left; color: var(--p-muted); }
+.a4 td .sku { color: var(--p-muted); font-size: 9.5px; margin-top: 1px; }
+.a4 tr.ext td { padding-top: 0; color: var(--p-muted); font-size: 11px; }
+.a4 tr.has-ext td { border-bottom: 0; }
+.a4 td:nth-child(2), .a4 .words, .a4 .terms, .a4 .foot { font-variant-numeric: normal; } /* PDF aracı eşit genişlikli rakamlarda kelime aralığını kaydırıyor */
 .a4 tr { break-inside: avoid; }
-.a4 .q-bottom { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 32px; align-items: start; }
-.a4 .tot div { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; }
+.a4 .q-bottom { display: grid; grid-template-columns: minmax(0, 1fr) 270px; gap: 28px; align-items: start; }
+.a4 .terms { display: grid; gap: 14px; font-size: 11px; }
+.a4 .terms dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; }
+.a4 .terms dt { color: var(--p-muted); } .a4 .terms dd { margin: 0; white-space: pre-line; }
+.a4 .bank { background: var(--p-band); border-radius: 6px; padding: 12px 14px; }
+.a4 .bank dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; }
+.a4 .bank dt { color: var(--p-muted); } .a4 .bank dd { margin: 0; font-weight: 600; }
+.a4 .tot > div { display: flex; justify-content: space-between; gap: 12px; padding: 5px 0; }
 .a4 .tot .s { color: var(--p-muted); font-size: 11px; }
-.a4 .tot .g { margin-top: 8px; padding: 11px 12px; background: var(--p-band); border-top: 1.5px solid var(--p-gold); font-size: 15px; font-weight: 700; }
-.a4 .words { margin-top: 8px; font-size: 10.5px; font-style: italic; color: var(--p-muted); }
-.a4 .notes { white-space: pre-line; font-size: 11px; }
-.a4 .bank { margin-top: 16px; font-size: 11px; }
-.a4 .sign { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; color: var(--p-muted); font-size: 10.5px; }
-.a4 .sign .line { width: 190px; border-top: 1px solid var(--p-muted); padding-top: 6px; text-align: center; }
+.a4 .tot .g { margin-top: 8px; padding: 12px 14px; background: #1E1B19; color: #FFFFFF; border-radius: 4px; font-size: 15px; font-weight: 700; }
+.a4 .words { margin-top: 8px; font-size: 10px; font-style: italic; color: var(--p-muted); }
+.a4 .foot { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; padding-top: 16px; border-top: 1px solid var(--p-line); color: var(--p-muted); font-size: 9.5px; line-height: 1.6; }
+.a4 .foot .sign { width: 200px; text-align: center; }
+.a4 .foot .sign .line { border-top: 1px solid var(--p-ink); padding-top: 6px; color: var(--p-ink); font-size: 11px; font-weight: 600; margin-top: 46px; }
 
 /* Ürün listesi (katalog) */
 .c-tools { margin-bottom: 12px; }
@@ -296,7 +323,7 @@ details.more .form { padding-bottom: 6px; }
       <h1><b>KDV Hesap</b>Defteri</h1>
     </div>
     <div class="top-actions">
-      <button class="btn primary" id="btnQuote" type="button">Teklif PDF</button>
+      <button class="btn primary" id="btnQuote" type="button">Proforma</button>
       <div class="menu">
         <button class="btn icon" id="btnMore" type="button" aria-label="Diğer işlemler" aria-expanded="false" aria-controls="morePop"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
         <div class="menu-pop" id="morePop" hidden></div>
@@ -319,6 +346,15 @@ details.more .form { padding-bottom: 6px; }
         <span style="padding-left:9px">Ürün</span><span class="r">Adet</span><span class="r">Birim fiyat</span><span>KDV</span><span class="r cost-col">Maliyet</span><span class="tr">KDV dahil</span><span></span>
       </div>
       <div class="lines" id="lines"></div>
+      <div class="pers-panel" id="persPanel">
+        <div class="pp-head">Logo uygulaması · adet fiyatı <span id="ppMode">(KDV hariç)</span></div>
+        <div class="pp-grid">
+          <label class="pp"><span>Lazer kazıma</span><span class="pp-box"><input id="pp-lazer" data-pp="lazer.price" inputmode="decimal" placeholder="0,00"><i>₺ / adet</i></span></label>
+          <label class="pp"><span>Metal plaka</span><span class="pp-box"><input id="pp-plaka" data-pp="plaka.price" inputmode="decimal" placeholder="0,00"><i>₺ / adet</i></span></label>
+          <label class="pp cost-col"><span>Lazer maliyeti</span><span class="pp-box"><input id="pp-lazer-c" data-pp="lazer.cost" inputmode="decimal" placeholder="—"><i>₺ / adet</i></span></label>
+          <label class="pp cost-col"><span>Plaka maliyeti</span><span class="pp-box"><input id="pp-plaka-c" data-pp="plaka.cost" inputmode="decimal" placeholder="—"><i>₺ / adet</i></span></label>
+        </div>
+      </div>
       <div class="t-foot">
         <button class="btn ghost" id="btnAdd" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Ürün ekle</button>
         <span class="hint" id="hint"></span>
@@ -330,46 +366,52 @@ details.more .form { padding-bottom: 6px; }
       <dl class="trows" id="trows"></dl>
       <div class="grand"><span>Genel toplam</span><b id="grand">₺0,00</b></div>
       <dl class="profit-box" id="profitBox" hidden></dl>
-      <button class="btn primary" id="btnQuote2" type="button">Teklif PDF oluştur</button>
+      <button class="btn primary" id="btnQuote2" type="button">Proforma oluştur</button>
     </aside>
   </div>
 </div>
 
 <div class="dock" id="dock">
   <div><div class="k">Genel toplam · KDV dahil</div><div class="v" id="dockGrand">₺0,00</div></div>
-  <button class="btn primary" id="btnQuote3" type="button">Teklif PDF</button>
+  <button class="btn primary" id="btnQuote3" type="button">Proforma</button>
 </div>
 
 <dialog class="sheet" id="dlgQuote" aria-labelledby="qT">
-  <div class="d-head"><h2 id="qT">Teklif</h2><button class="x" type="button" data-close aria-label="Kapat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="d-head"><h2 id="qT">Proforma</h2><button class="x" type="button" data-close aria-label="Kapat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
   <div class="d-body">
     <div class="q-layout">
       <form class="form" id="qForm" autocomplete="off">
         <label class="field"><span>Müşteri</span><input id="q_name" data-q="cust.name" placeholder="Firma ya da ad soyad"></label>
         <label class="field"><span>Telefon / e-posta</span><input id="q_contact" data-q="cust.contact"></label>
-        <label class="field"><span>Not</span><textarea id="q_notes" data-q="notes" rows="3" placeholder="Teslim süresi, ödeme, kargo…"></textarea></label>
+        <label class="field"><span>Not</span><textarea id="q_notes" data-q="notes" rows="2" placeholder="Ölçü, renk, baskı detayı…"></textarea></label>
         <details class="more">
-          <summary>Teklif ayrıntıları</summary>
+          <summary>Proforma ayrıntıları</summary>
           <div class="form">
             <div class="two">
-              <label class="field"><span>Teklif no</span><input id="q_no" data-q="no"></label>
+              <label class="field"><span>Proforma no</span><input id="q_no" data-q="no"></label>
               <label class="field"><span>Tarih</span><input id="q_date" data-q="date" type="date"></label>
             </div>
             <label class="field"><span>Geçerlilik (gün)</span><input id="q_valid" data-q="validDays" inputmode="numeric"></label>
+            <label class="field"><span>Ödeme şekli</span><input id="q_pay" data-q="payment" placeholder="Havale / EFT, %50 ön ödeme"></label>
+            <label class="field"><span>Teslim şekli</span><input id="q_del" data-q="delivery" placeholder="Kargo ile, 7 iş günü"></label>
             <label class="field"><span>Müşteri adresi</span><textarea id="q_addr" data-q="cust.address" rows="2"></textarea></label>
             <label class="field"><span>Vergi dairesi / no</span><input id="q_tax" data-q="cust.tax"></label>
           </div>
         </details>
-        <details class="more">
+        <details class="more" id="sellerBox">
           <summary>Firma bilgilerim</summary>
           <div class="form">
+            <label class="field"><span>Ad soyad (şahıs şirketi sahibi / hesap sahibi)</span><input id="s_owner" data-s="owner" placeholder="Ad Soyad" autocomplete="name"></label>
             <label class="field"><span>Adres</span><textarea id="s_addr" data-s="address" rows="2"></textarea></label>
             <div class="two">
               <label class="field"><span>Telefon</span><input id="s_phone" data-s="phone" inputmode="tel"></label>
               <label class="field"><span>E-posta</span><input id="s_mail" data-s="email" inputmode="email"></label>
             </div>
             <label class="field"><span>Vergi dairesi / no</span><input id="s_tax" data-s="tax"></label>
-            <label class="field"><span>IBAN</span><input id="s_iban" data-s="iban" placeholder="TR00 0000 0000 0000 0000 0000 00"></label>
+            <div class="two">
+              <label class="field"><span>Banka</span><input id="s_bank" data-s="bank" placeholder="Banka adı"></label>
+              <label class="field"><span>IBAN</span><input id="s_iban" data-s="iban" placeholder="TR00 0000 0000 0000 0000 0000 00"></label>
+            </div>
           </div>
         </details>
       </form>
@@ -378,8 +420,8 @@ details.more .form { padding-bottom: 6px; }
   </div>
   <div class="d-foot">
     <span class="grow" id="qStatus"></span>
-    <button class="btn" type="button" id="btnSharePdf" hidden>Paylaş</button>
-    <button class="btn primary" type="button" id="btnPdf">PDF indir</button>
+    <button class="btn" type="button" id="btnPdf">PDF kaydet</button>
+    <button class="btn primary" type="button" id="btnSend" hidden>Gönder</button>
   </div>
 </dialog>
 
@@ -466,7 +508,10 @@ details.more .form { padding-bottom: 6px; }
   state.quote = state.quote || {};
   const settings = Object.assign({ profit: false, seq: 1 }, read(KEY_SET) || {});
   if ("showProfit" in settings) { settings.profit = false; delete settings.showProfit; }
-  settings.seller = Object.assign({ name: "Faravis Atelier", address: "", phone: "", email: "", web: "faravisatelier.com", tax: "", iban: "" }, settings.seller || {});
+  settings.seller = Object.assign({ name: "Faravis Atelier", owner: "", address: "", phone: "", email: "", web: "faravisatelier.com", tax: "", bank: "", iban: "" }, settings.seller || {});
+  // Logo uygulaması: adet başı fiyat ve maliyet (fiyat, tablodaki fiyat türüyle aynı: KDV hariç ya da dahil)
+  const PERS = { lazer: "Lazer kazıma", plaka: "Metal plaka" };
+  settings.pers = Object.assign({ lazer: { price: "", cost: "" }, plaka: { price: "", cost: "" } }, settings.pers || {});
   let catalog = read(KEY_CAT);
   if (!catalog || !Array.isArray(catalog.items)) catalog = { items: [], source: "", updated: "" };
 
@@ -487,8 +532,20 @@ details.more .form { padding-bottom: 6px; }
     else { net = toK(p * q); gross = net + toK((net / 100) * r); }
     const unitNet = toK(state.mode === "gross" ? p / (1 + r) : p);
     const cs = String(it.cost ?? "").trim(), c = parseNum(cs);
-    const cost = cs && Number.isFinite(c) ? toK(c * q) : null;
-    return { net, vat: gross - net, gross, unitNet, q, rate: r * 100, cost, profit: cost === null ? null : net - cost };
+    let cost = cs && Number.isFinite(c) ? toK(c * q) : null;
+    // Logo uygulaması (lazer kazıma / metal plaka): ürünle aynı adet ve KDV oranı
+    let ext = null;
+    if (PERS[it.pers]) {
+      const pp = settings.pers[it.pers], ep = Math.max(0, num0(pp.price));
+      let en, eg;
+      if (state.mode === "gross") { eg = toK(ep * q); en = toK(eg / 100 / (1 + r)); }
+      else { en = toK(ep * q); eg = en + toK((en / 100) * r); }
+      const ecs = String(pp.cost ?? "").trim(), ec = parseNum(ecs);
+      ext = { key: it.pers, label: PERS[it.pers], unitNet: toK(state.mode === "gross" ? ep / (1 + r) : ep), net: en, vat: eg - en, gross: eg, missing: !String(pp.price).trim() };
+      if (cost !== null && ecs && Number.isFinite(ec)) cost += toK(ec * q);
+    }
+    const tNet = net + (ext ? ext.net : 0), tGross = gross + (ext ? ext.gross : 0);
+    return { net: tNet, vat: tGross - tNet, gross: tGross, p: { net, vat: gross - net, gross }, ext, unitNet, q, rate: r * 100, cost, profit: cost === null ? null : tNet - cost };
   }
   function totals() {
     const t = { net: 0, vat: 0, gross: 0, qty: 0, cost: 0, costNet: 0, costLines: 0, byRate: new Map(), lines: [] };
@@ -519,7 +576,9 @@ details.more .form { padding-bottom: 6px; }
       <div class="c-cost cost-col"><label class="ml" for="c-${id}">Birim maliyet (KDV hariç)</label><input class="in n" id="c-${id}" data-f="cost" inputmode="decimal" value="${esc(it.cost)}" placeholder="—" aria-label="Birim maliyet (KDV hariç)"></div>
       <div class="c-total" data-out="tot"></div>
       <button class="x" type="button" data-act="del" aria-label="Satırı sil">${X}</button>
-      <div class="c-sub" data-out="sub"></div>
+      <div class="c-sub"><select class="pers${PERS[it.pers] ? " on" : ""}" id="x-${id}" data-f="pers" aria-label="Logo uygulaması">
+        <option value="">Logo uygulaması yok</option>${Object.entries(PERS).map(([k, v]) => `<option value="${k}"${it.pers === k ? " selected" : ""}>+ ${v}</option>`).join("")}
+      </select><span class="sub-txt" data-out="sub"></span></div>
     </div>`;
   }
   function renderAll(focusId) {
@@ -529,6 +588,7 @@ details.more .form { padding-bottom: 6px; }
     document.querySelectorAll("[data-mode]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.mode === state.mode)));
     $("#table").classList.toggle("profit-on", settings.profit);
     $("#hint").innerHTML = state.sample ? `Örnek satırlar · <button type="button" id="btnFresh">Temizle</button>` : "";
+    renderPers();
     if (focusId) document.getElementById("n-" + focusId)?.focus();
   }
   function updateRow(it) {
@@ -536,6 +596,8 @@ details.more .form { padding-bottom: 6px; }
     const c = calc(it);
     el.querySelector('[data-out="tot"]').textContent = fm(c.gross);
     let sub = `<span>KDV hariç <b>${fm(c.net)}</b></span><span>KDV <b>${fm(c.vat)}</b></span><span class="m-only">KDV dahil <b>${fm(c.gross)}</b></span>`;
+    if (c.ext) sub = (c.ext.missing ? `<span class="warn">${c.ext.label} adet fiyatını aşağıya girin</span>` : `<span>${c.ext.label} <b>${fm(c.ext.net)}</b></span>`) + sub;
+    el.querySelector("select.pers").classList.toggle("on", !!c.ext);
     if (settings.profit && c.profit !== null) {
       const m = c.net ? (c.profit / c.net) * 100 : 0;
       sub += `<span>${c.profit < 0 ? "Zarar" : "Kâr"} <b class="${c.profit < 0 ? "neg" : "pos"}">${fm(c.profit)}</b> · %${pf.format(m)}</span>`;
@@ -581,6 +643,7 @@ details.more .form { padding-bottom: 6px; }
     it[f] = e.target.value;
     if (f === "name") { it.sku = ""; openSuggest(e.target, it); }
     updateRow(it); updateTotals(); touched();
+    if (f === "pers") renderPers();
   }
   linesEl.addEventListener("input", (e) => { if (e.target.tagName !== "SELECT") onField(e); });
   linesEl.addEventListener("change", (e) => { if (e.target.tagName === "SELECT") onField(e); });
@@ -626,6 +689,26 @@ details.more .form { padding-bottom: 6px; }
   }
   $("#btnAdd").addEventListener("click", addItem);
 
+  // Logo uygulaması fiyatları
+  function renderPers() {
+    $("#ppMode").textContent = state.mode === "gross" ? "(KDV dahil)" : "(KDV hariç)";
+    document.querySelectorAll("[data-pp]").forEach((el) => {
+      const [k, f] = el.dataset.pp.split(".");
+      if (document.activeElement !== el) el.value = settings.pers[k][f] ?? "";
+      if (f === "price") el.parentElement.classList.toggle("need", !String(settings.pers[k].price).trim() && state.items.some((x) => x.pers === k));
+    });
+  }
+  $("#persPanel").addEventListener("input", (e) => {
+    const el = e.target; if (!el.dataset.pp) return;
+    const [k, f] = el.dataset.pp.split("."); settings.pers[k][f] = el.value; saveSettings();
+    state.items.forEach(updateRow); updateTotals(); renderPers();
+  });
+  $("#persPanel").addEventListener("focusout", (e) => {
+    const el = e.target; if (!el.dataset.pp) return;
+    const [k, f] = el.dataset.pp.split("."), n = parseNum(el.value);
+    if (el.value.trim() && Number.isFinite(n)) { settings.pers[k][f] = el.value = plain.format(n); saveSettings(); }
+  });
+
   // Fiyat türü tüm tablo için tek ayar. Değiştirince fiyatlar çevrilir, toplamlar aynı kalır.
   document.querySelectorAll("[data-mode]").forEach((b) => b.addEventListener("click", () => {
     const m = b.dataset.mode; if (m === state.mode) return;
@@ -633,6 +716,9 @@ details.more .form { padding-bottom: 6px; }
       const p = parseNum(it.price), r = num0(it.rate) / 100;
       if (Number.isFinite(p) && String(it.price).trim()) it.price = plain.format(m === "gross" ? p * (1 + r) : p / (1 + r));
     });
+    // Logo uygulaması fiyatları %20 KDV ile çevrilir (askı ve baskı için standart oran)
+    Object.values(settings.pers).forEach((pp) => { const p = parseNum(pp.price); if (Number.isFinite(p) && String(pp.price).trim()) pp.price = plain.format(m === "gross" ? p * 1.2 : p / 1.2); });
+    saveSettings();
     state.mode = m; touched(); renderAll();
   }));
 
@@ -700,7 +786,10 @@ details.more .form { padding-bottom: 6px; }
 
   function summaryText() {
     const t = totals(), L = [`KDV hesabı · ${today()}`, ""];
-    t.lines.forEach(({ it, c }, i) => L.push(`${i + 1}) ${it.name || "Ürün"} — ${nf.format(c.q)} × ${fm(c.unitNet)} + KDV %${nf.format(c.rate)} = ${fm(c.gross)}`));
+    t.lines.forEach(({ it, c }, i) => {
+      L.push(`${i + 1}) ${it.name || "Ürün"} — ${nf.format(c.q)} × ${fm(c.unitNet)} + KDV %${nf.format(c.rate)} = ${fm(c.p.gross)}`);
+      if (c.ext) L.push(`   + ${c.ext.label} — ${nf.format(c.q)} × ${fm(c.ext.unitNet)} + KDV = ${fm(c.ext.gross)}`);
+    });
     L.push("", `Ara toplam (KDV hariç): ${fm(t.net)}`);
     t.rates.forEach(([r, b]) => L.push(`KDV %${nf.format(r)}: ${fm(b.vat)}`));
     L.push(`Genel toplam (KDV dahil): ${fm(t.gross)}`);
@@ -727,7 +816,10 @@ details.more .form { padding-bottom: 6px; }
   function exportCsv() {
     const t = totals(), q = (s) => `"${String(s ?? "").replace(/"/g, '""')}"`, n2 = (k) => (k === null ? "" : plain.format(k / 100));
     const L = [["Ürün", "Stok kodu", "Adet", "Birim fiyat (KDV hariç)", "KDV %", "KDV hariç", "KDV", "KDV dahil", "Maliyet", "Kâr"].map(q).join(";")];
-    t.lines.forEach(({ it, c }) => L.push([it.name, it.sku, nf.format(c.q), n2(c.unitNet), nf.format(c.rate), n2(c.net), n2(c.vat), n2(c.gross), n2(c.cost), n2(c.profit)].map(q).join(";")));
+    t.lines.forEach(({ it, c }) => {
+      L.push([it.name, it.sku, nf.format(c.q), n2(c.unitNet), nf.format(c.rate), n2(c.p.net), n2(c.p.vat), n2(c.p.gross), n2(c.cost), n2(c.profit)].map(q).join(";"));
+      if (c.ext) L.push(["  + " + c.ext.label, "", nf.format(c.q), n2(c.ext.unitNet), nf.format(c.rate), n2(c.ext.net), n2(c.ext.vat), n2(c.ext.gross), "", ""].map(q).join(";"));
+    });
     L.push(["TOPLAM", "", nf.format(t.qty), "", "", n2(t.net), n2(t.vat), n2(t.gross), "", ""].map(q).join(";"));
     saveFile(`kdv-hesabi-${new Date().toISOString().slice(0, 10)}.csv`, new Blob(["\uFEFF" + L.join("\r\n")], { type: "text/csv;charset=utf-8" }));
   }
@@ -737,7 +829,7 @@ details.more .form { padding-bottom: 6px; }
 
   document.querySelectorAll("dialog.sheet").forEach((d) => d.addEventListener("click", (e) => { if (e.target === d || e.target.closest("[data-close]")) d.close(); }));
 
-  // ---------- Teklif ----------
+  // ---------- Proforma ----------
   const dlgQ = $("#dlgQuote");
   const LOGO = $("#logo").innerHTML;
   // PDF aracı satır içi SVG'yi doğru çizemiyor; logo bir kez PNG'ye çevrilip teklifte resim olarak kullanılır
@@ -753,7 +845,7 @@ details.more .form { padding-bottom: 6px; }
     } catch (e) {}
   })();
   const isoToday = () => { const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 10); };
-  const quoteNo = (n) => `FA-${new Date().getFullYear()}-${String(n).padStart(4, "0")}`;
+  const quoteNo = (n) => `PF-${new Date().getFullYear()}-${String(n).padStart(4, "0")}`;
   const getP = (o, p) => p.split(".").reduce((a, k) => (a ? a[k] : undefined), o);
   const setP = (o, p, v) => { const ks = p.split("."), l = ks.pop(); ks.reduce((a, k) => (a[k] = a[k] || {}), o)[l] = v; };
   function openQuote() {
@@ -764,7 +856,8 @@ details.more .form { padding-bottom: 6px; }
     save();
     dlgQ.querySelectorAll("[data-q]").forEach((el) => { el.value = getP(q, el.dataset.q) ?? ""; });
     dlgQ.querySelectorAll("[data-s]").forEach((el) => { el.value = settings.seller[el.dataset.s] ?? ""; });
-    $("#qStatus").textContent = "";
+    $("#sellerBox").open = !settings.seller.owner;
+    $("#qStatus").textContent = settings.seller.owner ? "" : "Firma bilgilerime ad soyadınızı yazın; proformada satıcı ve hesap sahibi olarak görünür.";
     dlgQ.showModal(); renderQuote();
   }
   ["#btnQuote", "#btnQuote2", "#btnQuote3"].forEach((s) => $(s).addEventListener("click", openQuote));
@@ -799,28 +892,35 @@ details.more .form { padding-bottom: 6px; }
 
   function quoteHTML() {
     const q = state.quote, s = settings.seller, c = q.cust || {}, t = totals();
-    const seller = [s.address, [s.phone, s.email].filter(Boolean).join(" · "), s.web, s.tax].filter(Boolean).join("\n");
+    const seller = [s.owner, s.address, [s.phone, s.email].filter(Boolean).join(" · "), s.web, s.tax].filter(Boolean).join("\n");
     const cust = [c.contact, c.address, c.tax].filter(Boolean).join("\n");
-    const vd = parseInt(q.validDays, 10);
+    const vd = parseInt(q.validDays, 10), until = vd > 0 && q.date ? addDays(q.date, vd) : "";
     const lines = t.lines.filter(({ it, c }) => it.name || c.gross);
+    const terms = [["Ödeme şekli", q.payment], ["Teslim şekli", q.delivery], ["Not", q.notes]].filter(([, v]) => v && String(v).trim());
+    const bank = [["Hesap sahibi", s.owner], ["Banka", s.bank], ["IBAN", s.iban]].filter(([, v]) => v && String(v).trim());
+    let n = 0;
     return `
       <div class="q-top">
-        <div><div class="mark">${logoPng ? `<img src="${logoPng}" alt="Faravis Atelier">` : LOGO}</div><div class="seller">${esc(seller)}</div></div>
-        <div class="q-title"><h3>TEKLİF</h3><div class="meta">
-          <span>Teklif no</span><span><b>${esc(q.no)}</b></span>
+        <div class="mark">${logoPng ? `<img src="${logoPng}" alt="Faravis Atelier">` : LOGO}</div>
+        <div class="q-title"><h3>PROFORMA</h3><div class="meta">
+          <span>Proforma no</span><span><b>${esc(q.no)}</b></span>
           <span>Tarih</span><span>${esc(fmtDate(q.date))}</span>
-          ${vd > 0 && q.date ? `<span>Geçerlilik</span><span>${esc(addDays(q.date, vd))}</span>` : ""}
+          ${until ? `<span>Geçerlilik</span><span>${esc(until)}</span>` : ""}
         </div></div>
       </div>
-      <div class="to"><div class="lab">Sayın</div><div class="nm">${esc(c.name || "Müşteri")}</div>${cust ? `<div class="dt">${esc(cust)}</div>` : ""}</div>
+      <div class="parties">
+        <div class="party"><div class="lab">Satıcı</div><div class="nm">${esc(s.name || "Faravis Atelier")}</div>${seller ? `<div class="dt">${esc(seller)}</div>` : ""}</div>
+        <div class="party"><div class="lab">Alıcı</div><div class="nm">${esc(c.name || "Müşteri")}</div>${cust ? `<div class="dt">${esc(cust)}</div>` : ""}</div>
+      </div>
       <table>
-        <thead><tr><th>ÜRÜN</th><th>ADET</th><th>BİRİM FİYAT</th><th>KDV</th><th>TUTAR</th></tr></thead>
-        <tbody>${lines.map(({ it, c }) => `<tr><td>${esc(it.name || "Ürün")}${it.sku ? `<div class="sku">${esc(it.sku)}</div>` : ""}</td><td>${nf.format(c.q)}</td><td>${fm(c.unitNet)}</td><td>%${nf.format(c.rate)}</td><td>${fm(c.net)}</td></tr>`).join("")}</tbody>
+        <thead><tr><th>#</th><th>AÇIKLAMA</th><th>MİKTAR</th><th>BİRİM FİYAT</th><th>KDV</th><th>TUTAR</th></tr></thead>
+        <tbody>${lines.map(({ it, c }) => `<tr${c.ext ? ' class="has-ext"' : ""}><td>${++n}</td><td>${esc(it.name || "Ürün")}${it.sku ? `<div class="sku">${esc(it.sku)}</div>` : ""}</td><td>${nf.format(c.q)}</td><td>${fm(c.unitNet)}</td><td>%${nf.format(c.rate)}</td><td>${fm(c.p.net)}</td></tr>` +
+          (c.ext ? `<tr class="ext"><td></td><td>+ ${esc(c.ext.label)} (logo uygulaması)</td><td>${nf.format(c.q)}</td><td>${fm(c.ext.unitNet)}</td><td>%${nf.format(c.rate)}</td><td>${fm(c.ext.net)}</td></tr>` : "")).join("")}</tbody>
       </table>
       <div class="q-bottom">
-        <div>
-          ${q.notes ? `<div class="notes"><div class="lab">Not</div>${esc(q.notes)}</div>` : ""}
-          ${s.iban ? `<div class="bank"><div class="lab">Ödeme</div>${esc(s.name)}<br><b>${esc(s.iban)}</b></div>` : ""}
+        <div class="terms">
+          ${terms.length ? `<div><div class="lab">Koşullar</div><dl>${terms.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("")}</dl></div>` : ""}
+          ${bank.length ? `<div class="bank"><div class="lab">Banka bilgileri</div><dl>${bank.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("")}</dl></div>` : ""}
         </div>
         <div class="tot">
           <div><span>Ara toplam</span><span>${fm(t.net)}</span></div>
@@ -829,9 +929,12 @@ details.more .form { padding-bottom: 6px; }
           <div class="words">Yalnız: ${esc(inWords(t.gross))}</div>
         </div>
       </div>
-      <div class="sign"><div>Teklifimizi değerlendirdiğiniz için teşekkür ederiz.</div><div class="line">${esc(s.name)}<br>Kaşe / İmza</div></div>`;
+      <div class="foot">
+        <div>Bu belge proforma faturadır, resmi fatura yerine geçmez.${until ? `<br>Fiyatlar ${esc(until)} tarihine kadar geçerlidir.` : ""}<br>${esc([s.web, s.phone].filter(Boolean).join(" · "))}</div>
+        <div class="sign"><div class="line">${esc(s.owner || s.name || "Faravis Atelier")}</div>Kaşe / İmza</div>
+      </div>`;
   }
-  function renderQuote() { if (!dlgQ.open) return; $("#a4").innerHTML = quoteHTML(); fitA4(); }
+  function renderQuote() { if (!dlgQ.open) return; $("#a4").innerHTML = quoteHTML(); fitA4(); schedulePdf(); }
   function fitA4() {
     const f = $("#a4Frame"), sc = Math.min(1, f.clientWidth / 794);
     $("#a4Scale").style.transform = `scale(${sc})`; f.style.height = Math.ceil($("#a4").offsetHeight * sc) + "px";
@@ -840,7 +943,7 @@ details.more .form { padding-bottom: 6px; }
 
   const pdfName = () => {
     const c = (state.quote.cust?.name || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/ı/g, "i").replace(/[^\w]+/g, "-").replace(/^-|-$/g, "");
-    return `Teklif-${state.quote.no}${c ? "-" + c : ""}.pdf`;
+    return `Proforma-${state.quote.no}${c ? "-" + c : ""}.pdf`;
   };
   async function makePdf() {
     $("#qStatus").textContent = "PDF hazırlanıyor…";
@@ -860,22 +963,54 @@ details.more .form { padding-bottom: 6px; }
     } catch (e) { $("#qStatus").textContent = "PDF oluşturulamadı."; return null; }
     finally { host.remove(); }
   }
-  $("#btnPdf").addEventListener("click", async (e) => {
-    const b = e.currentTarget; b.disabled = true;
-    const blob = await makePdf(); b.disabled = false;
+  // PDF bir kez üretilir, içerik değişmedikçe yeniden kullanılır
+  let pdfCache = { key: "", blob: null }, pdfBusy = null, preTimer;
+  const pdfKey = () => quoteHTML() + (logoPng ? "1" : "0");
+  async function getPdf() {
+    const key = pdfKey();
+    if (pdfCache.key === key && pdfCache.blob) return pdfCache.blob;
+    if (pdfBusy?.key === key) return pdfBusy.p;
+    const p = makePdf(); pdfBusy = { key, p };
+    const blob = await p; if (pdfBusy?.p === p) pdfBusy = null;
+    if (blob) { pdfCache = { key, blob }; $("#qStatus").textContent = ""; }
+    return blob;
+  }
+
+  // Telefonda "Gönder": paylaşım menüsü (WhatsApp, Mail, Dosyalara Kaydet…). Bilgisayarda "PDF kaydet": kayıt yeri sorulur.
+  let canShareFiles = false;
+  try { canShareFiles = !embedded && !!navigator.canShare?.({ files: [new File(["x"], "t.pdf", { type: "application/pdf" })] }); } catch (e) {}
+  const phone = matchMedia("(pointer: coarse)").matches;
+  const sendMode = canShareFiles && phone;
+  if (sendMode) { $("#btnSend").hidden = false; $("#btnPdf").textContent = "İndir"; }
+  else { $("#btnPdf").classList.add("primary"); $("#btnPdf").textContent = embedded ? "PDF kaydet / gönder" : "PDF kaydet"; }
+  // Paylaşım menüsü dokunuştan hemen sonra açılmalı; PDF önceden hazırlanır
+  function schedulePdf() { if (!sendMode) return; clearTimeout(preTimer); preTimer = setTimeout(() => dlgQ.open && getPdf(), 900); }
+
+  function shareBlob(blob) {
+    return navigator.share({ files: [new File([blob], pdfName(), { type: "application/pdf" })], title: "Proforma " + state.quote.no })
+      .catch((e) => { if (e?.name === "NotAllowedError") $("#qStatus").textContent = "PDF hazır. Göndermek için “Gönder”e tekrar dokunun."; });
+  }
+  $("#btnSend").addEventListener("click", async () => {
+    if (pdfCache.key === pdfKey() && pdfCache.blob) { shareBlob(pdfCache.blob); return; }
+    const b = $("#btnSend"); b.disabled = true;
+    const blob = await getPdf(); b.disabled = false;
+    if (blob) shareBlob(blob);
+  });
+  $("#btnPdf").addEventListener("click", async () => {
+    const b = $("#btnPdf");
+    if (!embedded && window.showSaveFilePicker) {
+      let handle = null;
+      try { handle = await window.showSaveFilePicker({ suggestedName: pdfName(), types: [{ description: "PDF", accept: { "application/pdf": [".pdf"] } }] }); }
+      catch (e) { if (e?.name === "AbortError") return; }
+      if (handle) {
+        b.disabled = true; const blob = await getPdf(); b.disabled = false; if (!blob) return;
+        try { const w = await handle.createWritable(); await w.write(blob); await w.close(); toast("PDF kaydedildi"); } catch (e) { toast("Kaydedilemedi"); }
+        return;
+      }
+    }
+    b.disabled = true; const blob = await getPdf(); b.disabled = false;
     if (blob) saveFile(pdfName(), blob);
   });
-  if (!embedded) {
-    try {
-      if (navigator.canShare?.({ files: [new File(["x"], "t.pdf", { type: "application/pdf" })] })) {
-        $("#btnSharePdf").hidden = false;
-        $("#btnSharePdf").addEventListener("click", async () => {
-          const blob = await makePdf(); if (!blob) return;
-          navigator.share({ files: [new File([blob], pdfName(), { type: "application/pdf" })], title: "Teklif " + state.quote.no }).catch(() => {});
-        });
-      }
-    } catch (e) {}
-  }
 
   // ---------- Ürün listesi (katalog) ----------
   const dlgC = $("#dlgCat");
