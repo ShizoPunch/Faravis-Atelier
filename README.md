@@ -125,9 +125,41 @@ Maliyetler sitede olmadığı için Katalog ekranında bir kez girilir; liste ye
 - [x] 8 prosedürel sahne, temas + düşen gölge, pencere ışığının ürüne de düşmesi
 - [x] 4:5 / kare / story formatları, karşılaştırma panosu
 - [x] Flat-lay (üstten çekim) sahneleri, eğim düzeltme, sol üstte ® logo
-- [ ] Ürün rengine göre **otomatik sahne önerisi** (renk uyumu analizi)
-- [ ] **Carousel şablonları**: kapak → detay → ölçü/malzeme → fiyat/CTA
-- [ ] Feed ızgarası önizlemesi (9'lu profil görünümü, ton dengesi)
-- [ ] Gerçek doku fotoğrafları (traverten, keten, ahşap) ile sahne kütüphanesi
-- [ ] Yansıma (mermer zeminde), ürün üstüne sahne ışığı uyumu (color match)
+- [x] Ürün rengine göre **otomatik sahne önerisi** (renk uyumu analizi) — `--scene auto`, `--oneri`
+- [x] **Carousel şablonları**: kapak → detay → ölçü/malzeme → fiyat/CTA — `studio/carousel.py`
+- [x] Feed ızgarası önizlemesi (9'lu profil görünümü, ton dengesi) — `studio/feed.py`
+- [x] Gerçek doku fotoğrafları ile sahne kütüphanesi — `brand/dokular/` (fotoğraflar sizden)
+- [x] Yansıma (mermer zeminde), ürün üstüne sahne ışığı uyumu (kenar ışığı + hafif ortam tonu)
 - [ ] Yapay zekâ ile üretilmiş bağlamsal sahneler (ürün bir masada, rafta, elde)
+
+### Yeni araçlar
+
+**Otomatik sahne önerisi.** Ürünün baskın rengi (Lab) her sahnenin rengiyle karşılaştırılır: açıklık kontrastı,
+renk uyumu (tamamlayıcı / analog / üçlü / nötr) ve detaylar (altın kanca koyu-sıcak fonda, krom soğuk-gri fonda).
+
+```bash
+python studio/studio.py gelen/urun.jpg --oneri                 # ilk 5 sahneyi puanıyla yazar, ilk 3'ü üretir + pano
+python studio/studio.py gelen/urun.jpg --scene auto --cekim ust  # üstten çekim için en uygun sahneyle üretir
+```
+
+**Carousel (4 kare).** Paket fiyatları `--urun` ile `kdv/katalog.json`'dan gelir; detay karesi ürünün en ayrıntılı
+bölgesini (kanca, mandal, logo) kendisi bulur ve büyüteç çerçevesinde gösterir.
+
+```bash
+python studio/carousel.py gelen/urun.jpg --scene auto --baslik "Omuzlu Ceket Askısı" --alt "Ceviz · lama kanca" \
+    --detay "Fırınlanmış kayın gövde" --olcu "Genişlik: 44 cm; Omuz: 6 cm; Kanca: 9 cm" --malzeme "%100 kayın" \
+    --urun "omuzlu ceket lama"
+```
+
+**Feed önizlemesi.** İlk görsel en yeni gönderidir (profilde sol üst). `--sirala` ton dengesini en iyi yapan sırayı önerir.
+
+```bash
+python studio/feed.py output/*_portrait.jpg --sirala
+```
+
+**Doku kütüphanesi.** `brand/dokular/` klasörüne konan her fotoğraf (traverten.jpg, keten.jpg, ahsap.jpg…) iki sahne olur:
+`doku-traverten` (üstten çekim, fotoğraf yüzeyin kendisi) ve `doku-traverten-zemin` (yandan çekim, perspektifle zemin).
+En iyi sonuç: gün ışığında, yüzeye dik çekilmiş, en az 2000 px, gölgesiz doku fotoğrafı.
+
+**Dekupe.** Şeffaf PNG/WEBP doğrudan kullanılır. rembg kurulu değilse beyaz fonlu fotoğraflar (ikas ürün görselleri gibi)
+modelsiz ayrılır; beyaz ürünlerde en iyi sonuç için rembg önerilir. `--renk-sabit` sahne ışığı uyumunu kapatır.

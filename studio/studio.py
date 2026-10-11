@@ -43,6 +43,11 @@ def mix(a, b, t):
     return a * (1 - t) + b * t
 
 
+def tr_upper(t: str) -> str:
+    """Türkçe büyük harf: i → İ, ı → I (Python'un upper()'ı 'Ceviz'i 'CEVIZ' yapar)."""
+    return t.replace("i", "İ").replace("ı", "I").upper()
+
+
 def font(key: str, size: int) -> ImageFont.FreeTypeFont:
     return ImageFont.truetype(str(ROOT / BRAND["fonts"][key]), size)
 
@@ -345,6 +350,49 @@ def scene_kadife(w, h):
     return Scene(Image.fromarray(np.clip(col, 0, 255).astype(np.uint8)), 0.5, 0.64, 0.84, 0.8, PAL["ivory"], mode="flat")
 
 
+# ---- gerçek doku fotoğrafları: brand/dokular/ klasörüne konan her fotoğraf iki sahne olur
+#   doku-<ad>        üstten çekim (fotoğraf yüzeyin kendisi)
+#   doku-<ad>-zemin  yandan çekim (fotoğraf perspektifle zemine yatırılır, duvar onun açık tonu)
+DOKULAR = ROOT / "brand" / "dokular"
+
+
+def _tex(path: Path, w: int, h: int) -> Image.Image:
+    return ImageOps.fit(ImageOps.exif_transpose(Image.open(path)).convert("RGB"), (w, h), Image.LANCZOS)
+
+
+def _ink_for(col: np.ndarray) -> tuple[str, float]:
+    L = float(to_lab(col.reshape(-1, 3).mean(0))[0])
+    return (PAL["ivory"], 0.8) if L < 55 else (PAL["espresso"], 0.5)
+
+
+def texture_flat(path: Path):
+    def make(w, h):
+        col = np.asarray(_tex(path, w, h), np.float32)
+        col = col * (0.9 + 0.16 * vignette(w, h, 0.42, 0.38, 0.8)[..., None])  # sol üstten yumuşak ışık
+        ink, sh = _ink_for(col)
+        return Scene(Image.fromarray(np.clip(col, 0, 255).astype(np.uint8)), 0.5, 0.64, 0.84, sh, ink, mode="flat")
+    return make
+
+
+def texture_floor(path: Path):
+    def make(w, h):
+        horizon = 0.62
+        fh = int(h * (1 - horizon))
+        tex = _tex(path, w * 2, fh * 2)
+        # perspektif: ufka doğru daralan yamuk (uzak kenar dar, yakın kenar geniş)
+        floor = tex.transform((w, fh), Image.QUAD, (w * 0.5, 0, 0, fh * 2, w * 2, fh * 2, w * 1.5, 0), Image.BICUBIC)
+        fa = np.asarray(floor, np.float32)
+        fa *= np.linspace(0.82, 1.04, fh, dtype=np.float32)[:, None, None]  # uzak zemin daha loş
+        wall_c = mix(fa.reshape(-1, 3).mean(0), np.array([250, 246, 240], np.float32), 0.55)
+        col = studio_sweep(w, h, "#%02x%02x%02x" % tuple(int(v) for v in wall_c), "#%02x%02x%02x" % tuple(int(v) for v in wall_c), horizon, 0.12)
+        y0 = h - fh
+        blend = np.clip(np.linspace(0, 1, fh, dtype=np.float32) * 6, 0, 1)[:, None, None]  # ufuk çizgisi yumuşak
+        col[y0:] = col[y0:] * (1 - blend) + fa * blend
+        ink, sh = _ink_for(col)
+        return Scene(Image.fromarray(np.clip(col, 0, 255).astype(np.uint8)), 0.82, 0.60, 0.78, sh, ink)
+    return make
+
+
 SCENES = {
     "kum": scene_kum,
     "keten": scene_keten,
@@ -364,6 +412,72 @@ SCENES = {
     "beton": scene_beton,
     "lacivert": scene_lacivert,
 }
+for _p in sorted(DOKULAR.glob("*")) if DOKULAR.exists() else []:
+    if _p.suffix.lower() in (".jpg", ".jpeg", ".png", ".webp"):
+        SCENES[f"doku-{_p.stem}"] = texture_flat(_p)
+        SCENES[f"doku-{_p.stem}-zemin"] = texture_floor(_p)
+
+
+# ---------------------------------------------------------------- otomatik sahne önerisi
+# Ürünün baskın rengi (Lab) ile her sahnenin ürün arkasında kalan rengi karşılaştırılır:
+#   kontrast  — açıklık farkı (ΔL) yeterli mi; ürün fona karışmasın
+#   uyum      — renk açısı: tamamlayıcı / analog / üçlü; nötr fonlar her ürünle güvenli
+#   detay     — altın kanca/lama koyu-sıcak fonda, krom/gümüş soğuk-gri fonda parlar
+_SCENE_LAB: dict[str, np.ndarray] = {}
+
+
+def scene_lab(name: str) -> np.ndarray:
+    if name not in _SCENE_LAB:
+        sc = SCENES[name](216, 270)
+        arr = np.asarray(sc.bg.convert("RGB"), np.float32)
+        y0 = int(270 * (sc.floor_y - sc.max_h * 0.9)) if sc.mode == "stand" else 60
+        _SCENE_LAB[name] = to_lab(arr[max(0, y0) : max(y0 + 20, int(270 * sc.floor_y)), 40:176].reshape(-1, 3)).mean(0)
+    return _SCENE_LAB[name]
+
+
+def scene_mode(name: str) -> str:
+    return SCENES[name](54, 68).mode
+
+
+def product_profile(prod: Image.Image) -> dict:
+    arr = np.asarray(prod.convert("RGBA"), np.float32)
+    px = arr[..., :3][arr[..., 3] > 200]
+    lab = to_lab(px)
+    L, C, h = lch(np.median(lab, 0))
+    c = np.hypot(lab[:, 1], lab[:, 2])
+    hue = np.degrees(np.arctan2(lab[:, 2], lab[:, 1])) % 360
+    # altın metal: doygun, parlak sarı (doğal kayın daha az doygun, daha turuncu); krom: renksiz orta-açık gri (beyaz boya değil)
+    gold = float(((c > 34) & (hue > 72) & (hue < 100) & (lab[:, 0] > 60)).mean())
+    chrome = float(((c < 5) & (lab[:, 0] > 45) & (lab[:, 0] < 82)).mean())
+    return {"L": L, "C": C, "h": h, "gold": gold, "chrome": chrome}
+
+
+def suggest(prod: Image.Image, mode: str = "stand", n: int = 5) -> list[tuple[float, str, str]]:
+    pp = product_profile(prod)
+    out = []
+    for name, fn in SCENES.items():
+        if scene_mode(name) != mode:
+            continue
+        L, C, h = lch(scene_lab(name))
+        dL = abs(pp["L"] - L)
+        s_con = min(dL, 45) / 45
+        why = [f"kontrast {'güçlü' if dL > 30 else 'yeterli' if dL > 18 else 'düşük'} (ΔL {dL:.0f})"]
+        if C < 9:
+            s_har, w = 0.62, "nötr fon"
+        elif pp["C"] < 9:
+            s_har, w = 0.72, "renkli fon renksiz ürüne canlılık katar"
+        else:
+            dh = abs((pp["h"] - h + 180) % 360 - 180)
+            s_har, w = (0.95, "tamamlayıcı renk") if dh > 145 else (0.8, "ton ton uyum (analog)") if dh < 35 else (0.72, "üçlü uyum") if 100 < dh < 140 else (0.45, "renk uyumu zayıf")
+        why.append(w)
+        bonus = 0.0
+        if pp["gold"] > 0.02 and L < 50:
+            bonus += 0.12; why.append("altın detaylar koyu fonda parlar")
+        if pp["chrome"] > 0.04 and C < 14 and L < 75 and scene_lab(name)[2] < 6:
+            bonus += 0.08; why.append("krom detaylar gri/soğuk fonla uyumlu")
+        out.append((min(1.0, 0.58 * s_con + 0.34 * s_har + bonus), name, ", ".join(why)))
+    return sorted(out, reverse=True)[:n]
+
 
 
 # ---------------------------------------------------------------- ürün
@@ -476,7 +590,7 @@ MATCH = {"on": True}  # --renk-sabit ile kapanır
 
 def match_light(prod_rgb: Image.Image, alpha: Image.Image, canvas: Image.Image, x: int, y: int) -> Image.Image:
     """Sahne ışığı uyumu: (1) kenar ışığı — fonun bulanık rengi ürünün kenarlarına %30'a kadar sızar,
-    ürün 'yapıştırılmış' durmaz; (2) ortam tonu — ürün rengi sahnenin renk sıcaklığına %6 yaklaşır.
+    ürün 'yapıştırılmış' durmaz; (2) ortam tonu — ürün rengi sahnenin renk sıcaklığına %6 (en fazla %4 sapma) yaklaşır.
     Ürünün iç kısımlarındaki renk korunur."""
     if not MATCH["on"]:
         return prod_rgb
@@ -488,8 +602,8 @@ def match_light(prod_rgb: Image.Image, alpha: Image.Image, canvas: Image.Image, 
     wrap = np.clip((1 - inner) * a * 1.6, 0, 1)[..., None] * 0.30
     p, b = np.asarray(prod_rgb, np.float32), np.asarray(bg, np.float32)
     amb = b.reshape(-1, 3).mean(0)
-    tint = amb / max(amb.mean(), 1)
-    p = p * (1 + (tint - 1) * 0.06)
+    tint = np.clip(1 + (amb / max(amb.mean(), 1) - 1) * 0.06, 0.96, 1.04)  # doygun fonda bile en fazla %4
+    p = p * tint
     p = p * (1 - wrap) + b * wrap
     return Image.fromarray(np.clip(p, 0, 255).astype(np.uint8))
 
@@ -630,10 +744,10 @@ def add_type(img: Image.Image, scene: Scene, title: str | None, subtitle: str | 
         ty = H - 128 * u
         d.text((W / 2, ty), title, font=font("display_italic", int(58 * u)), fill=ink, anchor="ms")
         if subtitle:
-            spaced(d, (W / 2, ty + 48 * u), subtitle.upper(), font("sans_light", int(15 * u)), ink, 5 * u)
+            spaced(d, (W / 2, ty + 48 * u), tr_upper(subtitle), font("sans_light", int(15 * u)), ink, 5 * u)
     elif subtitle:
         u = W / 1080
-        spaced(d, (W / 2, H - 70 * u), subtitle.upper(), font("sans_light", int(15 * u)), ink, 5 * u)
+        spaced(d, (W / 2, H - 70 * u), tr_upper(subtitle), font("sans_light", int(15 * u)), ink, 5 * u)
     return img
 
 
@@ -680,7 +794,10 @@ def contact_sheet(files: list[Path], out: Path, cols=4):
 def main():
     ap = argparse.ArgumentParser(description="Faravis Atelier Instagram stüdyosu")
     ap.add_argument("images", nargs="+", type=Path)
-    ap.add_argument("--scene", default="kum", choices=list(SCENES))
+    ap.add_argument("--scene", default="kum", choices=list(SCENES) + ["auto"], help="auto: ürün rengine göre en uygun sahne")
+    ap.add_argument("--oneri", action="store_true", help="ürün rengine göre sahne önerilerini yaz, ilk 3'ü üret + pano")
+    ap.add_argument("--cekim", default="yan", choices=["yan", "ust"], help="fotoğraf yandan mı üstten mi çekildi (öneri için)")
+    ap.add_argument("--renk-sabit", action="store_true", help="sahne ışığı uyumunu kapat (ürün rengi birebir)")
     ap.add_argument("--format", default="portrait", choices=list(FORMATS))
     ap.add_argument("--all", action="store_true", help="tüm sahneleri üret + karşılaştırma panosu")
     ap.add_argument("--title")
@@ -690,14 +807,24 @@ def main():
     ap.add_argument("--rotate", type=float, default=0.0, help="ürünü döndür (derece)")
     ap.add_argument("--out", type=Path, default=ROOT / "output")
     a = ap.parse_args()
+    MATCH["on"] = not a.renk_sabit
 
     for p in a.images:
         scenes = list(SCENES) if a.all else [a.scene]
+        if a.oneri or a.scene == "auto":
+            prod = cutout(p, a.out / ".cache")
+            pp = product_profile(prod)
+            ranked = suggest(prod, "flat" if a.cekim == "ust" else "stand")
+            print(f"{p.name}: ürün rengi L {pp['L']:.0f} · doygunluk {pp['C']:.0f} · ton {pp['h']:.0f}°"
+                  + (" · altın detay" if pp["gold"] > 0.02 else "") + (" · krom detay" if pp["chrome"] > 0.04 else ""))
+            for i, (sc, name, why) in enumerate(ranked, 1):
+                print(f"  {i}. {name:<20} {sc * 100:4.0f} puan — {why}")
+            scenes = [r[1] for r in ranked[:3]] if a.oneri else [ranked[0][1]]
         outs = [render(p, s, a.format, a.out, a.title, a.subtitle, not a.no_logo, a.scale, a.rotate) for s in scenes]
         for o in outs:
             print(o.relative_to(ROOT) if o.is_relative_to(ROOT) else o)
-        if a.all:
-            print(contact_sheet(outs, a.out / f"{p.stem}_pano.jpg"))
+        if a.all or a.oneri:
+            print(contact_sheet(outs, a.out / f"{p.stem}_{'oneri' if a.oneri else 'pano'}.jpg", cols=4 if a.all else 3))
 
 
 if __name__ == "__main__":
