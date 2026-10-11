@@ -1,0 +1,2649 @@
+{
+ "source": "faravisatelier.com (ikas, 11.10.2026)",
+ "updated": "11.10.2026",
+ "items": [
+  {
+   "mode": "gross",
+   "name": "24'lü Gardırop Askı Seti Ceviz Gold Lama Kanca",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/24-adet-ceviz-premium-gardirop-aski-seti-gold-lama-kanca",
+   "colors": [],
+   "hooks": [],
+   "price": 216.625,
+   "tiers": [],
+   "note": "Paket: 24 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "50'li Özel Logolu Ahşap Askı Seti (25 İtalyan Elbise + 25 Mandallı Pantolon)",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/50li-ozel-logolu-ahsap-aski-seti-25-italyan-elbise-25-mandalli-pantolon",
+   "colors": [],
+   "hooks": [],
+   "price": 114,
+   "tiers": [],
+   "note": "Paket: 50 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Ahşap Mandallı Elbise Pantolon Etek Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/ahsap-mandalli-elbise-pantolon-etek-askisi",
+   "colors": [
+    "Beyaz",
+    "Siyah",
+    "Ceviz"
+   ],
+   "hooks": [],
+   "price": 149.916667,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 139.96
+    },
+    {
+     "min": 50,
+     "price": 137.98
+    },
+    {
+     "min": 100,
+     "price": 125.99
+    },
+    {
+     "min": 250,
+     "price": 121.596
+    },
+    {
+     "min": 500,
+     "price": 117.398
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Ahşap Otel Elbise Pantolon Askısı Mandallı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/ahsap-otel-elbise-pantolon-askisi-mandalli",
+   "colors": [
+    "Naturel",
+    "Beyaz",
+    "Siyah",
+    "Ceviz"
+   ],
+   "hooks": [],
+   "price": 158.25,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 139.96
+    },
+    {
+     "min": 50,
+     "price": 137.98
+    },
+    {
+     "min": 100,
+     "price": 133.99
+    },
+    {
+     "min": 250,
+     "price": 131.196
+    },
+    {
+     "min": 500,
+     "price": 128.598
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Ahşap Pantolon ve Etek Askısı - Gümüş Kanca ve PVC Kaplı Mandallı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/ahsap-pantolon-ve-etek-askisi-gumus-kanca-ve-pvc-kapli-mandalli",
+   "colors": [
+    "Naturel",
+    "Beyaz",
+    "Siyah",
+    "Ceviz"
+   ],
+   "hooks": [],
+   "price": 124.916667,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 111.96
+    },
+    {
+     "min": 50,
+     "price": 109.98
+    },
+    {
+     "min": 100,
+     "price": 108.99
+    },
+    {
+     "min": 250,
+     "price": 91.596
+    },
+    {
+     "min": 500,
+     "price": 88.798
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Askı Çoklayıcı Kanca 6'lı Paket",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/aski-coklayici-kanca-6li-paket",
+   "colors": [],
+   "hooks": [],
+   "price": 33.166667,
+   "tiers": [],
+   "note": "Paket: 6 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Beyaz Ahşap Bebek Elbise Pantolon Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/beyaz-ahsap-bebek-elbise-pantolon-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 135.75,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 131.96
+    },
+    {
+     "min": 50,
+     "price": 131.98
+    },
+    {
+     "min": 100,
+     "price": 128.59
+    },
+    {
+     "min": 250,
+     "price": 129.196
+    },
+    {
+     "min": 500,
+     "price": 120.598
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Beyaz Ahşap Elbise Pantolon Askısı Klasik Gold Kanca",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/beyaz-ahsap-elbise-pantolon-askisi-klasik-gold-kanca",
+   "colors": [],
+   "hooks": [],
+   "price": 133.25,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 131.96
+    },
+    {
+     "min": 50,
+     "price": 123.98
+    },
+    {
+     "min": 100,
+     "price": 112.99
+    },
+    {
+     "min": 250,
+     "price": 107.996
+    },
+    {
+     "min": 500,
+     "price": 104.798
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Beyaz Ahşap Elbise Pantolon Askısı Klasik Gümüş Kanca",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/beyaz-ahsap-elbise-pantolon-askisi-klasik-gumus-kanca",
+   "colors": [],
+   "hooks": [],
+   "price": 133.25,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 131.96
+    },
+    {
+     "min": 50,
+     "price": 123.98
+    },
+    {
+     "min": 100,
+     "price": 112.99
+    },
+    {
+     "min": 250,
+     "price": 107.996
+    },
+    {
+     "min": 500,
+     "price": 104.798
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Beyaz Ahşap Elbise ve Gömlek Askısı Barsız",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/beyaz-ahsap-elbise-askisi-barsiz",
+   "colors": [],
+   "hooks": [
+    "Gümüş kanca",
+    "Altın kanca"
+   ],
+   "price": 129.916667,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 127.96
+    },
+    {
+     "min": 50,
+     "price": 119.98
+    },
+    {
+     "min": 100,
+     "price": 109.99
+    },
+    {
+     "min": 250,
+     "price": 103.596
+    },
+    {
+     "min": 500,
+     "price": 100.598
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Beyaz Ahşap Elbise ve Gömlek Askısı Barsız Lama Kancalı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/beyaz-ahsap-elbise-ve-gomlek-askisi-barsiz-lama-kancali",
+   "colors": [],
+   "hooks": [
+    "Gümüş kanca",
+    "Altın kanca",
+    "Siyah kanca"
+   ],
+   "price": 145.75,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 135.96
+    },
+    {
+     "min": 50,
+     "price": 121.98
+    },
+    {
+     "min": 100,
+     "price": 117.99
+    },
+    {
+     "min": 250,
+     "price": 113.996
+    },
+    {
+     "min": 500,
+     "price": 112.398
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Beyaz Ahşap Gelinlik Triko Abiye Askısı Klasik Kalın Kancalı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/beyaz-ahsap-gelinlik-triko-abiye-askisi-klasik-kancali",
+   "colors": [],
+   "hooks": [
+    "Gümüş kanca",
+    "Altın kanca"
+   ],
+   "price": 149.916667,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 135.96
+    },
+    {
+     "min": 50,
+     "price": 125.98
+    },
+    {
+     "min": 100,
+     "price": 113.99
+    },
+    {
+     "min": 250,
+     "price": 109.196
+    },
+    {
+     "min": 500,
+     "price": 105.798
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Beyaz Ahşap Gelinlik Triko Abiye Askısı Lama Kancalı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/beyaz-ahsap-gelinlik-triko-abiye-askisi-lama-kancali",
+   "colors": [],
+   "hooks": [
+    "Siyah kanca",
+    "Gümüş kanca",
+    "Altın kanca"
+   ],
+   "price": 149.916667,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 139.96
+    },
+    {
+     "min": 50,
+     "price": 127.98
+    },
+    {
+     "min": 100,
+     "price": 121.99
+    },
+    {
+     "min": 250,
+     "price": 116.396
+    },
+    {
+     "min": 500,
+     "price": 112.798
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Beyaz Ahşap Gold Lama Kancalı Elbise Pantolon Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/beyaz-ahsap-gold-lama-kancali-elbise-pantolon-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 149.916667,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 139.96
+    },
+    {
+     "min": 50,
+     "price": 125.98
+    },
+    {
+     "min": 100,
+     "price": 121.99
+    },
+    {
+     "min": 250,
+     "price": 117.996
+    },
+    {
+     "min": 500,
+     "price": 116.398
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Beyaz Ahşap Gümüş Lama Kancalı Elbise Pantolon Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/beyaz-ahsap-gumus-lama-kancali-elbise-pantolon-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 149.916667,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 139.96
+    },
+    {
+     "min": 50,
+     "price": 125.98
+    },
+    {
+     "min": 100,
+     "price": 121.99
+    },
+    {
+     "min": 250,
+     "price": 117.996
+    },
+    {
+     "min": 500,
+     "price": 116.398
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Beyaz Ahşap Lama Kancalı Pabuçlu Takım Elbise Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/beyaz-ahsap-lama-kancali-pabuclu-takim-elbise-askisi",
+   "colors": [],
+   "hooks": [
+    "Altın kanca",
+    "Gümüş kanca",
+    "Siyah kanca"
+   ],
+   "price": 333.166667,
+   "tiers": [
+    {
+     "min": 12,
+     "price": 299.916667
+    },
+    {
+     "min": 25,
+     "price": 295.96
+    },
+    {
+     "min": 50,
+     "price": 285.98
+    },
+    {
+     "min": 100,
+     "price": 281.99
+    },
+    {
+     "min": 250,
+     "price": 272.396
+    }
+   ],
+   "note": "Paket: 6, 12, 25, 50, 100, 250 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Beyaz Ahşap Mandallı Pantolon Askısı Etek Askısı Özel Seri Gold Lama Kancalı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/beyaz-ahsap-mandalli-pantolon-askisi-etek-askisi-ozel-seri-gold-lama-kancali",
+   "colors": [],
+   "hooks": [],
+   "price": 133.25,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 123.96
+    },
+    {
+     "min": 50,
+     "price": 115.98
+    },
+    {
+     "min": 100,
+     "price": 112.99
+    },
+    {
+     "min": 250,
+     "price": 109.196
+    },
+    {
+     "min": 500,
+     "price": 105.798
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Beyaz Ahşap Mandallı Pantolon Askısı Etek Askısı Özel Seri Gümüş Lama Kancalı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/beyaz-ahsap-mandalli-pantolon-askisi-etek-askisi-ozel-seri-gumus-lama-kancali-10-adet",
+   "colors": [],
+   "hooks": [],
+   "price": 133.25,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 123.96
+    },
+    {
+     "min": 50,
+     "price": 115.98
+    },
+    {
+     "min": 100,
+     "price": 112.99
+    },
+    {
+     "min": 250,
+     "price": 109.196
+    },
+    {
+     "min": 500,
+     "price": 105.798
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Beyaz Ahşap Mandallı Pantolon Askısı Etek Askısı Özel Seri Siyah Lama Kancalı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/beyaz-ahsap-mandalli-pantolon-askisi-etek-askisi-ozel-seri-siyah-lama-kancali",
+   "colors": [],
+   "hooks": [],
+   "price": 133.25,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 123.96
+    },
+    {
+     "min": 50,
+     "price": 115.98
+    },
+    {
+     "min": 100,
+     "price": 112.99
+    },
+    {
+     "min": 250,
+     "price": 109.196
+    },
+    {
+     "min": 500,
+     "price": 105.798
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Beyaz Ahşap Pabuçlu Ceket Takım Elbise Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/beyaz-ahsap-pabuclu-ceket-takim-elbise-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 316.5,
+   "tiers": [
+    {
+     "min": 12,
+     "price": 291.583333
+    },
+    {
+     "min": 25,
+     "price": 279.96
+    },
+    {
+     "min": 50,
+     "price": 271.98
+    },
+    {
+     "min": 100,
+     "price": 267.99
+    },
+    {
+     "min": 250,
+     "price": 258.396
+    }
+   ],
+   "note": "Paket: 6, 12, 25, 50, 100, 250 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Beyaz Ahşap Pabuçlu Ceket Takım Elbise Askısı Gold Kanca",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/beyaz-ahsap-pabuclu-ceket-takim-elbise-askisi-gold-kanca",
+   "colors": [],
+   "hooks": [],
+   "price": 316.5,
+   "tiers": [
+    {
+     "min": 12,
+     "price": 291.583333
+    },
+    {
+     "min": 25,
+     "price": 279.96
+    },
+    {
+     "min": 50,
+     "price": 271.98
+    },
+    {
+     "min": 100,
+     "price": 267.99
+    },
+    {
+     "min": 250,
+     "price": 258.396
+    }
+   ],
+   "note": "Paket: 6, 12, 25, 50, 100, 250 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Beyaz Ahşap Pantolon Etek Askısı 100 Adet",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/beyaz-ahsap-pantolon-etek-askisi-100-adet",
+   "colors": [],
+   "hooks": [],
+   "price": 152.99,
+   "tiers": [],
+   "note": "Paket: 100 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Beyaz Ahşap Siyah Lama Kancalı Elbise Pantolon Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/beyaz-ahsap-siyah-lama-kancali-elbise-pantolon-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 149.916667,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 139.96
+    },
+    {
+     "min": 50,
+     "price": 125.98
+    },
+    {
+     "min": 100,
+     "price": 121.99
+    },
+    {
+     "min": 250,
+     "price": 117.996
+    },
+    {
+     "min": 500,
+     "price": 116.398
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Ceviz Ahşap Bebek Elbise Pantolon Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/ceviz-ahsap-bebek-elbise-pantolon-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 135.75,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 131.96
+    },
+    {
+     "min": 50,
+     "price": 131.98
+    },
+    {
+     "min": 100,
+     "price": 128.59
+    },
+    {
+     "min": 250,
+     "price": 129.196
+    },
+    {
+     "min": 500,
+     "price": 120.598
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Ceviz Ahşap Elbise ve Gömlek Askısı Barsız",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/ceviz-ahsap-elbise-askisi-barsiz",
+   "colors": [],
+   "hooks": [
+    "Gümüş kanca",
+    "Altın kanca"
+   ],
+   "price": 129.916667,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 127.96
+    },
+    {
+     "min": 50,
+     "price": 119.98
+    },
+    {
+     "min": 100,
+     "price": 109.99
+    },
+    {
+     "min": 250,
+     "price": 103.596
+    },
+    {
+     "min": 500,
+     "price": 100.598
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Ceviz Ahşap Elbise ve Gömlek Askısı Barsız Lama Kancalı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/ceviz-ahsap-elbise-ve-gomlek-askisi-barsiz-lama-kancali",
+   "colors": [],
+   "hooks": [
+    "Gümüş kanca",
+    "Altın kanca",
+    "Siyah kanca"
+   ],
+   "price": 145.75,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 135.96
+    },
+    {
+     "min": 50,
+     "price": 121.98
+    },
+    {
+     "min": 100,
+     "price": 117.99
+    },
+    {
+     "min": 250,
+     "price": 113.996
+    },
+    {
+     "min": 500,
+     "price": 112.398
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Ceviz Ahşap Gold Amerikan Kancalı Pantolon Etek Askısı 100 Adet",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/ceviz-ahsap-gold-amerikan-kancali-pantolon-etek-askisi-100-adet",
+   "colors": [],
+   "hooks": [],
+   "price": 187.99,
+   "tiers": [],
+   "note": "Paket: 100 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Ceviz Ahşap Gold Kancalı Elbise Pantolon Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/ceviz-ahsap-gold-kancali-elbise-pantolon-askisi-10-adet",
+   "colors": [],
+   "hooks": [],
+   "price": 133.25,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 131.96
+    },
+    {
+     "min": 50,
+     "price": 123.98
+    },
+    {
+     "min": 100,
+     "price": 112.99
+    },
+    {
+     "min": 250,
+     "price": 107.996
+    },
+    {
+     "min": 500,
+     "price": 104.798
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Ceviz Ahşap Gold Lama Kancalı Elbise Pantolon Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/ceviz-ahsap-gold-lama-kancali-elbise-pantolon-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 149.916667,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 139.96
+    },
+    {
+     "min": 50,
+     "price": 125.98
+    },
+    {
+     "min": 100,
+     "price": 121.99
+    },
+    {
+     "min": 250,
+     "price": 117.996
+    },
+    {
+     "min": 500,
+     "price": 116.398
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Ceviz Ahşap Gold Lama Kancalı Pantolon Etek Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/ceviz-gold-lama-kancali-pantolon-etek-askisii",
+   "colors": [],
+   "hooks": [],
+   "price": 133.25,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 123.96
+    },
+    {
+     "min": 50,
+     "price": 115.98
+    },
+    {
+     "min": 100,
+     "price": 112.99
+    },
+    {
+     "min": 250,
+     "price": 109.196
+    },
+    {
+     "min": 500,
+     "price": 105.798
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Ceviz Ahşap Gümüş Kancalı Elbise Pantolon Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/ceviz-ahsap-gumus-kancali-elbise-pantolon-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 133.25,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 131.96
+    },
+    {
+     "min": 50,
+     "price": 123.98
+    },
+    {
+     "min": 100,
+     "price": 112.99
+    },
+    {
+     "min": 250,
+     "price": 107.996
+    },
+    {
+     "min": 500,
+     "price": 104.798
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Ceviz Ahşap Gümüş Lama Kancalı Elbise Pantolon Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/ceviz-ahsap-gumus-lama-kancali-elbise-pantolon-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 149.916667,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 139.96
+    },
+    {
+     "min": 50,
+     "price": 125.98
+    },
+    {
+     "min": 100,
+     "price": 121.99
+    },
+    {
+     "min": 250,
+     "price": 117.996
+    },
+    {
+     "min": 500,
+     "price": 116.398
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Ceviz Ahşap Gümüş Lama Kancalı Pantolon Etek Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/ceviz-ahsap-gumus-lama-kancali-pantolon-etek-askiisi",
+   "colors": [],
+   "hooks": [],
+   "price": 133.25,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 123.96
+    },
+    {
+     "min": 50,
+     "price": 115.98
+    },
+    {
+     "min": 100,
+     "price": 112.99
+    },
+    {
+     "min": 250,
+     "price": 109.196
+    },
+    {
+     "min": 500,
+     "price": 105.798
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Ceviz Ahşap Lama Kancalı Pabuçlu Takım Elbise Askısı – Gold/Gümüş",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/ceviz-ahsap-lama-kancali-pabuclu-takim-elbise-askisi",
+   "colors": [],
+   "hooks": [
+    "Altın kanca",
+    "Gümüş kanca"
+   ],
+   "price": 316.5,
+   "tiers": [
+    {
+     "min": 12,
+     "price": 299.916667
+    },
+    {
+     "min": 25,
+     "price": 295.96
+    },
+    {
+     "min": 50,
+     "price": 285.98
+    },
+    {
+     "min": 100,
+     "price": 281.99
+    },
+    {
+     "min": 250,
+     "price": 272.396
+    }
+   ],
+   "note": "Paket: 6, 12, 25, 50, 100, 250 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Ceviz Ahşap Lama Kancalı Pabuçlu Takım Elbise Askısı – Siyah",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/ceviz-ahsap-lama-kancali-pabuclu-takim-elbise-askisi",
+   "colors": [],
+   "hooks": [
+    "Siyah kanca"
+   ],
+   "price": 333.166667,
+   "tiers": [
+    {
+     "min": 12,
+     "price": 299.916667
+    },
+    {
+     "min": 25,
+     "price": 295.96
+    },
+    {
+     "min": 50,
+     "price": 285.98
+    },
+    {
+     "min": 100,
+     "price": 281.99
+    },
+    {
+     "min": 250,
+     "price": 272.396
+    }
+   ],
+   "note": "Paket: 6, 12, 25, 50, 100, 250 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Ceviz Ahşap Omuzlu Ceket / Takım / Kaban Askısı Lama Kanca",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/ceviz-ahsap-omuzlu-ceket-takim-kaban-askisi-gold-kanca-1",
+   "colors": [
+    "Naturel",
+    "Beyaz",
+    "Siyah",
+    "Ceviz"
+   ],
+   "hooks": [
+    "Gümüş kanca",
+    "Altın kanca",
+    "Siyah kanca"
+   ],
+   "price": 750,
+   "tiers": [
+    {
+     "min": 10,
+     "price": 740
+    },
+    {
+     "min": 25,
+     "price": 700
+    },
+    {
+     "min": 50,
+     "price": 650
+    },
+    {
+     "min": 100,
+     "price": 598
+    },
+    {
+     "min": 250,
+     "price": 560
+    },
+    {
+     "min": 500,
+     "price": 530
+    }
+   ],
+   "note": "Paket: 6, 10, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Ceviz Ahşap Omuzlu Ceket / Takım / Kaban Askısı Standart Kanca",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/ceviz-ahsap-omuzlu-ceket-takim-kaban-askisi-gold-kanca",
+   "colors": [
+    "Naturel",
+    "Beyaz",
+    "Siyah",
+    "Ceviz"
+   ],
+   "hooks": [
+    "Gümüş kanca",
+    "Altın kanca"
+   ],
+   "price": 750,
+   "tiers": [
+    {
+     "min": 10,
+     "price": 740
+    },
+    {
+     "min": 25,
+     "price": 700
+    },
+    {
+     "min": 50,
+     "price": 650
+    },
+    {
+     "min": 100,
+     "price": 598
+    },
+    {
+     "min": 250,
+     "price": 560
+    },
+    {
+     "min": 500,
+     "price": 530
+    }
+   ],
+   "note": "Paket: 6, 10, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Ceviz Ahşap Pabuçlu Ceket Takım Elbise Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/ceviz-ahsap-pabuclu-ceket-takim-elbise-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 316.5,
+   "tiers": [
+    {
+     "min": 12,
+     "price": 291.583333
+    },
+    {
+     "min": 25,
+     "price": 279.96
+    },
+    {
+     "min": 50,
+     "price": 271.98
+    },
+    {
+     "min": 100,
+     "price": 267.99
+    },
+    {
+     "min": 250,
+     "price": 258.396
+    }
+   ],
+   "note": "Paket: 6, 12, 25, 50, 100, 250 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Ceviz Ahşap Pabuçlu Ceket Takım Elbise Askısı Gold Kanca",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/ceviz-ahsap-pabuclu-ceket-takim-elbise-askisi-gold-kanca",
+   "colors": [],
+   "hooks": [],
+   "price": 316.5,
+   "tiers": [
+    {
+     "min": 12,
+     "price": 291.583333
+    },
+    {
+     "min": 25,
+     "price": 279.96
+    },
+    {
+     "min": 50,
+     "price": 271.98
+    },
+    {
+     "min": 100,
+     "price": 267.99
+    },
+    {
+     "min": 250,
+     "price": 258.396
+    }
+   ],
+   "note": "Paket: 6, 12, 25, 50, 100, 250 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Ceviz Ahşap Pantolon Etek Askısı Özel Seri 100 Adet",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/ceviz-ahsap-pantolon-etek-askisi-ozel-seri-100-adet",
+   "colors": [],
+   "hooks": [],
+   "price": 163.99,
+   "tiers": [],
+   "note": "Paket: 100 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Ceviz Ahşap Siyah Lama Kancalı Elbise Pantolon Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/ceviz-ahsap-siyah-lama-kancali-elbise-pantolon-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 149.916667,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 139.96
+    },
+    {
+     "min": 50,
+     "price": 125.98
+    },
+    {
+     "min": 100,
+     "price": 121.99
+    },
+    {
+     "min": 250,
+     "price": 117.996
+    },
+    {
+     "min": 500,
+     "price": 116.398
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Ceviz Ahşap Siyah Lama Kancalı Pantolon Etek Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/ceviz-ahsap-siyah-lama-kancali-pantolon-etek-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 133.25,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 123.96
+    },
+    {
+     "min": 50,
+     "price": 115.98
+    },
+    {
+     "min": 100,
+     "price": 112.99
+    },
+    {
+     "min": 250,
+     "price": 109.196
+    },
+    {
+     "min": 500,
+     "price": 105.798
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Gold Ahşap Gold Kancalı Gelinlik Triko Abiye Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/gold-ahsap-gold-kancali-gelinlik-triko-abiye-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 133.25,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 131.96
+    },
+    {
+     "min": 50,
+     "price": 117.98
+    },
+    {
+     "min": 100,
+     "price": 111.99
+    },
+    {
+     "min": 250,
+     "price": 110.396
+    },
+    {
+     "min": 500,
+     "price": 107.998
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Gold Ahşap Gold Lama Kancalı Gelinlik Triko Abiye Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/gold-ahsap-gold-lama-kancali-gelinlik-triko-abiye-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 141.583333,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 135.96
+    },
+    {
+     "min": 50,
+     "price": 123.98
+    },
+    {
+     "min": 100,
+     "price": 119.99
+    },
+    {
+     "min": 250,
+     "price": 116.396
+    },
+    {
+     "min": 500,
+     "price": 112.798
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Güve Kovucu Doğal Sedir Ahşap Blok 6'lı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/guve-kovucu-dogal-sedir-ahsap-blok-6li",
+   "colors": [],
+   "hooks": [],
+   "price": 699,
+   "tiers": [],
+   "note": "Paket fiyatı"
+  },
+  {
+   "mode": "gross",
+   "name": "Naturel Ahşap Bebek & Çocuk Elbise ve Pantolon Askı Seti Gold Amerikan Kanca",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/naturel-ahsap-bebek-cocuk-elbise-ve-pantolon-aski-seti-gold-amerikan-kanca",
+   "colors": [],
+   "hooks": [],
+   "price": 183.25,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 183.96
+    },
+    {
+     "min": 50,
+     "price": 181.98
+    },
+    {
+     "min": 100,
+     "price": 179.99
+    },
+    {
+     "min": 250,
+     "price": 177.596
+    },
+    {
+     "min": 500,
+     "price": 172.798
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Naturel Ahşap Bebek & Çocuk Elbise ve Pantolon Askı Seti Gold Standart Kanca",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/naturel-ahsap-bebek-cocuk-elbise-ve-pantolon-aski-seti-gold-standart-kanca",
+   "colors": [],
+   "hooks": [],
+   "price": 174.916667,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 175.96
+    },
+    {
+     "min": 50,
+     "price": 173.98
+    },
+    {
+     "min": 100,
+     "price": 171.99
+    },
+    {
+     "min": 250,
+     "price": 169.196
+    },
+    {
+     "min": 500,
+     "price": 164.398
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Naturel Ahşap Bebek Elbise Pantolon Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/naturel-ahsap-bebek-elbise-pantolon-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 124.916667,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 119.96
+    },
+    {
+     "min": 50,
+     "price": 113.98
+    },
+    {
+     "min": 100,
+     "price": 111.99
+    },
+    {
+     "min": 250,
+     "price": 107.996
+    },
+    {
+     "min": 500,
+     "price": 105.598
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Naturel Ahşap Bebek&Çocuk Pantolon Askısı Amerikan Kanca",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/naturel-ahsap-bebekcocuk-pantolon-askisi-amerikan-kanca",
+   "colors": [],
+   "hooks": [],
+   "price": 133.25,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 127.96
+    },
+    {
+     "min": 50,
+     "price": 123.98
+    },
+    {
+     "min": 100,
+     "price": 116.99
+    },
+    {
+     "min": 250,
+     "price": 112.396
+    },
+    {
+     "min": 500,
+     "price": 105.798
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Naturel Ahşap Bebek&Çocuk Pantolon Askısı Standart Kanca",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/naturel-ahsap-bebekcocuk-pantolon-askisi-standart-kanca",
+   "colors": [],
+   "hooks": [],
+   "price": 124.916667,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 123.96
+    },
+    {
+     "min": 50,
+     "price": 121.98
+    },
+    {
+     "min": 100,
+     "price": 115.99
+    },
+    {
+     "min": 250,
+     "price": 111.996
+    },
+    {
+     "min": 500,
+     "price": 105.598
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Naturel Ahşap Çocuk ve Bebek Elbise Askısı Amerikan Kanca – Beyaz/Siyah/Ceviz",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/naturel-ahsap-cocuk-ve-bebek-elbise-askisi-amerikan-kanca",
+   "colors": [
+    "Beyaz",
+    "Siyah",
+    "Ceviz"
+   ],
+   "hooks": [
+    "Gümüş kanca",
+    "Altın kanca",
+    "Siyah kanca"
+   ],
+   "price": 149.916667,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 143.96
+    },
+    {
+     "min": 50,
+     "price": 141.98
+    },
+    {
+     "min": 100,
+     "price": 140.99
+    },
+    {
+     "min": 250,
+     "price": 136.396
+    },
+    {
+     "min": 500,
+     "price": 132.798
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Naturel Ahşap Çocuk ve Bebek Elbise Askısı Amerikan Kanca – Naturel",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/naturel-ahsap-cocuk-ve-bebek-elbise-askisi-amerikan-kanca",
+   "colors": [
+    "Naturel"
+   ],
+   "hooks": [
+    "Gümüş kanca",
+    "Altın kanca",
+    "Siyah kanca"
+   ],
+   "price": 124.916667,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 119.96
+    },
+    {
+     "min": 50,
+     "price": 115.98
+    },
+    {
+     "min": 100,
+     "price": 111.99
+    },
+    {
+     "min": 250,
+     "price": 108.396
+    },
+    {
+     "min": 500,
+     "price": 105.998
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Naturel Ahşap Çocuk Ve Bebek Elbise-Pantolon Askısı Standart Kanca",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/naturel-ahsap-cocuk-ve-bebek-elbise-pantolon-askisi-standart-kanca",
+   "colors": [],
+   "hooks": [
+    "Gümüş kanca",
+    "Altın kanca"
+   ],
+   "price": 116.583333,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 115.96
+    },
+    {
+     "min": 50,
+     "price": 111.98
+    },
+    {
+     "min": 100,
+     "price": 110.99
+    },
+    {
+     "min": 250,
+     "price": 107.996
+    },
+    {
+     "min": 500,
+     "price": 105.798
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Naturel Ahşap Elbise ve Gömlek Askısı Barsız",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/naturel-ahsap-elbise-ve-gomlek-askisi-barsiz",
+   "colors": [],
+   "hooks": [
+    "Gümüş kanca",
+    "Altın kanca"
+   ],
+   "price": 112.416667,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 99.96
+    },
+    {
+     "min": 50,
+     "price": 93.98
+    },
+    {
+     "min": 100,
+     "price": 84.99
+    },
+    {
+     "min": 250,
+     "price": 80.796
+    },
+    {
+     "min": 500,
+     "price": 76.798
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Naturel Ahşap Elbise ve Gömlek Askısı Barsız Lama Kancalı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/naturel-ahsap-elbise-ve-gomlek-askisi-barsiz-lama-kancali",
+   "colors": [],
+   "hooks": [
+    "Gümüş kanca",
+    "Altın kanca",
+    "Siyah kanca"
+   ],
+   "price": 120.75,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 111.96
+    },
+    {
+     "min": 50,
+     "price": 105.98
+    },
+    {
+     "min": 100,
+     "price": 101.99
+    },
+    {
+     "min": 250,
+     "price": 99.996
+    },
+    {
+     "min": 500,
+     "price": 96.998
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Naturel Ahşap Elbise ve Pantolon Askısı Klasik Gold Kanca",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/naturel-ahsap-elbise-ve-pantolon-askisi-klasik-gold-kanca",
+   "colors": [],
+   "hooks": [],
+   "price": 116.583333,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 103.96
+    },
+    {
+     "min": 50,
+     "price": 97.98
+    },
+    {
+     "min": 100,
+     "price": 88.99
+    },
+    {
+     "min": 250,
+     "price": 84.396
+    },
+    {
+     "min": 500,
+     "price": 80.598
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Naturel Ahşap Elbise ve Pantolon Askısı Klasik Gümüş Kanca",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/naturel-ahsap-elbise-ve-pantolon-askisi-klasik-gumus-kanca",
+   "colors": [],
+   "hooks": [],
+   "price": 116.583333,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 103.96
+    },
+    {
+     "min": 50,
+     "price": 97.98
+    },
+    {
+     "min": 100,
+     "price": 88.99
+    },
+    {
+     "min": 250,
+     "price": 84.396
+    },
+    {
+     "min": 500,
+     "price": 80.598
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Naturel Ahşap Lama Kancalı Elbise Pantolon Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/naturel-ahsap-lama-kancali-elbise-pantolon-askisi",
+   "colors": [],
+   "hooks": [
+    "Siyah kanca",
+    "Gümüş kanca",
+    "Altın kanca"
+   ],
+   "price": 124.916667,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 115.96
+    },
+    {
+     "min": 50,
+     "price": 109.98
+    },
+    {
+     "min": 100,
+     "price": 105.99
+    },
+    {
+     "min": 250,
+     "price": 103.996
+    },
+    {
+     "min": 500,
+     "price": 101.198
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Naturel Ahşap Lama Kancalı Pabuçlu Takım Elbise Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/naturel-ahsap-lama-kancali-pabuclu-takim-elbise-askisi",
+   "colors": [],
+   "hooks": [
+    "Altın kanca",
+    "Gümüş kanca",
+    "Siyah kanca"
+   ],
+   "price": 316.5,
+   "tiers": [
+    {
+     "min": 12,
+     "price": 299.916667
+    },
+    {
+     "min": 25,
+     "price": 291.96
+    },
+    {
+     "min": 50,
+     "price": 281.98
+    },
+    {
+     "min": 100,
+     "price": 275.99
+    },
+    {
+     "min": 250,
+     "price": 267.196
+    }
+   ],
+   "note": "Paket: 6, 12, 25, 50, 100, 250 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Naturel Ahşap Mandallı Elbise Pantolon Etek Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/naturel-ahsap-gumus-kancali-masali-elbise-pantolon-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 133.25,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 131.96
+    },
+    {
+     "min": 50,
+     "price": 131.98
+    },
+    {
+     "min": 100,
+     "price": 131.99
+    },
+    {
+     "min": 250,
+     "price": 131.196
+    },
+    {
+     "min": 500,
+     "price": 130.398
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Naturel Ahşap Otel Elbise Pantolon Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/naturel-ahsap-otel-elbise-pantolon-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 133.25,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 115.96
+    },
+    {
+     "min": 50,
+     "price": 113.98
+    },
+    {
+     "min": 100,
+     "price": 111.99
+    },
+    {
+     "min": 250,
+     "price": 104.396
+    },
+    {
+     "min": 500,
+     "price": 100.998
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Naturel Ahşap Pabuçlu Ceket Takım Elbise Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/naturel-ahsap-pabuclu-ceket-takim-elbise-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 299.833333,
+   "tiers": [
+    {
+     "min": 12,
+     "price": 283.25
+    },
+    {
+     "min": 25,
+     "price": 275.96
+    },
+    {
+     "min": 50,
+     "price": 265.98
+    },
+    {
+     "min": 100,
+     "price": 261.99
+    },
+    {
+     "min": 250,
+     "price": 252.796
+    }
+   ],
+   "note": "Paket: 6, 12, 25, 50, 100, 250 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Naturel Ahşap Pabuçlu Ceket Takım Elbise Askısı Gold Kanca",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/naturel-ahsap-pabuclu-ceket-takim-elbise-askisi-gold-kanca",
+   "colors": [],
+   "hooks": [],
+   "price": 299.833333,
+   "tiers": [
+    {
+     "min": 12,
+     "price": 283.25
+    },
+    {
+     "min": 25,
+     "price": 275.96
+    },
+    {
+     "min": 50,
+     "price": 265.98
+    },
+    {
+     "min": 100,
+     "price": 261.99
+    },
+    {
+     "min": 250,
+     "price": 252.796
+    }
+   ],
+   "note": "Paket: 6, 12, 25, 50, 100, 250 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Naturel Ahşap Pantolon Etek Askısı 100 Adet",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/naturel-ahsap-pantolon-etek-askisi-100-adet",
+   "colors": [],
+   "hooks": [],
+   "price": 116.99,
+   "tiers": [],
+   "note": "Paket: 100 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Naturel Ahşap Uzun Tel Gold Kancalı Bebek&Çocuk Takım Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/naturel-ahsap-uzun-tel-gold-kancali-bebekcocuk-takim-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 183.25,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 183.96
+    },
+    {
+     "min": 50,
+     "price": 179.98
+    },
+    {
+     "min": 100,
+     "price": 178.99
+    },
+    {
+     "min": 250,
+     "price": 173.996
+    },
+    {
+     "min": 500,
+     "price": 169.198
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Siyah Ahşap Bebek Elbise Pantolon Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/siyah-ahsap-bebek-elbise-pantolon-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 135.75,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 147.96
+    },
+    {
+     "min": 50,
+     "price": 131.98
+    },
+    {
+     "min": 100,
+     "price": 128.59
+    },
+    {
+     "min": 250,
+     "price": 129.196
+    },
+    {
+     "min": 500,
+     "price": 120.598
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Siyah Ahşap Elbise ve Gömlek Askısı Barsız",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/siyah-ahsap-elbise-ve-gomlek-askisi-barsiz",
+   "colors": [],
+   "hooks": [
+    "Gümüş kanca",
+    "Altın kanca"
+   ],
+   "price": 129.916667,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 127.96
+    },
+    {
+     "min": 50,
+     "price": 119.98
+    },
+    {
+     "min": 100,
+     "price": 109.99
+    },
+    {
+     "min": 250,
+     "price": 103.596
+    },
+    {
+     "min": 500,
+     "price": 100.598
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Siyah Ahşap Elbise ve Gömlek Askısı Barsız Lama Kancalı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/siyah-ahsap-elbise-ve-gomlek-askisi-barsiz-lama-kancali",
+   "colors": [],
+   "hooks": [
+    "Gümüş kanca",
+    "Altın kanca",
+    "Siyah kanca"
+   ],
+   "price": 145.75,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 135.96
+    },
+    {
+     "min": 50,
+     "price": 121.98
+    },
+    {
+     "min": 100,
+     "price": 117.99
+    },
+    {
+     "min": 250,
+     "price": 113.996
+    },
+    {
+     "min": 500,
+     "price": 112.398
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Siyah Ahşap Gold Kancalı Elbise Pantolon Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/siyah-ahsap-gold-kancali-elbise-pantolon-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 133.25,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 131.96
+    },
+    {
+     "min": 50,
+     "price": 123.98
+    },
+    {
+     "min": 100,
+     "price": 112.99
+    },
+    {
+     "min": 250,
+     "price": 107.996
+    },
+    {
+     "min": 500,
+     "price": 104.798
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Siyah Ahşap Gold Lama Kancalı Elbise Pantolon Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/siyah-ahsap-gold-lama-kancali-elbise-pantolon-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 149.916667,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 139.96
+    },
+    {
+     "min": 50,
+     "price": 125.98
+    },
+    {
+     "min": 100,
+     "price": 121.99
+    },
+    {
+     "min": 250,
+     "price": 118.396
+    },
+    {
+     "min": 500,
+     "price": 116.398
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Siyah Ahşap Gümüş Kancalı Elbise Pantolon Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/siyah-ahsap-gumus-kancali-elbise-pantolon-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 133.25,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 131.96
+    },
+    {
+     "min": 50,
+     "price": 123.98
+    },
+    {
+     "min": 100,
+     "price": 112.99
+    },
+    {
+     "min": 250,
+     "price": 107.996
+    },
+    {
+     "min": 500,
+     "price": 104.798
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Siyah Ahşap Gümüş Lama Kancalı Elbise Pantolon Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/siyah-ahsap-gumus-lama-kancali-elbise-pantolon-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 149.916667,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 139.96
+    },
+    {
+     "min": 50,
+     "price": 125.98
+    },
+    {
+     "min": 100,
+     "price": 121.99
+    },
+    {
+     "min": 250,
+     "price": 118.396
+    },
+    {
+     "min": 500,
+     "price": 116.398
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Siyah Ahşap Lama Kancalı Pabuçlu Takım Elbise Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/siyah-ahsap-lama-kancali-pabuclu-takim-elbise-askisi",
+   "colors": [],
+   "hooks": [
+    "Altın kanca",
+    "Gümüş kanca",
+    "Siyah kanca"
+   ],
+   "price": 333.166667,
+   "tiers": [
+    {
+     "min": 12,
+     "price": 299.916667
+    },
+    {
+     "min": 25,
+     "price": 295.96
+    },
+    {
+     "min": 50,
+     "price": 285.98
+    },
+    {
+     "min": 100,
+     "price": 281.99
+    },
+    {
+     "min": 250,
+     "price": 272.396
+    }
+   ],
+   "note": "Paket: 6, 12, 25, 50, 100, 250 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Siyah Ahşap Mandallı Pantolon Askısı Etek Askısı Özel Seri Gold Lama Kancalı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/siyah-ahsap-mandalli-pantolon-askisi-etek-askisi-ozel-seri-gold-lama-kancali",
+   "colors": [],
+   "hooks": [],
+   "price": 133.25,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 123.96
+    },
+    {
+     "min": 50,
+     "price": 115.98
+    },
+    {
+     "min": 100,
+     "price": 112.99
+    },
+    {
+     "min": 250,
+     "price": 109.196
+    },
+    {
+     "min": 500,
+     "price": 105.798
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Siyah Ahşap Mandallı Pantolon Askısı Etek Askısı Özel Seri Gümüş Lama Kancalı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/siyah-ahsap-mandalli-pantolon-askisi-etek-askisi-ozel-seri-gumus-lama-kancali",
+   "colors": [],
+   "hooks": [],
+   "price": 133.25,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 123.96
+    },
+    {
+     "min": 50,
+     "price": 115.98
+    },
+    {
+     "min": 100,
+     "price": 112.99
+    },
+    {
+     "min": 250,
+     "price": 109.196
+    },
+    {
+     "min": 500,
+     "price": 105.798
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Siyah Ahşap Mandallı Pantolon Askısı Etek Askısı Özel Seri Siyah Lama Kancalı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/siyah-ahsap-mandalli-pantolon-askisi-etek-askisi-ozel-seri-siyah-lama-kancali",
+   "colors": [],
+   "hooks": [],
+   "price": 133.25,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 123.96
+    },
+    {
+     "min": 50,
+     "price": 115.98
+    },
+    {
+     "min": 100,
+     "price": 112.99
+    },
+    {
+     "min": 250,
+     "price": 109.196
+    },
+    {
+     "min": 500,
+     "price": 105.798
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Siyah Ahşap Pabuçlu Ceket Takım Elbise Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/siyah-ahsap-pabuclu-ceket-takim-elbise-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 316.5,
+   "tiers": [
+    {
+     "min": 12,
+     "price": 291.583333
+    },
+    {
+     "min": 25,
+     "price": 279.96
+    },
+    {
+     "min": 50,
+     "price": 271.98
+    },
+    {
+     "min": 100,
+     "price": 267.99
+    },
+    {
+     "min": 250,
+     "price": 258.396
+    }
+   ],
+   "note": "Paket: 6, 12, 25, 50, 100, 250 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Siyah Ahşap Pabuçlu Ceket Takım Elbise Askısı Gold Kanca",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/siyah-ahsap-pabuclu-ceket-takim-elbise-askisi-gold-kanca",
+   "colors": [],
+   "hooks": [],
+   "price": 316.5,
+   "tiers": [
+    {
+     "min": 12,
+     "price": 291.583333
+    },
+    {
+     "min": 25,
+     "price": 279.96
+    },
+    {
+     "min": 50,
+     "price": 271.98
+    },
+    {
+     "min": 100,
+     "price": 267.99
+    },
+    {
+     "min": 250,
+     "price": 258.396
+    }
+   ],
+   "note": "Paket: 6, 12, 25, 50, 100, 250 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Siyah Ahşap Pantolon Etek Askısı 100 Adet",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/siyah-ahsap-pantolon-etek-askisi-100-adet",
+   "colors": [],
+   "hooks": [],
+   "price": 116.99,
+   "tiers": [],
+   "note": "Paket: 100 adet"
+  },
+  {
+   "mode": "gross",
+   "name": "Siyah Ahşap Siyah Lama Kancalı Elbise Pantolon Askısı",
+   "sku": "",
+   "rate": 20,
+   "cost": null,
+   "url": "https://faravisatelier.com/siyah-ahsap-siyah-lama-kancali-elbise-pantolon-askisi",
+   "colors": [],
+   "hooks": [],
+   "price": 149.916667,
+   "tiers": [
+    {
+     "min": 25,
+     "price": 139.96
+    },
+    {
+     "min": 50,
+     "price": 125.98
+    },
+    {
+     "min": 100,
+     "price": 121.99
+    },
+    {
+     "min": 250,
+     "price": 118.396
+    },
+    {
+     "min": 500,
+     "price": 116.398
+    }
+   ],
+   "note": "Paket: 12, 25, 50, 100, 250, 500 adet"
+  }
+ ]
+}

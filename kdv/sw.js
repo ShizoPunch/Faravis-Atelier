@@ -1,6 +1,6 @@
 // Çevrimdışı çalışma: uygulama dosyalarını önbelleğe alır, önce ağdan dener.
-const CACHE = "kdv-v6";
-const FILES = ["./", "index.html", "manifest.webmanifest", "icon.svg", "icon-192.png", "icon-512.png"];
+const CACHE = "kdv-v7";
+const FILES = ["./", "index.html", "manifest.webmanifest", "icon.svg", "icon-192.png", "icon-512.png", "katalog.json"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES)).then(() => self.skipWaiting()));

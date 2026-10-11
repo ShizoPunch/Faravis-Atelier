@@ -127,12 +127,42 @@ select.in { cursor: pointer; padding-right: 4px; }
 .c-sub .pos { color: var(--ok); }
 .m-only { display: none; }
 .sub-txt { display: contents; }
-select.pers {
+select.chip-sel {
   height: 26px; border: 1px solid var(--line); border-radius: 999px; background: var(--sunken); color: var(--muted);
   font-size: 12px; font-weight: 500; padding: 0 8px; margin-right: 4px; cursor: pointer; max-width: 100%;
 }
-select.pers.on { color: var(--accent-ink); border-color: var(--accent); background: var(--surface); }
+select.chip-sel.on { color: var(--accent-ink); border-color: var(--accent); background: var(--surface); }
 .c-sub .warn { color: var(--danger); font-weight: 500; }
+.c-sub .tier { color: var(--accent-ink); }
+.doc-chip { font-size: 12px; font-weight: 500; color: var(--muted); margin-left: 8px; }
+.cust-x { border: 0; background: transparent; color: var(--muted); padding: 0 4px; font-size: 16px; line-height: 1; }
+.cust-x:hover { color: var(--danger); }
+/* Proformalar */
+.h-sum { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.h-chip { border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 8px 12px; display: grid; gap: 1px; min-width: 104px; }
+.h-chip b { font-size: 16px; } .h-chip span { font-size: 11px; color: var(--muted); }
+.h-list { display: grid; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); overflow: hidden; }
+.h-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 12px; padding: 12px; border-top: 1px solid var(--line); align-items: center; }
+.h-row:first-child { border-top: 0; }
+.h-row.cur { background: var(--sunken); }
+.h-main { min-width: 0; }
+.h-main .t { font-weight: 600; overflow-wrap: anywhere; }
+.h-main .m { font-size: 12px; color: var(--muted); }
+.h-amt { font-weight: 600; text-align: right; white-space: nowrap; }
+.h-acts { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.h-acts .btn { min-height: 32px; padding: 0 12px; font-size: 12px; }
+select.st { height: 32px; border-radius: 999px; border: 1px solid var(--line); padding: 0 10px; font-size: 12px; font-weight: 600; background: var(--surface); cursor: pointer; }
+select.st[data-s="taslak"] { color: var(--muted); }
+select.st[data-s="gonderildi"] { color: var(--accent-ink); border-color: var(--accent); }
+select.st[data-s="onaylandi"], select.st[data-s="odendi"] { color: var(--ok); border-color: var(--ok); }
+select.st[data-s="reddedildi"] { color: var(--danger); border-color: var(--danger); }
+/* Kademeler */
+.c-row .c-acts { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+.tiers { grid-column: 1 / -1; display: grid; gap: 6px; padding: 10px; border-radius: 10px; background: var(--sunken); }
+.tiers .th { font-size: 11px; color: var(--muted); }
+.t-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 12px; color: var(--muted); }
+.t-row input { width: 96px; height: 34px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); padding: 0 8px; text-align: right; font-size: 13px; }
+.t-row input:focus { outline: none; border-color: var(--accent); }
 .pers-panel { border-top: 1px solid var(--line); background: var(--sunken); padding: 12px 16px; display: grid; gap: 8px; }
 .pp-head { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 .pp-head span { text-transform: none; letter-spacing: 0; font-weight: 500; }
@@ -285,6 +315,7 @@ details.more .form { padding-bottom: 6px; }
 .a4 .bank dt { color: var(--p-muted); } .a4 .bank dd { margin: 0; font-weight: 600; }
 .a4 .tot > div { display: flex; justify-content: space-between; gap: 12px; padding: 5px 0; }
 .a4 .tot .s { color: var(--p-muted); font-size: 11px; }
+.a4 .tot .dep { margin-top: 10px; border-top: 1px dashed var(--p-line); padding-top: 9px; font-weight: 600; }
 .a4 .tot .g { margin-top: 8px; padding: 12px 14px; background: #1E1B19; color: #FFFFFF; border-radius: 4px; font-size: 15px; font-weight: 700; }
 .a4 .words { margin-top: 8px; font-size: 10px; font-style: italic; color: var(--p-muted); }
 .a4 .foot { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; padding-top: 16px; border-top: 1px solid var(--p-line); color: var(--p-muted); font-size: 9.5px; line-height: 1.6; }
@@ -294,7 +325,7 @@ details.more .form { padding-bottom: 6px; }
 /* Ürün listesi (katalog) */
 .c-tools { margin-bottom: 12px; }
 .c-list { display: grid; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); overflow: hidden; }
-.c-row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 10px; align-items: center; padding: 10px 12px; border-top: 1px solid var(--line); }
+.c-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 10px 12px; border-top: 1px solid var(--line); }
 .c-row:first-child { border-top: 0; }
 .c-row .cn { font-weight: 500; overflow-wrap: anywhere; }
 .c-row .cm { font-size: 12px; color: var(--muted); }
@@ -334,7 +365,7 @@ details.more .form { padding-bottom: 6px; }
   <div class="layout">
     <section class="panel" id="table" aria-label="Ürünler">
       <div class="t-head">
-        <h2>Ürünler</h2>
+        <h2>Ürünler<span class="doc-chip" id="docChip"></span></h2>
         <div class="seg">Fiyatlar
           <div class="seg-box" role="group" aria-label="Girilen fiyatlar">
             <button type="button" data-mode="net">KDV hariç</button>
@@ -381,8 +412,14 @@ details.more .form { padding-bottom: 6px; }
   <div class="d-body">
     <div class="q-layout">
       <form class="form" id="qForm" autocomplete="off">
-        <label class="field"><span>Müşteri</span><input id="q_name" data-q="cust.name" placeholder="Firma ya da ad soyad"></label>
+        <div class="field"><span><label for="q_name">Müşteri</label></span><div class="name-wrap">
+          <input id="q_name" data-q="cust.name" placeholder="Firma ya da ad soyad" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="custSug">
+          <div class="suggest" id="custSug" role="listbox" hidden></div></div></div>
         <label class="field"><span>Telefon / e-posta</span><input id="q_contact" data-q="cust.contact"></label>
+        <div class="two">
+          <label class="field"><span>Ön ödeme (%)</span><input id="q_dep" data-q="depositPct" inputmode="decimal" placeholder="Örn. 50"></label>
+          <label class="field"><span>Termin (iş günü)</span><input id="q_lead" data-q="leadDays" inputmode="numeric" placeholder="Örn. 7"></label>
+        </div>
         <label class="field"><span>Not</span><textarea id="q_notes" data-q="notes" rows="2" placeholder="Ölçü, renk, baskı detayı…"></textarea></label>
         <details class="more">
           <summary>Proforma ayrıntıları</summary>
@@ -419,10 +456,22 @@ details.more .form { padding-bottom: 6px; }
   </div>
   <div class="d-foot">
     <span class="grow" id="qStatus"></span>
+    <button class="btn" type="button" id="btnSaveQ">Kaydet</button>
     <button class="btn" type="button" id="btnPdf">PDF kaydet</button>
     <button class="btn primary" type="button" id="btnSend" hidden>Gönder</button>
   </div>
 </dialog>
+
+<dialog class="sheet narrow" id="dlgHist" aria-labelledby="hT">
+  <div class="d-head"><div><h2 id="hT">Proformalar</h2><p class="small">Proforma kaydedildiğinde ya da gönderildiğinde buraya eklenir.</p></div><button class="x" type="button" data-close aria-label="Kapat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="d-body">
+    <div class="h-sum" id="histSum"></div>
+    <div class="c-tools"><label class="field"><input id="histSearch" placeholder="Müşteri ya da proforma no ara" aria-label="Proforma ara"></label></div>
+    <div class="h-list" id="histList"></div>
+  </div>
+</dialog>
+
+<input type="file" id="bakFile" accept=".json,application/json" hidden>
 
 <dialog class="sheet narrow" id="dlgCat" aria-labelledby="cT">
   <div class="d-head"><div><h2 id="cT">Ürün listesi</h2><p class="small" id="catInfo"></p></div><button class="x" type="button" data-close aria-label="Kapat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
@@ -443,7 +492,9 @@ details.more .form { padding-bottom: 6px; }
 <script>
 (() => {
   "use strict";
-  const KEY = "faravis-kdv-v1", KEY_CAT = "faravis-kdv-katalog", KEY_SET = "faravis-kdv-ayarlar";
+  const KEY = "faravis-kdv-v1", KEY_CAT = "faravis-kdv-katalog", KEY_SET = "faravis-kdv-ayarlar", KEY_HIST = "faravis-kdv-proformalar", KEY_CUST = "faravis-kdv-musteriler";
+  // Sitedeki renk ve kanca seçenekleri
+  const COLORS = ["Naturel", "Beyaz", "Ceviz", "Siyah"], HOOKS = ["Gümüş kanca", "Altın kanca", "Siyah kanca"];
   const RATES = [0, 1, 10, 20];
   const LIB_PDF = "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js";
   const LIB_XLSX = "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";
@@ -480,7 +531,8 @@ details.more .form { padding-bottom: 6px; }
   const rid = () => "i" + Date.now().toString(36) + (uid++).toString(36);
   const read = (k) => { try { const r = localStorage.getItem(k); return r ? JSON.parse(r) : null; } catch (e) { return null; } };
   const write = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
-  const newItem = (o = {}) => ({ id: rid(), name: "", sku: "", price: "", qty: "1", rate: "20", cost: "", ...o });
+  const newItem = (o = {}) => ({ id: rid(), name: "", sku: "", price: "", qty: "1", rate: "20", cost: "", color: "", hook: "", pers: "", catId: "", manual: false, ...o });
+  const clone = (o) => JSON.parse(JSON.stringify(o));
   const SAMPLE = () => [
     newItem({ name: "Ceviz askı 100 adet (örnek)", price: "4.500,00", qty: "2", cost: "2.600,00" }),
     newItem({ name: "Beyaz pantolon askısı 100 adet (örnek)", price: "3.900,00", qty: "1" }),
@@ -488,7 +540,7 @@ details.more .form { padding-bottom: 6px; }
 
   function migrate(s) {
     if (!s || !Array.isArray(s.items)) return { v: 2, mode: "net", items: SAMPLE(), sample: true, quote: {} };
-    if (s.v === 2) return s;
+    if (s.v === 2 || s.v === 3) return s;
     // Eski sürüm: her satırın kendi fiyat türü ve iskontosu vardı → tek fiyat türüne çevir
     const gross = s.items.filter((x) => x.mode === "gross").length;
     const mode = gross > s.items.length / 2 ? "gross" : "net";
@@ -505,12 +557,18 @@ details.more .form { padding-bottom: 6px; }
   }
   let state = migrate(read(KEY));
   state.quote = state.quote || {};
+  state.docId = state.docId || rid();
   const settings = Object.assign({ profit: false, seq: 1 }, read(KEY_SET) || {});
   if ("showProfit" in settings) { settings.profit = false; delete settings.showProfit; }
   settings.seller = Object.assign({ name: "Faravis Atelier", owner: "", address: "", phone: "", email: "", web: "faravisatelier.com", tax: "", holder: "", bank: "", iban: "" }, settings.seller || {});
   // Logo uygulaması: adet başı fiyat ve maliyet (fiyat, tablodaki fiyat türüyle aynı: KDV hariç ya da dahil)
   const PERS = { lazer: "Lazer kazıma", plaka: "Metal plaka" };
   settings.pers = Object.assign({ lazer: { price: "", cost: "" }, plaka: { price: "", cost: "" } }, settings.pers || {});
+  // Her proforma kendi uygulama fiyatlarını taşır (eski proforma açılınca rakamlar değişmesin); yeni proformalar son girilen fiyatlarla başlar
+  if (!state.pers) state.pers = clone(settings.pers);
+  let hist = read(KEY_HIST); if (!Array.isArray(hist)) hist = [];
+  let custs = read(KEY_CUST); if (!Array.isArray(custs)) custs = [];
+  const saveHist = () => write(KEY_HIST, hist), saveCusts = () => write(KEY_CUST, custs);
   let catalog = read(KEY_CAT);
   if (!catalog || !Array.isArray(catalog.items)) catalog = { items: [], source: "", updated: "" };
 
@@ -535,7 +593,7 @@ details.more .form { padding-bottom: 6px; }
     // Logo uygulaması (lazer kazıma / metal plaka): ürünle aynı adet ve KDV oranı
     let ext = null;
     if (PERS[it.pers]) {
-      const pp = settings.pers[it.pers], ep = Math.max(0, num0(pp.price));
+      const pp = state.pers[it.pers], ep = Math.max(0, num0(pp.price));
       let en, eg;
       if (state.mode === "gross") { eg = toK(ep * q); en = toK(eg / 100 / (1 + r)); }
       else { en = toK(ep * q); eg = en + toK((en / 100) * r); }
@@ -575,7 +633,11 @@ details.more .form { padding-bottom: 6px; }
       <div class="c-cost cost-col"><label class="ml" for="c-${id}">Birim maliyet (KDV hariç)</label><input class="in n" id="c-${id}" data-f="cost" inputmode="decimal" value="${esc(it.cost)}" placeholder="—" aria-label="Birim maliyet (KDV hariç)"></div>
       <div class="c-total" data-out="tot"></div>
       <button class="x" type="button" data-act="del" aria-label="Satırı sil">${X}</button>
-      <div class="c-sub"><select class="pers${PERS[it.pers] ? " on" : ""}" id="x-${id}" data-f="pers" aria-label="Logo uygulaması">
+      <div class="c-sub"><select class="chip-sel${it.color ? " on" : ""}" id="cl-${id}" data-f="color" aria-label="Renk">
+        <option value="">Renk</option>${COLORS.map((v) => `<option${it.color === v ? " selected" : ""}>${v}</option>`).join("")}
+      </select><select class="chip-sel${it.hook ? " on" : ""}" id="hk-${id}" data-f="hook" aria-label="Kanca">
+        <option value="">Kanca</option>${HOOKS.map((v) => `<option${it.hook === v ? " selected" : ""}>${v}</option>`).join("")}
+      </select><select class="chip-sel${PERS[it.pers] ? " on" : ""}" id="x-${id}" data-f="pers" aria-label="Logo uygulaması">
         <option value="">Logo uygulaması yok</option>${Object.entries(PERS).map(([k, v]) => `<option value="${k}"${it.pers === k ? " selected" : ""}>+ ${v}</option>`).join("")}
       </select><span class="sub-txt" data-out="sub"></span></div>
     </div>`;
@@ -588,6 +650,7 @@ details.more .form { padding-bottom: 6px; }
     $("#table").classList.toggle("profit-on", settings.profit);
     $("#hint").innerHTML = state.sample ? `Örnek satırlar · <button type="button" id="btnFresh">Temizle</button>` : "";
     renderPers();
+    $("#docChip").textContent = state.quote.no ? `${state.quote.no}${state.quote.cust?.name ? " · " + state.quote.cust.name : ""}` : "";
     if (focusId) document.getElementById("n-" + focusId)?.focus();
   }
   function updateRow(it) {
@@ -596,7 +659,9 @@ details.more .form { padding-bottom: 6px; }
     el.querySelector('[data-out="tot"]').textContent = fm(c.gross);
     let sub = `<span>KDV hariç <b>${fm(c.net)}</b></span><span>KDV <b>${fm(c.vat)}</b></span><span class="m-only">KDV dahil <b>${fm(c.gross)}</b></span>`;
     if (c.ext) sub = (c.ext.missing ? `<span class="warn">${c.ext.label} adet fiyatını aşağıya girin</span>` : `<span>${c.ext.label} <b>${fm(c.ext.net)}</b></span>`) + sub;
-    el.querySelector("select.pers").classList.toggle("on", !!c.ext);
+    el.querySelectorAll("select.chip-sel").forEach((x) => x.classList.toggle("on", !!x.value));
+    const cat = it.catId && catalog.items.find((x) => x.id === it.catId), tier = cat && !it.manual && tierFor(cat, c.q);
+    if (tier) sub = `<span class="tier">${nf.format(tier.min)}+ adet fiyatı</span>` + sub;
     if (settings.profit && c.profit !== null) {
       const m = c.net ? (c.profit / c.net) * 100 : 0;
       sub += `<span>${c.profit < 0 ? "Zarar" : "Kâr"} <b class="${c.profit < 0 ? "neg" : "pos"}">${fm(c.profit)}</b> · %${pf.format(m)}</span>`;
@@ -640,7 +705,9 @@ details.more .form { padding-bottom: 6px; }
     const f = e.target.dataset.f; if (!f) return;
     const it = itemOf(e.target); if (!it) return;
     it[f] = e.target.value;
-    if (f === "name") { it.sku = ""; openSuggest(e.target, it); }
+    if (f === "name") { it.sku = ""; it.catId = ""; openSuggest(e.target, it); }
+    if (f === "price") it.manual = true;
+    if (f === "qty" && applyTier(it)) { const pe = document.getElementById("p-" + it.id); if (pe) pe.value = it.price; }
     updateRow(it); updateTotals(); touched();
     if (f === "pers") renderPers();
   }
@@ -693,19 +760,19 @@ details.more .form { padding-bottom: 6px; }
     $("#ppMode").textContent = state.mode === "gross" ? "(KDV dahil)" : "(KDV hariç)";
     document.querySelectorAll("[data-pp]").forEach((el) => {
       const [k, f] = el.dataset.pp.split(".");
-      if (document.activeElement !== el) el.value = settings.pers[k][f] ?? "";
-      if (f === "price") el.parentElement.classList.toggle("need", !String(settings.pers[k].price).trim() && state.items.some((x) => x.pers === k));
+      if (document.activeElement !== el) el.value = state.pers[k][f] ?? "";
+      if (f === "price") el.parentElement.classList.toggle("need", !String(state.pers[k].price).trim() && state.items.some((x) => x.pers === k));
     });
   }
   $("#persPanel").addEventListener("input", (e) => {
     const el = e.target; if (!el.dataset.pp) return;
-    const [k, f] = el.dataset.pp.split("."); settings.pers[k][f] = el.value; saveSettings();
+    const [k, f] = el.dataset.pp.split("."); state.pers[k][f] = el.value; settings.pers = clone(state.pers); saveSettings(); save();
     state.items.forEach(updateRow); updateTotals(); renderPers();
   });
   $("#persPanel").addEventListener("focusout", (e) => {
     const el = e.target; if (!el.dataset.pp) return;
     const [k, f] = el.dataset.pp.split("."), n = parseNum(el.value);
-    if (el.value.trim() && Number.isFinite(n)) { settings.pers[k][f] = el.value = plain.format(n); saveSettings(); }
+    if (el.value.trim() && Number.isFinite(n)) { state.pers[k][f] = el.value = plain.format(n); settings.pers = clone(state.pers); saveSettings(); save(); }
   });
 
   // Fiyat türü tüm tablo için tek ayar. Değiştirince fiyatlar çevrilir, toplamlar aynı kalır.
@@ -716,14 +783,15 @@ details.more .form { padding-bottom: 6px; }
       if (Number.isFinite(p) && String(it.price).trim()) it.price = plain.format(m === "gross" ? p * (1 + r) : p / (1 + r));
     });
     // Logo uygulaması fiyatları %20 KDV ile çevrilir (askı ve baskı için standart oran)
-    Object.values(settings.pers).forEach((pp) => { const p = parseNum(pp.price); if (Number.isFinite(p) && String(pp.price).trim()) pp.price = plain.format(m === "gross" ? p * 1.2 : p / 1.2); });
-    saveSettings();
+    Object.values(state.pers).forEach((pp) => { const p = parseNum(pp.price); if (Number.isFinite(p) && String(pp.price).trim()) pp.price = plain.format(m === "gross" ? p * 1.2 : p / 1.2); });
+    settings.pers = clone(state.pers); saveSettings();
     state.mode = m; touched(); renderAll();
   }));
 
   // ---------- Ürün listesinden öneri ----------
   let sel = -1;
   const findCat = (q) => { const w = norm(q).split(" ").filter(Boolean); return catalog.items.filter((c) => { const h = norm(c.name + " " + (c.sku || "")); return w.every((x) => h.includes(x)); }); };
+  const perUnit = (c) => !!(c.tiers?.length || /^Paket:/.test(c.note || ""));
   const catPrice = (c) => { const r = (c.rate ?? 20) / 100, p = c.price || 0, m = c.mode || "gross"; return m === state.mode ? p : (state.mode === "gross" ? p * (1 + r) : p / (1 + r)); };
   function openSuggest(input, it) {
     const box = document.getElementById("s-" + it.id);
@@ -731,7 +799,7 @@ details.more .form { padding-bottom: 6px; }
     const list = findCat(input.value).slice(0, 8);
     if (!list.length) { closeSuggest(input); return; }
     sel = -1;
-    box.innerHTML = list.map((c) => `<div class="opt" role="option" id="o-${it.id}-${c.id}" data-cat="${c.id}" aria-selected="false"><span>${esc(c.name)}</span><span class="op">${c.price ? fm(toK(catPrice(c))) : ""}</span></div>`).join("");
+    box.innerHTML = list.map((c) => `<div class="opt" role="option" id="o-${it.id}-${c.id}" data-cat="${c.id}" aria-selected="false"><span>${esc(c.name)}</span><span class="op">${c.price ? fm(toK(catPrice(c))) + (perUnit(c) ? " / adet" : "") : ""}</span></div>`).join("");
     box.hidden = false; input.setAttribute("aria-expanded", "true");
   }
   function closeSuggest(input) {
@@ -754,39 +822,148 @@ details.more .form { padding-bottom: 6px; }
     if (e.key === "Escape") { closeSuggest(e.target); return true; }
     return false;
   }
+  // Kademeli fiyat: adet en yüksek hangi eşiği geçiyorsa o fiyat (yoksa liste fiyatı)
+  function tierFor(c, q) {
+    return (c.tiers || []).filter((t) => t.min > 0 && t.price > 0 && q >= t.min).sort((a, b) => b.min - a.min)[0] || null;
+  }
+  function applyTier(it) {
+    const c = it.catId && catalog.items.find((x) => x.id === it.catId);
+    if (!c || it.manual || !(c.tiers || []).length) return false;
+    const t = tierFor(c, Math.max(0, num0(it.qty)));
+    const price = catPrice({ ...c, price: t ? t.price : c.price });
+    if (!price) return false;
+    it.price = plain.format(price); return true;
+  }
   function pick(it, c) {
-    Object.assign(it, { name: c.name, sku: c.sku || "", price: c.price ? plain.format(catPrice(c)) : it.price, rate: String(c.rate ?? 20), cost: c.cost != null ? plain.format(c.cost) : it.cost });
+    Object.assign(it, { name: c.name, sku: c.sku || "", catId: c.id, manual: false, price: c.price ? plain.format(catPrice(c)) : it.price, rate: String(c.rate ?? 20), cost: c.cost != null ? plain.format(c.cost) : it.cost });
+    if (c.colors?.length === 1) it.color = COLORS.includes(c.colors[0]) ? c.colors[0] : it.color;
+    if (c.hooks?.length === 1) it.hook = c.hooks[0];
+    applyTier(it);
     touched(); renderAll(); document.getElementById("q-" + it.id)?.select();
   }
 
   // ---------- Menü ----------
   const pop = $("#morePop"), btnMore = $("#btnMore");
-  const menuHTML = () => `<button type="button" data-m="cat">Ürün listesi${catalog.items.length ? ` (${catalog.items.length})` : ""}</button>
+  const menuHTML = () => `<button type="button" data-m="hist">Proformalar${hist.length ? ` (${hist.length})` : ""}</button>
+      <button type="button" data-m="cat">Ürün listesi${catalog.items.length ? ` (${catalog.items.length})` : ""}</button>
       <button type="button" data-m="profit">${settings.profit ? "Kâr hesabını gizle" : "Kâr hesabını göster"}</button>
       <hr><button type="button" data-m="copy">Özeti kopyala</button>
       <button type="button" data-m="csv">Excel'e aktar (CSV)</button>
-      <hr><button type="button" data-m="new" class="danger">Yeni liste</button>`;
+      <hr><button type="button" data-m="bak">Yedek al</button>
+      <button type="button" data-m="restore">Yedekten yükle</button>
+      <hr><button type="button" data-m="new">Yeni proforma</button>`;
   const setMenu = (open) => { pop.hidden = !open; btnMore.setAttribute("aria-expanded", String(open)); if (open) pop.innerHTML = menuHTML(); };
   btnMore.addEventListener("click", () => setMenu(pop.hidden));
   document.addEventListener("click", (e) => { if (!pop.hidden && !e.target.closest(".menu")) setMenu(false); });
   pop.addEventListener("click", (e) => {
     const b = e.target.closest("button"); if (!b) return;
-    const m = b.dataset.m;
-    if (m === "cat") { setMenu(false); openCatalog(); }
-    else if (m === "profit") { settings.profit = !settings.profit; saveSettings(); setMenu(false); renderAll(); }
-    else if (m === "copy") { setMenu(false); copyText(summaryText()); }
-    else if (m === "csv") { setMenu(false); exportCsv(); }
-    else if (m === "new") pop.innerHTML = `<div class="confirm">Liste silinsin mi? <button class="btn danger" type="button" data-m="yes">Sil</button><button class="btn" type="button" data-m="no">Vazgeç</button></div>`;
-    else if (m === "yes") {
-      const prev = state; state = { v: 2, mode: state.mode, items: [newItem()], quote: {} }; save(); setMenu(false); renderAll(state.items[0].id);
-      toast("Yeni liste açıldı", () => { state = prev; save(); renderAll(); });
-    } else if (m === "no") setMenu(false);
+    const m = b.dataset.m; setMenu(false);
+    if (m === "hist") openHist();
+    else if (m === "cat") openCatalog();
+    else if (m === "profit") { settings.profit = !settings.profit; saveSettings(); renderAll(); }
+    else if (m === "copy") copyText(summaryText());
+    else if (m === "csv") exportCsv();
+    else if (m === "bak") backup();
+    else if (m === "restore") $("#bakFile").click();
+    else if (m === "new") newProforma();
+  });
+
+  // ---------- Proforma geçmişi ----------
+  const STATUS = { taslak: "Taslak", gonderildi: "Gönderildi", onaylandi: "Onaylandı", reddedildi: "Reddedildi", odendi: "Ödendi" };
+  const hasContent = () => state.items.some((x) => x.name.trim() || String(x.price).trim());
+  function snapshot() { return { mode: state.mode, items: clone(state.items), quote: clone(state.quote), pers: clone(state.pers) }; }
+  function upsertHist(status) {
+    if (!hasContent()) return null;
+    if (!state.quote.no) { state.quote.no = quoteNo(settings.seq++); saveSettings(); }
+    let h = hist.find((x) => x.id === state.docId);
+    const data = { no: state.quote.no, date: state.quote.date || isoToday(), cust: state.quote.cust?.name || "", total: totals().gross, updated: Date.now(), snap: snapshot() };
+    if (h) { Object.assign(h, data); if (status && (h.status === "taslak" || !h.status)) h.status = status; }
+    else { h = { id: state.docId, status: status || "taslak", ...data }; hist.unshift(h); }
+    saveHist(); save(); return h;
+  }
+  function loadDoc(h, asCopy) {
+    if (hasContent()) upsertHist("taslak");
+    const sn = clone(h.snap);
+    state = { v: 3, mode: sn.mode, items: sn.items, quote: sn.quote, pers: sn.pers || clone(settings.pers), docId: asCopy ? rid() : h.id };
+    if (asCopy) { state.items.forEach((x) => (x.id = rid())); state.quote.no = ""; state.quote.date = ""; }
+    save(); renderAll();
+  }
+  function newProforma() {
+    if (hasContent()) upsertHist("taslak");
+    state = { v: 3, mode: state.mode, items: [newItem()], quote: {}, pers: clone(settings.pers), docId: rid() };
+    save(); renderAll(state.items[0].id); toast("Yeni proforma açıldı" + (hist.length ? " · öncekiler Proformalar'da" : ""));
+  }
+  const dlgH = $("#dlgHist");
+  function openHist() { $("#histSearch").value = ""; renderHist(); dlgH.showModal(); }
+  function renderHist() {
+    const cnt = (k) => hist.filter((h) => h.status === k).length;
+    const won = hist.filter((h) => h.status === "onaylandi" || h.status === "odendi").reduce((a, h) => a + (h.total || 0), 0);
+    const open = hist.filter((h) => h.status === "gonderildi").reduce((a, h) => a + (h.total || 0), 0);
+    $("#histSum").innerHTML = hist.length ? `<div class="h-chip"><b>${cnt("gonderildi")}</b><span>Yanıt bekliyor · ${fm(open)}</span></div>
+      <div class="h-chip"><b>${cnt("onaylandi") + cnt("odendi")}</b><span>Onaylandı · ${fm(won)}</span></div>
+      <div class="h-chip"><b>${cnt("reddedildi")}</b><span>Reddedildi</span></div>` : "";
+    const q = norm($("#histSearch").value);
+    const list = hist.filter((h) => !q || norm(h.no + " " + h.cust).includes(q));
+    $("#histList").innerHTML = !hist.length ? `<div class="c-empty"><b>Henüz proforma yok</b>Proforma ekranında “Kaydet”, “PDF kaydet” ya da “Gönder” dediğinizde burada listelenir.</div>`
+      : !list.length ? `<div class="c-empty">Eşleşen proforma yok.</div>`
+      : list.map((h) => `<div class="h-row${h.id === state.docId ? " cur" : ""}" data-h="${h.id}">
+          <div class="h-main"><div class="t">${esc(h.cust || "Müşteri yok")}</div><div class="m">${esc(h.no)} · ${esc(fmtDate(h.date))}${h.id === state.docId ? " · şu an açık" : ""}</div></div>
+          <div class="h-amt">${fm(h.total || 0)}</div>
+          <div class="h-acts">
+            <select class="st" data-s="${h.status}" aria-label="Durum">${Object.entries(STATUS).map(([k, v]) => `<option value="${k}"${h.status === k ? " selected" : ""}>${v}</option>`).join("")}</select>
+            <button class="btn" type="button" data-ha="open">Aç</button>
+            <button class="btn" type="button" data-ha="copy">Kopyasını oluştur</button>
+            <button class="btn danger" type="button" data-ha="del">Sil</button>
+          </div></div>`).join("");
+  }
+  $("#histSearch").addEventListener("input", renderHist);
+  $("#histList").addEventListener("change", (e) => {
+    if (!e.target.classList.contains("st")) return;
+    const h = hist.find((x) => x.id === e.target.closest(".h-row").dataset.h); if (!h) return;
+    h.status = e.target.value; saveHist(); renderHist();
+  });
+  $("#histList").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-ha]"); if (!b) return;
+    const h = hist.find((x) => x.id === b.closest(".h-row").dataset.h); if (!h) return;
+    if (b.dataset.ha === "open") { if (h.id !== state.docId) loadDoc(h, false); dlgH.close(); toast(`${h.no} açıldı`); }
+    else if (b.dataset.ha === "copy") { loadDoc(h, true); dlgH.close(); toast(`${h.no} kopyalandı; yeni numara proforma ekranında verilir`); }
+    else { const i = hist.indexOf(h); hist.splice(i, 1); saveHist(); renderHist(); toast(`${h.no} silindi`, () => { hist.splice(i, 0, h); saveHist(); renderHist(); }); }
+  });
+
+  // ---------- Yedek ----------
+  const ALL_KEYS = () => [KEY, KEY_SET, KEY_CAT, KEY_HIST, KEY_CUST];
+  function backup() {
+    flush();
+    const data = {}; ALL_KEYS().forEach((k) => { data[k] = read(k); });
+    const blob = new Blob([JSON.stringify({ app: "faravis-kdv", v: 1, date: new Date().toISOString(), data }, null, 1)], { type: "application/json" });
+    saveFile(`faravis-kdv-yedek-${isoToday()}.json`, blob);
+  }
+  function applyAll(data) {
+    ALL_KEYS().forEach((k) => { if (data[k] != null) write(k, data[k]); else { try { localStorage.removeItem(k); } catch (e) {} } });
+    state = migrate(read(KEY)); state.quote = state.quote || {}; state.docId = state.docId || rid();
+    const ns = read(KEY_SET) || {}; Object.keys(settings).forEach((k) => delete settings[k]); Object.assign(settings, { profit: false, seq: 1 }, ns);
+    settings.seller = Object.assign({ name: "Faravis Atelier" }, settings.seller || {});
+    settings.pers = Object.assign({ lazer: { price: "", cost: "" }, plaka: { price: "", cost: "" } }, settings.pers || {});
+    if (!state.pers) state.pers = clone(settings.pers);
+    catalog = read(KEY_CAT) || { items: [], source: "", updated: "" };
+    hist = read(KEY_HIST) || []; custs = read(KEY_CUST) || [];
+    renderAll();
+  }
+  $("#bakFile").addEventListener("change", async (e) => {
+    const f = e.target.files[0]; e.target.value = ""; if (!f) return;
+    try {
+      const j = JSON.parse(await f.text());
+      if (j.app !== "faravis-kdv" || !j.data) throw new Error("Bu dosya KDV Hesap Defteri yedeği değil.");
+      flush(); const prev = {}; ALL_KEYS().forEach((k) => { prev[k] = read(k); });
+      applyAll(j.data);
+      toast(`Yedek yüklendi (${new Date(j.date).toLocaleDateString("tr-TR")})`, () => { applyAll(prev); toast("Yedek geri alındı"); });
+    } catch (err) { toast(err?.message?.startsWith("Bu dosya") ? err.message : "Yedek dosyası okunamadı"); }
   });
 
   function summaryText() {
     const t = totals(), L = [`KDV hesabı · ${today()}`, ""];
     t.lines.forEach(({ it, c }, i) => {
-      L.push(`${i + 1}) ${it.name || "Ürün"} — ${nf.format(c.q)} × ${fm(c.unitNet)} + KDV %${nf.format(c.rate)} = ${fm(c.p.gross)}`);
+      L.push(`${i + 1}) ${[it.name || "Ürün", it.color, it.hook].filter(Boolean).join(", ")} — ${nf.format(c.q)} × ${fm(c.unitNet)} + KDV %${nf.format(c.rate)} = ${fm(c.p.gross)}`);
       if (c.ext) L.push(`   + ${c.ext.label} — ${nf.format(c.q)} × ${fm(c.ext.unitNet)} + KDV = ${fm(c.ext.gross)}`);
     });
     L.push("", `Ara toplam (KDV hariç): ${fm(t.net)}`);
@@ -816,7 +993,7 @@ details.more .form { padding-bottom: 6px; }
     const t = totals(), q = (s) => `"${String(s ?? "").replace(/"/g, '""')}"`, n2 = (k) => (k === null ? "" : plain.format(k / 100));
     const L = [["Ürün", "Stok kodu", "Adet", "Birim fiyat (KDV hariç)", "KDV %", "KDV hariç", "KDV", "KDV dahil", "Maliyet", "Kâr"].map(q).join(";")];
     t.lines.forEach(({ it, c }) => {
-      L.push([it.name, it.sku, nf.format(c.q), n2(c.unitNet), nf.format(c.rate), n2(c.p.net), n2(c.p.vat), n2(c.p.gross), n2(c.cost), n2(c.profit)].map(q).join(";"));
+      L.push([[it.name, it.color, it.hook].filter(Boolean).join(", "), it.sku, nf.format(c.q), n2(c.unitNet), nf.format(c.rate), n2(c.p.net), n2(c.p.vat), n2(c.p.gross), n2(c.cost), n2(c.profit)].map(q).join(";"));
       if (c.ext) L.push(["  + " + c.ext.label, "", nf.format(c.q), n2(c.ext.unitNet), nf.format(c.rate), n2(c.ext.net), n2(c.ext.vat), n2(c.ext.gross), "", ""].map(q).join(";"));
     });
     L.push(["TOPLAM", "", nf.format(t.qty), "", "", n2(t.net), n2(t.vat), n2(t.gross), "", ""].map(q).join(";"));
@@ -849,6 +1026,7 @@ details.more .form { padding-bottom: 6px; }
   const setP = (o, p, v) => { const ks = p.split("."), l = ks.pop(); ks.reduce((a, k) => (a[k] = a[k] || {}), o)[l] = v; };
   function openQuote() {
     const q = state.quote; q.cust = q.cust || {};
+    if (!q.no) q.date = "";
     if (!q.no) { q.no = quoteNo(settings.seq++); saveSettings(); }
     if (!q.date) q.date = isoToday();
     if (q.validDays == null) q.validDays = "15";
@@ -863,6 +1041,7 @@ details.more .form { padding-bottom: 6px; }
   $("#qForm").addEventListener("input", (e) => {
     const el = e.target;
     if (el.dataset.q) { setP(state.quote, el.dataset.q, el.value); save(); }
+    if (el.id === "q_name") openCustSuggest();
     if (el.dataset.s) { settings.seller[el.dataset.s] = el.value; saveSettings(); }
     renderQuote();
   });
@@ -888,14 +1067,47 @@ details.more .form { padding-bottom: 6px; }
   const inWords = (k) => { let s = words(Math.floor(k / 100)) + " Türk lirası"; if (k % 100) s += " " + words(k % 100) + " kuruş"; return s.charAt(0).toLocaleUpperCase("tr-TR") + s.slice(1); };
   const fmtDate = (iso) => { if (!iso) return ""; const [y, m, d] = iso.split("-"); return `${d}.${m}.${y}`; };
   const addDays = (iso, n) => { const d = new Date(iso + "T12:00:00"); d.setDate(d.getDate() + n); return d.toLocaleDateString("tr-TR"); };
+  // İş günü: cumartesi ve pazar atlanır (resmi tatiller hesaba katılmaz)
+  const addWorkdays = (iso, n) => { const d = new Date(iso + "T12:00:00"); let k = 0; while (k < n) { d.setDate(d.getDate() + 1); if (d.getDay() % 6) k++; } return d.toLocaleDateString("tr-TR"); };
+
+  // ---------- Müşteri listesi ----------
+  const custBox = $("#custSug");
+  function openCustSuggest() {
+    const inp = $("#q_name"), q = norm(inp.value);
+    const list = custs.filter((c) => !q || norm(c.name).includes(q)).slice(0, 6);
+    if (!list.length || (list.length === 1 && norm(list[0].name) === q)) { custBox.hidden = true; inp.setAttribute("aria-expanded", "false"); return; }
+    custBox.innerHTML = list.map((c) => `<div class="opt" role="option" data-cu="${c.id}"><span>${esc(c.name)}<br><small style="color:var(--muted)">${esc([c.contact, c.tax].filter(Boolean).join(" · "))}</small></span><button class="cust-x" type="button" data-cx="${c.id}" aria-label="${esc(c.name)} müşterisini sil">×</button></div>`).join("");
+    custBox.hidden = false; inp.setAttribute("aria-expanded", "true");
+  }
+  $("#q_name").addEventListener("focus", () => custs.length && openCustSuggest());
+  $("#q_name").addEventListener("blur", () => setTimeout(() => { custBox.hidden = true; }, 150));
+  custBox.addEventListener("mousedown", (e) => e.preventDefault());
+  custBox.addEventListener("click", (e) => {
+    const x = e.target.closest("[data-cx]");
+    if (x) { custs = custs.filter((c) => c.id !== x.dataset.cx); saveCusts(); openCustSuggest(); return; }
+    const o = e.target.closest("[data-cu]"); if (!o) return;
+    const c = custs.find((v) => v.id === o.dataset.cu); if (!c) return;
+    state.quote.cust = { name: c.name, contact: c.contact || "", address: c.address || "", tax: c.tax || "" }; save();
+    ["name", "contact", "address", "tax"].forEach((k) => { const el = dlgQ.querySelector(`[data-q="cust.${k}"]`); if (el) el.value = state.quote.cust[k]; });
+    custBox.hidden = true; renderQuote(); renderAll();
+  });
+  function upsertCust() {
+    const c = state.quote.cust || {}; if (!c.name?.trim()) return;
+    const ex = custs.find((v) => norm(v.name) === norm(c.name));
+    if (ex) Object.assign(ex, { name: c.name.trim(), contact: c.contact || "", address: c.address || "", tax: c.tax || "" });
+    else custs.unshift({ id: rid(), name: c.name.trim(), contact: c.contact || "", address: c.address || "", tax: c.tax || "" });
+    saveCusts();
+  }
 
   function quoteHTML() {
     const q = state.quote, s = settings.seller, c = q.cust || {}, t = totals();
     const seller = [s.owner, s.address, [s.phone, s.email].filter(Boolean).join(" · "), s.web, s.tax].filter(Boolean).join("\n");
     const cust = [c.contact, c.address, c.tax].filter(Boolean).join("\n");
     const vd = parseInt(q.validDays, 10), until = vd > 0 && q.date ? addDays(q.date, vd) : "";
+    const lead = parseInt(q.leadDays, 10), due = lead > 0 && q.date ? addWorkdays(q.date, lead) : "";
+    const dp = Math.min(100, Math.max(0, num0(q.depositPct))), dep = dp ? Math.round(t.gross * dp / 100) : 0;
     const lines = t.lines.filter(({ it, c }) => it.name || c.gross);
-    const terms = [["Ödeme şekli", q.payment], ["Teslim şekli", q.delivery], ["Not", q.notes]].filter(([, v]) => v && String(v).trim());
+    const terms = [["Ödeme şekli", q.payment], ["Teslim şekli", q.delivery], ["Teslim süresi", due ? `${lead} iş günü (${due})` : ""], ["Not", q.notes]].filter(([, v]) => v && String(v).trim());
     const bank = [["Hesap sahibi", s.holder || s.owner], ["Banka", s.bank], ["IBAN", s.iban]].filter(([, v]) => v && String(v).trim());
     let n = 0;
     return `
@@ -905,6 +1117,7 @@ details.more .form { padding-bottom: 6px; }
           <span>Proforma no</span><span><b>${esc(q.no)}</b></span>
           <span>Tarih</span><span>${esc(fmtDate(q.date))}</span>
           ${until ? `<span>Geçerlilik</span><span>${esc(until)}</span>` : ""}
+          ${due ? `<span>Termin</span><span>${esc(due)}</span>` : ""}
         </div></div>
       </div>
       <div class="parties">
@@ -913,7 +1126,7 @@ details.more .form { padding-bottom: 6px; }
       </div>
       <table>
         <thead><tr><th>#</th><th>AÇIKLAMA</th><th>MİKTAR</th><th>BİRİM FİYAT</th><th>KDV</th><th>TUTAR</th></tr></thead>
-        <tbody>${lines.map(({ it, c }) => `<tr${c.ext ? ' class="has-ext"' : ""}><td>${++n}</td><td>${esc(it.name || "Ürün")}${it.sku ? `<div class="sku">${esc(it.sku)}</div>` : ""}</td><td>${nf.format(c.q)}</td><td>${fm(c.unitNet)}</td><td>%${nf.format(c.rate)}</td><td>${fm(c.p.net)}</td></tr>` +
+        <tbody>${lines.map(({ it, c }) => `<tr${c.ext ? ' class="has-ext"' : ""}><td>${++n}</td><td>${esc(it.name || "Ürün")}${[it.color, it.hook, it.sku].some(Boolean) ? `<div class="sku">${esc([it.color, it.hook, it.sku].filter(Boolean).join(" · "))}</div>` : ""}</td><td>${nf.format(c.q)}</td><td>${fm(c.unitNet)}</td><td>%${nf.format(c.rate)}</td><td>${fm(c.p.net)}</td></tr>` +
           (c.ext ? `<tr class="ext"><td></td><td>+ ${esc(c.ext.label)} (logo uygulaması)</td><td>${nf.format(c.q)}</td><td>${fm(c.ext.unitNet)}</td><td>%${nf.format(c.rate)}</td><td>${fm(c.ext.net)}</td></tr>` : "")).join("")}</tbody>
       </table>
       <div class="q-bottom">
@@ -926,6 +1139,7 @@ details.more .form { padding-bottom: 6px; }
           ${t.rates.map(([r, b]) => `<div class="s"><span>KDV %${nf.format(r)}</span><span>${fm(b.vat)}</span></div>`).join("")}
           <div class="g"><span>Genel toplam</span><span>${fm(t.gross)}</span></div>
           <div class="words">Yalnız: ${esc(inWords(t.gross))}</div>
+          ${dep ? `<div class="dep"><span>Ön ödeme (%${nf.format(dp)})</span><span>${fm(dep)}</span></div><div class="s"><span>Kalan (teslimde)</span><span>${fm(t.gross - dep)}</span></div>` : ""}
         </div>
       </div>
       <div class="foot">
@@ -971,7 +1185,7 @@ details.more .form { padding-bottom: 6px; }
     if (pdfBusy?.key === key) return pdfBusy.p;
     const p = makePdf(); pdfBusy = { key, p };
     const blob = await p; if (pdfBusy?.p === p) pdfBusy = null;
-    if (blob) { pdfCache = { key, blob }; $("#qStatus").textContent = ""; }
+    if (blob) { pdfCache = { key, blob }; $("#qStatus").textContent = ""; upsertHist("gonderildi"); upsertCust(); }
     return blob;
   }
 
@@ -989,6 +1203,10 @@ details.more .form { padding-bottom: 6px; }
     return navigator.share({ files: [new File([blob], pdfName(), { type: "application/pdf" })], title: "Proforma " + state.quote.no })
       .catch((e) => { if (e?.name === "NotAllowedError") $("#qStatus").textContent = "PDF hazır. Göndermek için “Gönder”e tekrar dokunun."; });
   }
+  $("#btnSaveQ").addEventListener("click", () => {
+    const h = upsertHist("taslak"); upsertCust();
+    toast(h ? `${h.no} kaydedildi · ${STATUS[h.status]}` : "Kaydedilecek ürün yok"); renderAll();
+  });
   $("#btnSend").addEventListener("click", async () => {
     if (pdfCache.key === pdfKey() && pdfCache.blob) { shareBlob(pdfCache.blob); return; }
     const b = $("#btnSend"); b.disabled = true;
@@ -1022,11 +1240,18 @@ details.more .form { padding-bottom: 6px; }
       return;
     }
     $("#catList").innerHTML = list.slice(0, 300).map((c) => `<div class="c-row" data-cat="${c.id}">
-        <div><div class="cn">${esc(c.name)}</div><div class="cm">${c.price ? fm(toK(c.price)) + (c.mode === "net" ? " + KDV" : " KDV dahil") : "Fiyat yok"}${c.sku ? " · " + esc(c.sku) : ""}</div></div>
-        ${settings.profit ? `<label class="cost"><input data-cc inputmode="decimal" placeholder="Maliyet" value="${c.cost != null ? esc(plain.format(c.cost)) : ""}" aria-label="Birim maliyet (KDV hariç)"></label>` : "<span></span>"}
-        <button class="btn" type="button" data-use>Ekle</button>
+        <div><div class="cn">${esc(c.name)}</div><div class="cm">${c.price ? fm(toK(c.price)) + (perUnit(c) ? "/adet" : "") + (c.mode === "net" ? " + KDV" : " KDV dahil") : "Fiyat yok"}${c.sku ? " · " + esc(c.sku) : ""}${c.note ? " · " + esc(c.note) : ""}${c.colors?.length ? " · " + esc(c.colors.join("/")) : ""}${c.hooks?.length ? " · " + esc(c.hooks.join("/")) : ""}</div></div>
+        <div class="c-acts">
+          ${settings.profit ? `<label class="cost"><input data-cc inputmode="decimal" placeholder="Maliyet" value="${c.cost != null ? esc(plain.format(c.cost)) : ""}" aria-label="Birim maliyet (KDV hariç)"></label>` : ""}
+          <button class="btn" type="button" data-tiers aria-expanded="${openTiers.has(c.id)}">Kademe${c.tiers?.length ? ` (${c.tiers.length})` : ""}</button>
+          <button class="btn" type="button" data-use>Ekle</button>
+        </div>
+        ${openTiers.has(c.id) ? `<div class="tiers"><div class="th">Adet bu sayıya ulaşınca birim fiyat değişir (${c.mode === "net" ? "KDV hariç" : "KDV dahil"}).</div>
+          ${(c.tiers || []).map((t, i) => `<div class="t-row"><label>Adet ≥ <input data-t="min" data-i="${i}" inputmode="numeric" value="${t.min || ""}"></label><label>Birim fiyat <input data-t="price" data-i="${i}" inputmode="decimal" value="${t.price ? esc(plain.format(t.price)) : ""}"></label><button class="cust-x" type="button" data-tdel="${i}" aria-label="Kademeyi sil">×</button></div>`).join("")}
+          <div><button class="btn ghost" type="button" data-tadd>+ Kademe ekle</button></div></div>` : ""}
       </div>`).join("") || `<div class="c-empty">Eşleşen ürün yok.</div>`;
   }
+  const openTiers = new Set();
   function openCatalog() { $("#catSearch").value = ""; renderCatalog(); dlgC.showModal(); }
   $("#catSearch").addEventListener("input", renderCatalog);
   $("#catList").addEventListener("input", (e) => {
@@ -1034,9 +1259,23 @@ details.more .form { padding-bottom: 6px; }
     const c = catalog.items.find((x) => x.id === e.target.closest(".c-row").dataset.cat); if (!c) return;
     const n = parseNum(e.target.value); c.cost = e.target.value.trim() && Number.isFinite(n) ? n : null; saveCatalog();
   });
-  $("#catList").addEventListener("click", (e) => {
-    if (!e.target.closest("[data-use]")) return;
+  $("#catList").addEventListener("input", (e) => {
+    const f = e.target.dataset.t; if (!f) return;
     const c = catalog.items.find((x) => x.id === e.target.closest(".c-row").dataset.cat); if (!c) return;
+    const n = parseNum(e.target.value); c.tiers[+e.target.dataset.i][f] = Number.isFinite(n) ? n : 0; saveCatalog();
+  });
+  $("#catList").addEventListener("change", (e) => {
+    if (!e.target.dataset.t) return;
+    state.items.forEach((it) => { if (applyTier(it)) updateRow(it); }); renderAll();
+  });
+  $("#catList").addEventListener("click", (e) => {
+    const row = e.target.closest(".c-row"); const cc = row && catalog.items.find((x) => x.id === row.dataset.cat);
+    if (cc && e.target.closest("[data-tiers]")) { openTiers.has(cc.id) ? openTiers.delete(cc.id) : openTiers.add(cc.id); renderCatalog(); return; }
+    if (cc && e.target.closest("[data-tadd]")) { (cc.tiers = cc.tiers || []).push({ min: 0, price: 0 }); saveCatalog(); renderCatalog(); row.parentElement.querySelector(`[data-cat="${cc.id}"] .t-row:last-of-type input`)?.focus(); return; }
+    const td = e.target.closest("[data-tdel]");
+    if (cc && td) { cc.tiers.splice(+td.dataset.tdel, 1); saveCatalog(); renderCatalog(); return; }
+    if (!e.target.closest("[data-use]")) return;
+    const c = cc; if (!c) return;
     let it = state.items.find((x) => !x.name && !String(x.price).trim());
     if (!it) { it = newItem(); state.items.push(it); }
     pick(it, c); toast(`Eklendi: ${c.name}`);
@@ -1068,6 +1307,62 @@ details.more .form { padding-bottom: 6px; }
     }
     return out;
   }
+  // ikas ürün Excel'i: her ürün grubu tek kayıt. "Adet Seçenekleri" paketleri adet başı fiyata ve kademelere dönüşür,
+  // askı rengi ve kanca/lama rengi satırdaki seçeneklere; yalnızca fiyatı farklı olan renkler ayrı kayıt olur.
+  const hookName = (v) => ({ gold: "Altın kanca", "altın": "Altın kanca", "gümüş": "Gümüş kanca", siyah: "Siyah kanca" }[norm(v)] || v + " kanca");
+  const isIkas = (rows) => rows.length && "Ürün Grup ID" in rows[0] && "Varyant Tip 1" in rows[0];
+  function ikasToItems(rows) {
+    const off = (v) => String(v ?? "").trim().toLowerCase();
+    const groups = new Map();
+    for (const r of rows) {
+      if (off(r["Silindi mi?"]) === "true" || off(r["Varyant Aktiflik"]) === "false" || off(r["Satış Kanalı:faravisatelier"]) === "passive") continue;
+      const g = r["Ürün Grup ID"] || r["İsim"]; if (!groups.has(g)) groups.set(g, []); groups.get(g).push(r);
+    }
+    const out = [];
+    for (const rs of groups.values()) {
+      const recs = rs.map((r) => {
+        let qty = 0; const attrs = {};
+        for (let i = 1; i <= 3; i++) {
+          const t = String(r[`Varyant Tip ${i}`] ?? "").trim(), v = String(r[`Varyant Değer ${i}`] ?? "").trim();
+          if (!t || !v) continue;
+          if (/^adet/.test(norm(t))) qty = parseNum(v); else attrs[t] = v;
+        }
+        if (!qty) qty = parseNum(r["Satılan Ürün Miktarı"]) || 0;
+        const sale = parseNum(r["İndirimli Fiyatı"]), base = parseNum(r["Satış Fiyatı"]), cost = parseNum(r["Alış Fiyatı"]);
+        return { qty, price: sale > 0 ? sale : base, attrs, cost: cost > 0 ? cost : null };
+      }).filter((x) => x.price > 0);
+      // Aynı fiyat dizisine sahip renk/kanca kombinasyonları tek kayıtta toplanır
+      const byAttr = new Map();
+      recs.forEach((x) => { const k = JSON.stringify(Object.entries(x.attrs).sort()); if (!byAttr.has(k)) byAttr.set(k, []); byAttr.get(k).push(x); });
+      const sigs = new Map();
+      for (const [k, xs] of byAttr) {
+        const sig = xs.map((x) => `${x.qty}:${x.price}`).sort().join("|");
+        if (!sigs.has(sig)) sigs.set(sig, { xs, attrs: [] });
+        sigs.get(sig).attrs.push(Object.fromEntries(JSON.parse(k)));
+      }
+      const all = [...sigs.values()].flatMap((x) => x.attrs);
+      const types = [...new Set(all.flatMap((a) => Object.keys(a)))];
+      const vals = (list, t) => [...new Set(list.map((a) => a[t]).filter(Boolean))];
+      for (const sg of sigs.values()) {
+        const packs = sg.xs.filter((x) => x.qty > 0).sort((a, b) => a.qty - b.qty).filter((x, i, arr) => !i || x.qty !== arr[i - 1].qty);
+        let name = String(rs[0]["İsim"] ?? "").trim();
+        if (sigs.size > 1) {
+          const diff = types.map((t) => { const mine = vals(sg.attrs, t); return mine.length < vals(all, t).length ? mine.join("/") : ""; }).filter(Boolean);
+          if (diff.length) name += " – " + diff.join(", ");
+        }
+        const colors = types.filter((t) => /askı renk|aski renk/.test(norm(t))).flatMap((t) => vals(sg.attrs, t));
+        const hooks = types.filter((t) => /kanca|lama/.test(norm(t))).flatMap((t) => vals(sg.attrs, t)).map(hookName);
+        const unit = (x) => Math.round((x.price / x.qty) * 1e6) / 1e6;
+        const item = packs.length
+          ? { price: unit(packs[0]), tiers: packs.slice(1).map((x) => ({ min: x.qty, price: unit(x) })), note: "Paket: " + packs.map((x) => x.qty).join(", ") + " adet" }
+          : { price: sg.xs[0].price, tiers: [], note: "Paket fiyatı" };
+        const slug = rs[0]["Slug"];
+        out.push({ name, sku: "", rate: 20, mode: "gross", cost: sg.xs.find((x) => x.cost)?.cost ?? null, url: slug ? "https://faravisatelier.com/" + slug : "",
+          colors: [...new Set(colors)], hooks: [...new Set(hooks)], ...item });
+      }
+    }
+    return out.sort((a, b) => a.name.localeCompare(b.name, "tr"));
+  }
   function parseCsv(text) {
     const first = text.split(/\r?\n/, 1)[0];
     const d = [";", "\t", ","].map((x) => [x, first.split(x).length]).sort((a, b) => b[1] - a[1])[0][0];
@@ -1093,7 +1388,7 @@ details.more .form { padding-bottom: 6px; }
     let a = 0, u = 0;
     for (const n of items) {
       const ex = catalog.items.find((c) => (n.sku && c.sku === n.sku) || norm(c.name) === norm(n.name));
-      if (ex) { Object.assign(ex, { ...n, id: ex.id, cost: n.cost != null ? n.cost : ex.cost }); u++; } else { catalog.items.push({ id: rid(), mode: "gross", ...n }); a++; }
+      if (ex) { Object.assign(ex, { ...n, id: ex.id, cost: n.cost != null ? n.cost : ex.cost, tiers: n.tiers || ex.tiers }); u++; } else { catalog.items.push({ id: rid(), mode: "gross", ...n }); a++; }
     }
     catalog.source = source; catalog.updated = today(); saveCatalog();
     if (dlgC.open) renderCatalog();
@@ -1114,7 +1409,7 @@ details.more .form { padding-bottom: 6px; }
         if (/^\s*[[{]/.test(text)) { const j = JSON.parse(text); rows = Array.isArray(j) ? j : j.items; }
         else if (/^\s*</.test(text)) rows = parseXml(text); else rows = parseCsv(text);
       }
-      const items = rows.length && typeof rows[0].price === "number" ? rows : rowsToItems(rows);
+      const items = isIkas(rows) ? ikasToItems(rows) : rows.length && typeof rows[0].price === "number" ? rows : rowsToItems(rows);
       if (!items.length) { $("#catStatus").textContent = "Dosyada “Ürün adı” ve “Fiyat” sütunları bulunamadı."; return; }
       merge(items, file.name);
     } catch (err) { $("#catStatus").textContent = "Dosya okunamadı: " + (err?.message || err); }

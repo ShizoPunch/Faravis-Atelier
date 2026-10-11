@@ -81,7 +81,16 @@ sağda ara toplam, oranlara göre KDV ve genel toplam.
   tutar yazıyla, "resmi fatura yerine geçmez" notu ve imza alanı. Maliyet ve kâr proformada yer almaz.
   - Telefonda **Gönder:** paylaşım menüsü açılır (WhatsApp, Mail, Dosyalara Kaydet…).
   - Bilgisayarda **PDF kaydet:** Chrome / Edge kayıt yerini sorar; diğer tarayıcılar İndirilenler'e kaydeder.
-- **Ürün listesi** ve **kâr hesabı** (⋯ menüsü), özeti kopyalama, Excel'e (CSV) aktarma. Veriler cihazda saklanır.
+- **Proformalar** (⋯ menüsü): kaydedilen / gönderilen her proforma listelenir; durum (Taslak, Gönderildi, Onaylandı,
+  Reddedildi, Ödendi), bekleyen ve onaylanan toplamlar; eskisini açma ya da kopyasından yeni proforma.
+- **Müşteriler:** proformadaki müşteri adı yazılırken önceki müşteriler önerilir, seçince iletişim / adres / vergi bilgisi dolar.
+- **Ön ödeme ve termin:** ön ödeme yüzdesi proformaya "Ön ödeme / Kalan" olarak, termin (iş günü) hafta sonları atlanarak tarihe çevrilir.
+- **Renk ve kanca:** her satırda askı rengi (Naturel, Beyaz, Ceviz, Siyah) ve kanca (Gümüş, Altın, Siyah); proformada ürün adının altında.
+- **Ürün listesi ve kademeli fiyat:** `kdv/katalog.json` ikas ürün Excel'inden üretilir (80 ürün). ikas'taki adet paketleri
+  (12, 25, 50, 100, 250, 500) adet başı fiyata ve kademelere dönüşür; adet yazınca uygun kademe fiyatı kendiliğinden gelir.
+  Yeni Excel uygulamadan da yüklenebilir: ⋯ → Ürün listesi → Excel / CSV yükle.
+- **Kâr hesabı**, özeti kopyalama, Excel'e (CSV) aktarma, **yedek al / yedekten yükle** (tüm veriler tek JSON dosyasında;
+  telefon ile bilgisayar arasında taşımak için de kullanılır). Veriler cihazda saklanır.
 
 Hesap, faturadaki gibi satır bazında kuruşa yuvarlanır; toplamlar satırların toplamıdır.
 
