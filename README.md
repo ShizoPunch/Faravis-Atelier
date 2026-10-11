@@ -56,8 +56,8 @@ python studio/studio.py gelen/*.jpg --scene golge --format story
 ## Marka kiti
 
 `brand/brand.json`: renk paleti, fontlar (Cormorant Garamond + Montserrat, OFL lisanslı) ve logo.
-Logo varsayılan olarak **sol üst köşede, ® tescil işaretiyle** basılır (`wordmark.position`, `wordmark.symbol`).
-Logo dosyanız varsa `brand/` klasörüne eklenir, yazı logosunun yerine o kullanılır.
+Logo: `brand/logo.png` (şeffaf zemin) ve `brand/logo.svg` (vektör). Stüdyo, `logo.png` varsa onu sahnenin yazı rengine boyayıp
+**sol üst köşeye** basar; dosya yoksa yazıyla oluşturulan logoya döner (`wordmark.position`).
 
 ## Fotoğraf çekim ipuçları (sonucu en çok bunlar belirler)
 

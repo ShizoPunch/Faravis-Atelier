@@ -23,6 +23,7 @@ from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont, ImageOps
 
 ROOT = Path(__file__).resolve().parent.parent
 BRAND = json.loads((ROOT / "brand" / "brand.json").read_text())
+LOGO = ROOT / "brand" / "logo.png"
 PAL = BRAND["palette"]
 
 FORMATS = {
@@ -495,7 +496,13 @@ def add_type(img: Image.Image, scene: Scene, title: str | None, subtitle: str | 
     if logo:
         u = W / 1080
         mark = BRAND["wordmark"]
-        if mark.get("position", "topleft") == "topleft":
+        if LOGO.exists():  # gerçek logo dosyası: sahnenin yazı rengine boyanır
+            src = Image.open(LOGO).convert("RGBA")
+            lw = int(230 * u)
+            alpha = src.getchannel("A").resize((lw, round(src.height * lw / src.width)), Image.LANCZOS)
+            pos = (int(64 * u), int(64 * u)) if mark.get("position", "topleft") == "topleft" else ((W - lw) // 2, int(56 * u))
+            img.paste(Image.new("RGB", alpha.size, ink), pos, alpha)
+        elif mark.get("position", "topleft") == "topleft":
             x0, y0 = 64 * u, 104 * u
             tw = spaced(d, (x0, y0), mark["primary"], font("display_medium", int(38 * u)), ink, 11 * u, anchor="left")
             if mark.get("symbol"):  # tescil işareti, üst simge olarak
