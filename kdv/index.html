@@ -714,7 +714,9 @@ details.more .form { padding-bottom: 6px; }
     if (f === "colorSel") {
       const v = e.target.value;
       if (v === CUSTOM) { it.colorCustom = true; it.color = ""; touched(); renderAll(); document.getElementById("cc-" + it.id)?.focus(); return; }
-      it.colorCustom = false; it.color = v; updateRow(it); updateTotals(); touched(); return;
+      it.colorCustom = false; it.color = v;
+      document.getElementById("cc-" + it.id)?.remove(); // özel renk kutusu kapanır
+      updateRow(it); updateTotals(); touched(); return;
     }
     it[f] = e.target.value;
     if (f === "name") { it.sku = ""; it.catId = ""; openSuggest(e.target, it); }
