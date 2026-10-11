@@ -401,17 +401,16 @@ details.more .form { padding-bottom: 6px; }
         <details class="more" id="sellerBox">
           <summary>Firma bilgilerim</summary>
           <div class="form">
-            <label class="field"><span>Ad soyad (şahıs şirketi sahibi / hesap sahibi)</span><input id="s_owner" data-s="owner" placeholder="Ad Soyad" autocomplete="name"></label>
+            <label class="field"><span>Ad soyad (satıcı, imza)</span><input id="s_owner" data-s="owner" placeholder="Ad Soyad" autocomplete="name"></label>
             <label class="field"><span>Adres</span><textarea id="s_addr" data-s="address" rows="2"></textarea></label>
             <div class="two">
               <label class="field"><span>Telefon</span><input id="s_phone" data-s="phone" inputmode="tel"></label>
               <label class="field"><span>E-posta</span><input id="s_mail" data-s="email" inputmode="email"></label>
             </div>
             <label class="field"><span>Vergi dairesi / no</span><input id="s_tax" data-s="tax"></label>
-            <div class="two">
-              <label class="field"><span>Banka</span><input id="s_bank" data-s="bank" placeholder="Banka adı"></label>
-              <label class="field"><span>IBAN</span><input id="s_iban" data-s="iban" placeholder="TR00 0000 0000 0000 0000 0000 00"></label>
-            </div>
+            <label class="field"><span>Hesap sahibi</span><input id="s_holder" data-s="holder" placeholder="IBAN'ın kayıtlı olduğu ad soyad" autocomplete="off"></label>
+            <label class="field"><span>Banka</span><input id="s_bank" data-s="bank" placeholder="Banka adı"></label>
+            <label class="field"><span>IBAN</span><input id="s_iban" data-s="iban" placeholder="TR00 0000 0000 0000 0000 0000 00" inputmode="text" autocapitalize="characters"></label>
           </div>
         </details>
       </form>
@@ -508,7 +507,7 @@ details.more .form { padding-bottom: 6px; }
   state.quote = state.quote || {};
   const settings = Object.assign({ profit: false, seq: 1 }, read(KEY_SET) || {});
   if ("showProfit" in settings) { settings.profit = false; delete settings.showProfit; }
-  settings.seller = Object.assign({ name: "Faravis Atelier", owner: "", address: "", phone: "", email: "", web: "faravisatelier.com", tax: "", bank: "", iban: "" }, settings.seller || {});
+  settings.seller = Object.assign({ name: "Faravis Atelier", owner: "", address: "", phone: "", email: "", web: "faravisatelier.com", tax: "", holder: "", bank: "", iban: "" }, settings.seller || {});
   // Logo uygulaması: adet başı fiyat ve maliyet (fiyat, tablodaki fiyat türüyle aynı: KDV hariç ya da dahil)
   const PERS = { lazer: "Lazer kazıma", plaka: "Metal plaka" };
   settings.pers = Object.assign({ lazer: { price: "", cost: "" }, plaka: { price: "", cost: "" } }, settings.pers || {});
@@ -897,7 +896,7 @@ details.more .form { padding-bottom: 6px; }
     const vd = parseInt(q.validDays, 10), until = vd > 0 && q.date ? addDays(q.date, vd) : "";
     const lines = t.lines.filter(({ it, c }) => it.name || c.gross);
     const terms = [["Ödeme şekli", q.payment], ["Teslim şekli", q.delivery], ["Not", q.notes]].filter(([, v]) => v && String(v).trim());
-    const bank = [["Hesap sahibi", s.owner], ["Banka", s.bank], ["IBAN", s.iban]].filter(([, v]) => v && String(v).trim());
+    const bank = [["Hesap sahibi", s.holder || s.owner], ["Banka", s.bank], ["IBAN", s.iban]].filter(([, v]) => v && String(v).trim());
     let n = 0;
     return `
       <div class="q-top">

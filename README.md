@@ -77,7 +77,7 @@ sağda ara toplam, oranlara göre KDV ve genel toplam.
 - **Fiyatlar KDV hariç / KDV dahil:** tablonun üstünde tek ayar; değiştirince fiyatlar çevrilir, toplam aynı kalır.
 - **Logo uygulaması:** her satırda "Lazer kazıma" ya da "Metal plaka" seçilir; adet fiyatları tablonun altındaki alana bir kez girilir.
   Ürünle aynı adet ve KDV oranıyla hesaplanır, proformada ürünün altında ayrı satır olarak görünür.
-- **Proforma PDF:** logolu A4; satıcı (ad soyad dahil) ve alıcı blokları, ödeme ve teslim şekli, banka bilgileri (hesap sahibi, banka, IBAN),
+- **Proforma PDF:** logolu A4; satıcı (ad soyad dahil) ve alıcı blokları, ödeme ve teslim şekli, banka bilgileri (hesap sahibi, banka, IBAN — hesap sahibi boşsa satıcının ad soyadı yazılır),
   tutar yazıyla, "resmi fatura yerine geçmez" notu ve imza alanı. Maliyet ve kâr proformada yer almaz.
   - Telefonda **Gönder:** paylaşım menüsü açılır (WhatsApp, Mail, Dosyalara Kaydet…).
   - Bilgisayarda **PDF kaydet:** Chrome / Edge kayıt yerini sorar; diğer tarayıcılar İndirilenler'e kaydeder.
