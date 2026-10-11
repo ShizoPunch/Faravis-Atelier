@@ -76,10 +76,26 @@ Telefonda ve bilgisayarda çalışan, kurulum gerektirmeyen KDV hesaplayıcı. `
 - Her ürünün kendi KDV hariç / KDV / KDV dahil toplamı ve birim fiyatları
 - Yanda (telefonda altta) genel toplam: KDV hariç, oran bazında KDV + matrah, genel toplam
 - Liste cihazda otomatik kaydedilir; ürün kopyalama, silmeyi geri alma
-- Özeti kopyalama / paylaşma (WhatsApp vb.), Excel'e (CSV) aktarma, yazdırma / PDF
+- **Teklif / PDF:** müşteri bilgileri, otomatik teklif no (FA-2026-0001), geçerlilik, notlar, IBAN, tutarın yazıyla
+  yazılışı; logolu A4 PDF olarak indirilir, telefonda doğrudan WhatsApp'a paylaşılabilir. Maliyet ve kâr teklifte yer almaz.
+- **Ürün kataloğu:** ürün adını yazarken öneri çıkar, seçince fiyat, KDV ve maliyet dolar. Katalog siteden
+  (`katalog.json`), ikas'tan alınan Excel/CSV dışa aktarımından ya da ürün XML'inden yüklenir; kartlardan tek tek kaydedilebilir.
+- **Kâr marjı:** birim maliyet girilince ürün başına kâr, marj ve maliyet üstü oran; özette toplam maliyet ve brüt kâr.
+  "Kâr" düğmesiyle müşteri yanındayken gizlenir.
+- Özeti kopyalama / paylaşma (WhatsApp vb.), Excel'e (CSV) aktarma
 - Ana ekrana eklenebilir ve internetsiz çalışır (GitHub Pages gibi bir adresten yayınlandığında)
 
 Hesap, faturadaki gibi satır bazında kuruşa yuvarlanır; toplamlar satırların toplamıdır.
+
+### Siteden ürün listesini çekmek
+
+```bash
+python kdv/katalog_cek.py            # faravisatelier.com → kdv/katalog.json
+```
+
+Sitenin `sitemap.xml` dosyasındaki ürün sayfalarını gezer; ad, stok kodu, varyant ve KDV dahil fiyatı okur.
+Uygulama açılışta `katalog.json` dosyasını otomatik yükler ("faravisatelier.com listesini yükle" ile de yenilenir).
+Maliyetler sitede olmadığı için Katalog ekranında bir kez girilir; liste yeniden yüklense de korunur.
 
 ## Ar-Ge yol haritası
 

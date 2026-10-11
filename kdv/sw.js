@@ -1,5 +1,5 @@
 // Çevrimdışı çalışma: uygulama dosyalarını önbelleğe alır, önce ağdan dener.
-const CACHE = "kdv-v1";
+const CACHE = "kdv-v2";
 const FILES = ["./", "index.html", "manifest.webmanifest", "icon.svg", "icon-192.png", "icon-512.png"];
 
 self.addEventListener("install", (e) => {
@@ -16,6 +16,7 @@ self.addEventListener("fetch", (e) => {
         if (res.ok || res.type === "opaque") { const copy = res.clone(); caches.open(CACHE).then((c) => c.put(e.request, copy)); }
         return res;
       })
-      .catch(() => caches.match(e.request).then((r) => r || caches.match("index.html")))
+      // Ağ yoksa önbellekten ver; sayfanın kendisi yalnızca sayfa açılışlarında yedek olarak döner
+      .catch(() => caches.match(e.request).then((r) => r || (e.request.mode === "navigate" ? caches.match("index.html") : Response.error())))
   );
 });
