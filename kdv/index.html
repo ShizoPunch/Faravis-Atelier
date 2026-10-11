@@ -747,6 +747,7 @@ details.more .form { padding-bottom: 6px; }
       if (v === CUSTOM) { it.colorCustom = true; it.color = ""; touched(); renderAll(); document.getElementById("cc-" + it.id)?.focus(); return; }
       it.colorCustom = false; it.color = v;
       document.getElementById("cc-" + it.id)?.remove(); // özel renk kutusu kapanır
+      if (switchColor(it, v)) { touched(); renderAll(); return; }
       updateRow(it); updateTotals(); touched(); return;
     }
     it[f] = e.target.value;
@@ -900,9 +901,27 @@ details.more .form { padding-bottom: 6px; }
     if (!price) return false;
     it.price = plain.format(price); return true;
   }
+  // ikas'ta bazı ürünler her renk için ayrı ürün ("Ceviz Ahşap …", "Siyah Ahşap …"). Böyle bir üründe renk
+  // değişince satır aynı ailenin o renkteki ürününe geçer: ad, görsel ve fiyat birlikte değişir.
+  const colorOfName = (name) => String(name || "").split(/\s+/).find((w) => COLORS.includes(w)) || "";
+  function switchColor(it, color) {
+    const c = it.catId && catalog.items.find((x) => x.id === it.catId);
+    if (!c || !color || (c.imgs || {})[color]) return false;
+    const cur = colorOfName(c.name);
+    if (!cur || cur === color) return false;
+    const want = c.name.split(/\s+/).map((w) => (w === cur ? color : w)).join(" ");
+    const sib = catalog.items.find((x) => x.name === want);
+    if (!sib) { toast(`Listede ${color} renkli “${c.name.replace(cur, color)}” yok`); return false; }
+    Object.assign(it, { name: sib.name, sku: sib.sku || "", catId: sib.id, img: sib.img || "", rate: String(sib.rate ?? 20) });
+    if (!it.manual && sib.price) it.price = plain.format(catPrice(sib));
+    if (sib.cost != null) it.cost = plain.format(sib.cost);
+    applyTier(it);
+    return true;
+  }
   function pick(it, c) {
     Object.assign(it, { name: c.name, sku: c.sku || "", catId: c.id, img: c.img || "", manual: false, price: c.price ? plain.format(catPrice(c)) : it.price, rate: String(c.rate ?? 20), cost: c.cost != null ? plain.format(c.cost) : it.cost });
     if (c.colors?.length === 1) { it.color = c.colors[0]; it.colorCustom = !COLORS.includes(c.colors[0]); }
+    else if (!c.colors?.length && colorOfName(c.name)) { it.color = colorOfName(c.name); it.colorCustom = false; }
     if (c.hooks?.length === 1) it.hook = c.hooks[0];
     applyTier(it);
     touched(); renderAll(); document.getElementById("q-" + it.id)?.select();
