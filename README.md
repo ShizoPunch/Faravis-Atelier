@@ -85,7 +85,8 @@ sağda ara toplam, oranlara göre KDV ve genel toplam.
   Reddedildi, Ödendi), bekleyen ve onaylanan toplamlar; eskisini açma ya da kopyasından yeni proforma.
 - **Müşteriler:** proformadaki müşteri adı yazılırken önceki müşteriler önerilir, seçince iletişim / adres / vergi bilgisi dolar.
 - **Ön ödeme ve termin:** ön ödeme yüzdesi proformaya "Ön ödeme / Kalan" olarak, termin (iş günü) hafta sonları atlanarak tarihe çevrilir.
-- **Renk ve kanca:** her satırda askı rengi (Naturel, Beyaz, Ceviz, Siyah) ve kanca (Gümüş, Altın, Siyah); proformada ürün adının altında.
+- **Renk ve kanca:** her satırda askı rengi (Naturel, Beyaz, Ceviz, Siyah ya da "Özel renk…" ile elle yazılan renk) ve kanca
+  (Standart Gold, Standart Gümüş, Gold Lama, Siyah Lama, Gümüş Lama); proformada ürün adının altında.
 - **Ürün listesi ve kademeli fiyat:** `kdv/katalog.json` ikas ürün Excel'inden üretilir (80 ürün). ikas'taki adet paketleri
   (12, 25, 50, 100, 250, 500) adet başı fiyata ve kademelere dönüşür; adet yazınca uygun kademe fiyatı kendiliğinden gelir.
   Yeni Excel uygulamadan da yüklenebilir: ⋯ → Ürün listesi → Excel / CSV yükle.

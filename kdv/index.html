@@ -131,6 +131,8 @@ select.chip-sel {
   height: 26px; border: 1px solid var(--line); border-radius: 999px; background: var(--sunken); color: var(--muted);
   font-size: 12px; font-weight: 500; padding: 0 8px; margin-right: 4px; cursor: pointer; max-width: 100%;
 }
+.chip-in { color: var(--ink); font-weight: 500; height: 26px; width: 130px; border: 1px solid var(--accent); border-radius: 999px; background: var(--surface); padding: 0 10px; font-size: 12px; margin-right: 4px; }
+.chip-in:focus { outline: none; box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 30%, transparent); }
 select.chip-sel.on { color: var(--accent-ink); border-color: var(--accent); background: var(--surface); }
 .c-sub .warn { color: var(--danger); font-weight: 500; }
 .c-sub .tier { color: var(--accent-ink); }
@@ -494,7 +496,11 @@ details.more .form { padding-bottom: 6px; }
   "use strict";
   const KEY = "faravis-kdv-v1", KEY_CAT = "faravis-kdv-katalog", KEY_SET = "faravis-kdv-ayarlar", KEY_HIST = "faravis-kdv-proformalar", KEY_CUST = "faravis-kdv-musteriler";
   // Sitedeki renk ve kanca seçenekleri
-  const COLORS = ["Naturel", "Beyaz", "Ceviz", "Siyah"], HOOKS = ["Gümüş kanca", "Altın kanca", "Siyah kanca"];
+  const COLORS = ["Naturel", "Beyaz", "Ceviz", "Siyah"];
+  const HOOKS = ["Standart Gold Kanca", "Standart Gümüş Kanca", "Gold Lama Kanca", "Siyah Lama Kanca", "Gümüş Lama Kanca"];
+  const CUSTOM = "__ozel";
+  // Listede olmayan kayıtlı değer (eski kayıt ya da özel giriş) seçenek olarak korunur
+  const withSaved = (list, v) => (v && !list.includes(v) ? [...list, v] : list);
   const RATES = [0, 1, 10, 20];
   const LIB_PDF = "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js";
   const LIB_XLSX = "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";
@@ -633,10 +639,11 @@ details.more .form { padding-bottom: 6px; }
       <div class="c-cost cost-col"><label class="ml" for="c-${id}">Birim maliyet (KDV hariç)</label><input class="in n" id="c-${id}" data-f="cost" inputmode="decimal" value="${esc(it.cost)}" placeholder="—" aria-label="Birim maliyet (KDV hariç)"></div>
       <div class="c-total" data-out="tot"></div>
       <button class="x" type="button" data-act="del" aria-label="Satırı sil">${X}</button>
-      <div class="c-sub"><select class="chip-sel${it.color ? " on" : ""}" id="cl-${id}" data-f="color" aria-label="Renk">
-        <option value="">Renk</option>${COLORS.map((v) => `<option${it.color === v ? " selected" : ""}>${v}</option>`).join("")}
-      </select><select class="chip-sel${it.hook ? " on" : ""}" id="hk-${id}" data-f="hook" aria-label="Kanca">
-        <option value="">Kanca</option>${HOOKS.map((v) => `<option${it.hook === v ? " selected" : ""}>${v}</option>`).join("")}
+      <div class="c-sub"><select class="chip-sel${it.color || it.colorCustom ? " on" : ""}" id="cl-${id}" data-f="colorSel" aria-label="Renk">
+        <option value="">Renk</option>${COLORS.map((v) => `<option${!it.colorCustom && it.color === v ? " selected" : ""}>${v}</option>`).join("")}
+        <option value="${CUSTOM}"${it.colorCustom ? " selected" : ""}>Özel renk…</option>
+      </select>${it.colorCustom ? `<input class="chip-in" id="cc-${id}" data-f="color" value="${esc(it.color)}" placeholder="Rengi yazın" aria-label="Özel renk" autocomplete="off">` : ""}<select class="chip-sel${it.hook ? " on" : ""}" id="hk-${id}" data-f="hook" aria-label="Kanca">
+        <option value="">Kanca</option>${withSaved(HOOKS, it.hook).map((v) => `<option${it.hook === v ? " selected" : ""}>${esc(v)}</option>`).join("")}
       </select><select class="chip-sel${PERS[it.pers] ? " on" : ""}" id="x-${id}" data-f="pers" aria-label="Logo uygulaması">
         <option value="">Logo uygulaması yok</option>${Object.entries(PERS).map(([k, v]) => `<option value="${k}"${it.pers === k ? " selected" : ""}>+ ${v}</option>`).join("")}
       </select><span class="sub-txt" data-out="sub"></span></div>
@@ -704,6 +711,11 @@ details.more .form { padding-bottom: 6px; }
   function onField(e) {
     const f = e.target.dataset.f; if (!f) return;
     const it = itemOf(e.target); if (!it) return;
+    if (f === "colorSel") {
+      const v = e.target.value;
+      if (v === CUSTOM) { it.colorCustom = true; it.color = ""; touched(); renderAll(); document.getElementById("cc-" + it.id)?.focus(); return; }
+      it.colorCustom = false; it.color = v; updateRow(it); updateTotals(); touched(); return;
+    }
     it[f] = e.target.value;
     if (f === "name") { it.sku = ""; it.catId = ""; openSuggest(e.target, it); }
     if (f === "price") it.manual = true;
@@ -725,6 +737,7 @@ details.more .form { padding-bottom: 6px; }
     if (f === "name" && suggestKey(e)) return;
     if (e.key !== "Enter") return;
     e.preventDefault();
+    if (f === "color") { e.target.blur(); return; }
     const it = itemOf(e.target);
     const next = { name: "q", qty: "p", price: settings.profit ? "c" : null }[f];
     if (next) document.getElementById(`${next}-${it.id}`)?.select();
@@ -836,7 +849,7 @@ details.more .form { padding-bottom: 6px; }
   }
   function pick(it, c) {
     Object.assign(it, { name: c.name, sku: c.sku || "", catId: c.id, manual: false, price: c.price ? plain.format(catPrice(c)) : it.price, rate: String(c.rate ?? 20), cost: c.cost != null ? plain.format(c.cost) : it.cost });
-    if (c.colors?.length === 1) it.color = COLORS.includes(c.colors[0]) ? c.colors[0] : it.color;
+    if (c.colors?.length === 1) { it.color = c.colors[0]; it.colorCustom = !COLORS.includes(c.colors[0]); }
     if (c.hooks?.length === 1) it.hook = c.hooks[0];
     applyTier(it);
     touched(); renderAll(); document.getElementById("q-" + it.id)?.select();
@@ -1309,7 +1322,11 @@ details.more .form { padding-bottom: 6px; }
   }
   // ikas ürün Excel'i: her ürün grubu tek kayıt. "Adet Seçenekleri" paketleri adet başı fiyata ve kademelere dönüşür,
   // askı rengi ve kanca/lama rengi satırdaki seçeneklere; yalnızca fiyatı farklı olan renkler ayrı kayıt olur.
-  const hookName = (v) => ({ gold: "Altın kanca", "altın": "Altın kanca", "gümüş": "Gümüş kanca", siyah: "Siyah kanca" }[norm(v)] || v + " kanca");
+  // ikas: "Kanca Renk" standart kanca, "Lama Renk" lama kanca
+  const hookName = (type, v) => {
+    const c = { gold: "Gold", "altın": "Gold", "gümüş": "Gümüş", siyah: "Siyah" }[norm(v)] || v;
+    return /lama/.test(norm(type)) ? `${c} Lama Kanca` : `Standart ${c} Kanca`;
+  };
   const isIkas = (rows) => rows.length && "Ürün Grup ID" in rows[0] && "Varyant Tip 1" in rows[0];
   function ikasToItems(rows) {
     const off = (v) => String(v ?? "").trim().toLowerCase();
@@ -1351,7 +1368,7 @@ details.more .form { padding-bottom: 6px; }
           if (diff.length) name += " – " + diff.join(", ");
         }
         const colors = types.filter((t) => /askı renk|aski renk/.test(norm(t))).flatMap((t) => vals(sg.attrs, t));
-        const hooks = types.filter((t) => /kanca|lama/.test(norm(t))).flatMap((t) => vals(sg.attrs, t)).map(hookName);
+        const hooks = types.filter((t) => /kanca|lama/.test(norm(t))).flatMap((t) => vals(sg.attrs, t).map((v) => hookName(t, v)));
         const unit = (x) => Math.round((x.price / x.qty) * 1e6) / 1e6;
         const item = packs.length
           ? { price: unit(packs[0]), tiers: packs.slice(1).map((x) => ({ min: x.qty, price: unit(x) })), note: "Paket: " + packs.map((x) => x.qty).join(", ") + " adet" }
