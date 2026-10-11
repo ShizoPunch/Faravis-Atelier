@@ -276,7 +276,14 @@ dialog.sheet::backdrop { background: rgba(28, 22, 18, .5); }
 @media (max-width: 640px) { dialog.sheet, dialog.sheet.narrow { width: 100%; height: 100%; max-height: 100%; margin: 0; border-radius: 0; } }
 .d-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: calc(14px + env(safe-area-inset-top, 0px)) 18px 14px; border-bottom: 1px solid var(--line); }
 .d-head h2 { margin: 0; font-size: 17px; font-weight: 600; }
-.d-head .x { opacity: 1; }
+.d-head .x { opacity: 1; position: relative; }
+.d-head .x.nudge { animation: nudge .9s ease-out 1; }
+@keyframes nudge {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 75%, transparent); }
+  25% { transform: scale(1.25); background: var(--accent); color: var(--btn-fg); }
+  60% { transform: scale(1); background: var(--accent); color: var(--btn-fg); }
+  100% { box-shadow: 0 0 0 16px transparent; }
+}
 .d-body { flex: 1; min-height: 0; overflow: auto; padding: 18px; }
 .d-foot { display: flex; gap: 8px; justify-content: flex-end; align-items: center; flex-wrap: wrap; padding: 12px 18px calc(12px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); }
 .d-foot .grow { flex: 1; font-size: 12px; color: var(--muted); min-width: 140px; }
@@ -1056,7 +1063,14 @@ details.more .form { padding-bottom: 6px; }
     const s = document.createElement("script"); s.src = src; s.onload = ok; s.onerror = () => { delete c[src]; no(new Error("yüklenemedi")); }; document.head.appendChild(s);
   })); })();
 
-  document.querySelectorAll("dialog.sheet").forEach((d) => d.addEventListener("click", (e) => { if (e.target === d || e.target.closest("[data-close]")) d.close(); }));
+  // Pencereler yalnızca X ile kapanır; dışarı tıklayınca ya da Esc'de X bir kez parlayarak yerini gösterir
+  document.querySelectorAll("dialog.sheet").forEach((d) => {
+    const x = d.querySelector(".d-head [data-close]");
+    const nudge = () => { x.classList.remove("nudge"); void x.offsetWidth; x.classList.add("nudge"); };
+    x.addEventListener("animationend", () => x.classList.remove("nudge"));
+    d.addEventListener("click", (e) => { if (e.target.closest("[data-close]")) d.close(); else if (e.target === d) nudge(); });
+    d.addEventListener("cancel", (e) => { e.preventDefault(); nudge(); });
+  });
 
   // ---------- Proforma ----------
   const dlgQ = $("#dlgQuote");
