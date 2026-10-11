@@ -68,6 +68,19 @@ Logo dosyanız varsa `brand/` klasörüne eklenir, yazı logosunun yerine o kull
 4. **Göz hizasından ya da hafif üstten** çekin. Sahnelerin perspektifi buna göre ayarlı.
 5. En yüksek çözünürlükte gönderin (WhatsApp sıkıştırması yerine dosya olarak).
 
+## KDV Hesap Defteri (`kdv/`)
+
+Telefonda ve bilgisayarda çalışan, kurulum gerektirmeyen KDV hesaplayıcı. `kdv/index.html` dosyasını tarayıcıda açmanız yeterli.
+
+- Her ürün için: ad, birim fiyat (**KDV hariç** ya da **KDV dahil** girilebilir), adet, KDV oranı (%0 · %1 · %10 · %20 ya da elle), iskonto %
+- Her ürünün kendi KDV hariç / KDV / KDV dahil toplamı ve birim fiyatları
+- Yanda (telefonda altta) genel toplam: KDV hariç, oran bazında KDV + matrah, genel toplam
+- Liste cihazda otomatik kaydedilir; ürün kopyalama, silmeyi geri alma
+- Özeti kopyalama / paylaşma (WhatsApp vb.), Excel'e (CSV) aktarma, yazdırma / PDF
+- Ana ekrana eklenebilir ve internetsiz çalışır (GitHub Pages gibi bir adresten yayınlandığında)
+
+Hesap, faturadaki gibi satır bazında kuruşa yuvarlanır; toplamlar satırların toplamıdır.
+
 ## Ar-Ge yol haritası
 
 - [x] Otomatik dekupe (ISNet), ana ürün dışındaki parçaları temizleme
