@@ -123,6 +123,7 @@ select.in { cursor: pointer; padding-right: 4px; }
 .x svg { width: 16px; height: 16px; }
 .c-sub { grid-column: 1 / -2; padding: 0 9px 2px; font-size: 12px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 2px 14px; }
 .c-sub b { font-weight: 500; color: var(--ink); }
+@media (min-width: 640px) { .c-sub { padding-left: 75px; } }
 .c-sub .neg { color: var(--danger); }
 .c-sub .pos { color: var(--ok); }
 .m-only { display: none; }
@@ -137,20 +138,21 @@ select.chip-sel.on { color: var(--accent-ink); border-color: var(--accent); back
 .c-sub .warn { color: var(--danger); font-weight: 500; }
 .c-sub .tier { color: var(--accent-ink); }
 .thumb {
-  width: 36px; height: 36px; border-radius: 7px; object-fit: cover; background: var(--sunken); border: 1px solid var(--line);
-  flex: none; display: inline-grid; place-items: center; font-size: 13px; font-weight: 600; color: var(--muted);
+  width: 56px; height: 56px; border-radius: 9px; object-fit: cover; background: var(--sunken); border: 1px solid var(--line);
+  flex: none; display: inline-grid; place-items: center; font-size: 18px; font-weight: 600; color: var(--muted);
 }
-.thumb.sm { width: 28px; height: 28px; font-size: 11px; border-radius: 6px; }
-.thumb.lg { width: 44px; height: 44px; }
-.nm-line { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.thumb.sm { width: 40px; height: 40px; font-size: 14px; border-radius: 7px; }
+.thumb.lg { width: 64px; height: 64px; }
+@media (max-width: 639px) { .nm-line .thumb { width: 52px; height: 52px; } }
+.nm-line { display: flex; align-items: center; gap: 10px; min-width: 0; }
 .nm-line .name-wrap { flex: 1; }
 .c-info { display: flex; gap: 10px; align-items: center; min-width: 0; }
 .opt .o-l { display: flex; gap: 8px; align-items: center; min-width: 0; }
 .opt .o-l { flex: 1; }
-.nm-line .suggest { left: -44px; }
+.nm-line .suggest { left: -66px; }
 @media (max-width: 639px) {
   .opt { flex-direction: column; gap: 2px; }
-  .opt .op { padding-left: 36px; font-size: 12px; }
+  .opt .op { padding-left: 48px; font-size: 12px; }
 }
 .check { display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--muted); cursor: pointer; }
 .doc-chip { font-size: 12px; font-weight: 500; color: var(--muted); margin-left: 8px; }
@@ -320,8 +322,8 @@ details.more .form { padding-bottom: 6px; }
 .a4 td { padding: 10px 8px; text-align: right; border-bottom: 1px solid var(--p-line); vertical-align: top; }
 .a4 th:nth-child(2), .a4 td:nth-child(2) { text-align: left; }
 .a4 th:first-child, .a4 td:first-child { width: 26px; text-align: left; color: var(--p-muted); }
-.a4 .pi { display: flex; gap: 10px; align-items: center; }
-.a4 .pimg { width: 42px; height: 42px; object-fit: cover; border-radius: 4px; border: 1px solid var(--p-line); flex: none; }
+.a4 .pi { display: flex; gap: 12px; align-items: center; }
+.a4 .pimg { width: 64px; height: 64px; object-fit: cover; border-radius: 4px; border: 1px solid var(--p-line); flex: none; }
 .a4 td .sku { color: var(--p-muted); font-size: 9.5px; margin-top: 1px; }
 .a4 tr.ext td { padding-top: 0; color: var(--p-muted); font-size: 11px; }
 .a4 tr.has-ext td { border-bottom: 0; }
@@ -395,7 +397,7 @@ details.more .form { padding-bottom: 6px; }
         </div>
       </div>
       <div class="cols" aria-hidden="true">
-        <span style="padding-left:9px">Ürün</span><span class="r">Adet</span><span class="r">Birim fiyat</span><span>KDV</span><span class="r cost-col">Maliyet</span><span class="tr">KDV dahil</span><span></span>
+        <span style="padding-left:75px">Ürün</span><span class="r">Adet</span><span class="r">Birim fiyat</span><span>KDV</span><span class="r cost-col">Maliyet</span><span class="tr">KDV dahil</span><span></span>
       </div>
       <div class="lines" id="lines"></div>
       <div class="pers-panel" id="persPanel">

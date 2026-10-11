@@ -1,5 +1,5 @@
 // Çevrimdışı çalışma: uygulama dosyalarını önbelleğe alır, önce ağdan dener.
-const CACHE = "kdv-v11";
+const CACHE = "kdv-v12";
 const FILES = ["./", "index.html", "manifest.webmanifest", "icon.svg", "icon-192.png", "icon-512.png", "katalog.json"];
 
 self.addEventListener("install", (e) => {
