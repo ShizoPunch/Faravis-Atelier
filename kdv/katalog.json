@@ -12,6 +12,7 @@
    "url": "https://faravisatelier.com/24-adet-ceviz-premium-gardirop-aski-seti-gold-lama-kanca",
    "colors": [],
    "hooks": [],
+   "hook": "Gold Lama Kanca",
    "img": "img/115787c40c27.webp",
    "price": 216.625,
    "tiers": [],
@@ -52,6 +53,7 @@
     "Ceviz"
    ],
    "hooks": [],
+   "hook": "Standart Gümüş Kanca",
    "img": "img/e1a8ccb9b9b4.webp",
    "price": 149.916667,
    "tiers": [
@@ -146,6 +148,7 @@
     "Ceviz"
    ],
    "hooks": [],
+   "hook": "Standart Gümüş Kanca",
    "img": "img/f2b8e2ec4751.webp",
    "price": 124.916667,
    "tiers": [
@@ -434,9 +437,9 @@
   {
    "mode": "gross",
    "imgs": {
-    "Standart Siyah Kanca": "img/4e18bf5e7463.webp",
-    "Standart Gümüş Kanca": "img/3a9194af1c8f.webp",
-    "Standart Gold Kanca": "img/90a9ce2db4f2.webp"
+    "Siyah Lama Kanca": "img/4e18bf5e7463.webp",
+    "Gümüş Lama Kanca": "img/3a9194af1c8f.webp",
+    "Gold Lama Kanca": "img/90a9ce2db4f2.webp"
    },
    "name": "Beyaz Ahşap Gelinlik Triko Abiye Askısı Lama Kancalı",
    "sku": "",
@@ -445,9 +448,9 @@
    "url": "https://faravisatelier.com/beyaz-ahsap-gelinlik-triko-abiye-askisi-lama-kancali",
    "colors": [],
    "hooks": [
-    "Standart Siyah Kanca",
-    "Standart Gümüş Kanca",
-    "Standart Gold Kanca"
+    "Siyah Lama Kanca",
+    "Gümüş Lama Kanca",
+    "Gold Lama Kanca"
    ],
    "img": "img/4e18bf5e7463.webp",
    "price": 149.916667,
@@ -486,6 +489,7 @@
    "url": "https://faravisatelier.com/beyaz-ahsap-gold-lama-kancali-elbise-pantolon-askisi",
    "colors": [],
    "hooks": [],
+   "hook": "Gold Lama Kanca",
    "img": "img/263e026b8532.webp",
    "price": 149.916667,
    "tiers": [
@@ -523,6 +527,7 @@
    "url": "https://faravisatelier.com/beyaz-ahsap-gumus-lama-kancali-elbise-pantolon-askisi",
    "colors": [],
    "hooks": [],
+   "hook": "Gümüş Lama Kanca",
    "img": "img/efcfe23c02d0.webp",
    "price": 149.916667,
    "tiers": [
@@ -605,6 +610,7 @@
    "url": "https://faravisatelier.com/beyaz-ahsap-mandalli-pantolon-askisi-etek-askisi-ozel-seri-gold-lama-kancali",
    "colors": [],
    "hooks": [],
+   "hook": "Gold Lama Kanca",
    "img": "img/3ea30fe86ebd.webp",
    "price": 133.25,
    "tiers": [
@@ -642,6 +648,7 @@
    "url": "https://faravisatelier.com/beyaz-ahsap-mandalli-pantolon-askisi-etek-askisi-ozel-seri-gumus-lama-kancali-10-adet",
    "colors": [],
    "hooks": [],
+   "hook": "Gümüş Lama Kanca",
    "img": "img/e4071ee5bd0b.webp",
    "price": 133.25,
    "tiers": [
@@ -679,6 +686,7 @@
    "url": "https://faravisatelier.com/beyaz-ahsap-mandalli-pantolon-askisi-etek-askisi-ozel-seri-siyah-lama-kancali",
    "colors": [],
    "hooks": [],
+   "hook": "Gümüş Lama Kanca",
    "img": "img/6dbfb3021fb2.webp",
    "price": 133.25,
    "tiers": [
@@ -716,6 +724,7 @@
    "url": "https://faravisatelier.com/beyaz-ahsap-pabuclu-ceket-takim-elbise-askisi",
    "colors": [],
    "hooks": [],
+   "hook": "Standart Gümüş Kanca",
    "img": "img/0b7b9c3562af.webp",
    "price": 316.5,
    "tiers": [
@@ -753,6 +762,7 @@
    "url": "https://faravisatelier.com/beyaz-ahsap-pabuclu-ceket-takim-elbise-askisi-gold-kanca",
    "colors": [],
    "hooks": [],
+   "hook": "Standart Gold Kanca",
    "img": "img/fb10ddaf6a5c.webp",
    "price": 316.5,
    "tiers": [
@@ -790,6 +800,7 @@
    "url": "https://faravisatelier.com/beyaz-ahsap-pantolon-etek-askisi-100-adet",
    "colors": [],
    "hooks": [],
+   "hook": "Gümüş Lama Kanca",
    "img": "img/9cb5c4a30be4.webp",
    "price": 152.99,
    "tiers": [],
@@ -806,6 +817,7 @@
    "url": "https://faravisatelier.com/beyaz-ahsap-siyah-lama-kancali-elbise-pantolon-askisi",
    "colors": [],
    "hooks": [],
+   "hook": "Siyah Lama Kanca",
    "img": "img/65f97a271547.webp",
    "price": 149.916667,
    "tiers": [
@@ -968,6 +980,7 @@
    "url": "https://faravisatelier.com/ceviz-ahsap-gold-amerikan-kancali-pantolon-etek-askisi-100-adet",
    "colors": [],
    "hooks": [],
+   "hook": "Gold Lama Kanca",
    "img": "img/c328642e98a1.jpg",
    "price": 187.99,
    "tiers": [],
@@ -984,6 +997,7 @@
    "url": "https://faravisatelier.com/ceviz-ahsap-gold-kancali-elbise-pantolon-askisi-10-adet",
    "colors": [],
    "hooks": [],
+   "hook": "Standart Gold Kanca",
    "img": "img/394712e855a5.webp",
    "price": 133.25,
    "tiers": [
@@ -1021,6 +1035,7 @@
    "url": "https://faravisatelier.com/ceviz-ahsap-gold-lama-kancali-elbise-pantolon-askisi",
    "colors": [],
    "hooks": [],
+   "hook": "Gold Lama Kanca",
    "img": "img/7c3b08c58703.webp",
    "price": 149.916667,
    "tiers": [
@@ -1058,6 +1073,7 @@
    "url": "https://faravisatelier.com/ceviz-gold-lama-kancali-pantolon-etek-askisii",
    "colors": [],
    "hooks": [],
+   "hook": "Gold Lama Kanca",
    "img": "img/bc6a5fe8fcfa.webp",
    "price": 133.25,
    "tiers": [
@@ -1095,6 +1111,7 @@
    "url": "https://faravisatelier.com/ceviz-ahsap-gumus-kancali-elbise-pantolon-askisi",
    "colors": [],
    "hooks": [],
+   "hook": "Standart Gümüş Kanca",
    "img": "img/0e7739449eae.webp",
    "price": 133.25,
    "tiers": [
@@ -1132,6 +1149,7 @@
    "url": "https://faravisatelier.com/ceviz-ahsap-gumus-lama-kancali-elbise-pantolon-askisi",
    "colors": [],
    "hooks": [],
+   "hook": "Gümüş Lama Kanca",
    "img": "img/0de6a0f6dc0d.webp",
    "price": 149.916667,
    "tiers": [
@@ -1169,6 +1187,7 @@
    "url": "https://faravisatelier.com/ceviz-ahsap-gumus-lama-kancali-pantolon-etek-askiisi",
    "colors": [],
    "hooks": [],
+   "hook": "Gümüş Lama Kanca",
    "img": "img/635ce5f98274.webp",
    "price": 133.25,
    "tiers": [
@@ -1283,25 +1302,25 @@
   {
    "mode": "gross",
    "imgs": {
-    "Naturel|Standart Gümüş Kanca": "img/da173ff18cc0.webp",
+    "Naturel|Gümüş Lama Kanca": "img/da173ff18cc0.webp",
     "Naturel": "img/da173ff18cc0.webp",
-    "Standart Gümüş Kanca": "img/da173ff18cc0.webp",
-    "Naturel|Standart Gold Kanca": "img/d67f2926938b.webp",
-    "Standart Gold Kanca": "img/d67f2926938b.webp",
-    "Naturel|Standart Siyah Kanca": "img/f7acf22025e9.webp",
-    "Standart Siyah Kanca": "img/f7acf22025e9.webp",
-    "Beyaz|Standart Gümüş Kanca": "img/3db32b267272.webp",
+    "Gümüş Lama Kanca": "img/da173ff18cc0.webp",
+    "Naturel|Gold Lama Kanca": "img/d67f2926938b.webp",
+    "Gold Lama Kanca": "img/d67f2926938b.webp",
+    "Naturel|Siyah Lama Kanca": "img/f7acf22025e9.webp",
+    "Siyah Lama Kanca": "img/f7acf22025e9.webp",
+    "Beyaz|Gümüş Lama Kanca": "img/3db32b267272.webp",
     "Beyaz": "img/3db32b267272.webp",
-    "Beyaz|Standart Gold Kanca": "img/fec982224850.webp",
-    "Beyaz|Standart Siyah Kanca": "img/88899a3c8dc3.webp",
-    "Siyah|Standart Gümüş Kanca": "img/5fd3c51311c2.webp",
+    "Beyaz|Gold Lama Kanca": "img/fec982224850.webp",
+    "Beyaz|Siyah Lama Kanca": "img/88899a3c8dc3.webp",
+    "Siyah|Gümüş Lama Kanca": "img/5fd3c51311c2.webp",
     "Siyah": "img/5fd3c51311c2.webp",
-    "Siyah|Standart Gold Kanca": "img/7af50ab91d20.webp",
-    "Siyah|Standart Siyah Kanca": "img/a823b327c185.webp",
-    "Ceviz|Standart Gümüş Kanca": "img/05638fb8ade5.webp",
+    "Siyah|Gold Lama Kanca": "img/7af50ab91d20.webp",
+    "Siyah|Siyah Lama Kanca": "img/a823b327c185.webp",
+    "Ceviz|Gümüş Lama Kanca": "img/05638fb8ade5.webp",
     "Ceviz": "img/05638fb8ade5.webp",
-    "Ceviz|Standart Gold Kanca": "img/640eee357f46.webp",
-    "Ceviz|Standart Siyah Kanca": "img/229990c95a39.webp"
+    "Ceviz|Gold Lama Kanca": "img/640eee357f46.webp",
+    "Ceviz|Siyah Lama Kanca": "img/229990c95a39.webp"
    },
    "name": "Ceviz Ahşap Omuzlu Ceket / Takım / Kaban Askısı Lama Kanca",
    "sku": "",
@@ -1315,9 +1334,9 @@
     "Ceviz"
    ],
    "hooks": [
-    "Standart Gümüş Kanca",
-    "Standart Gold Kanca",
-    "Standart Siyah Kanca"
+    "Gümüş Lama Kanca",
+    "Gold Lama Kanca",
+    "Siyah Lama Kanca"
    ],
    "img": "img/da173ff18cc0.webp",
    "price": 750,
@@ -1424,6 +1443,7 @@
    "url": "https://faravisatelier.com/ceviz-ahsap-pabuclu-ceket-takim-elbise-askisi",
    "colors": [],
    "hooks": [],
+   "hook": "Standart Gümüş Kanca",
    "img": "img/e7b0cff70dd6.webp",
    "price": 316.5,
    "tiers": [
@@ -1461,6 +1481,7 @@
    "url": "https://faravisatelier.com/ceviz-ahsap-pabuclu-ceket-takim-elbise-askisi-gold-kanca",
    "colors": [],
    "hooks": [],
+   "hook": "Standart Gold Kanca",
    "img": "img/81529154eb36.webp",
    "price": 316.5,
    "tiers": [
@@ -1498,6 +1519,7 @@
    "url": "https://faravisatelier.com/ceviz-ahsap-pantolon-etek-askisi-ozel-seri-100-adet",
    "colors": [],
    "hooks": [],
+   "hook": "Gümüş Lama Kanca",
    "img": "img/3ff438c36f8d.webp",
    "price": 163.99,
    "tiers": [],
@@ -1514,6 +1536,7 @@
    "url": "https://faravisatelier.com/ceviz-ahsap-siyah-lama-kancali-elbise-pantolon-askisi",
    "colors": [],
    "hooks": [],
+   "hook": "Siyah Lama Kanca",
    "img": "img/8c1f87438d9f.webp",
    "price": 149.916667,
    "tiers": [
@@ -1551,6 +1574,7 @@
    "url": "https://faravisatelier.com/ceviz-ahsap-siyah-lama-kancali-pantolon-etek-askisi",
    "colors": [],
    "hooks": [],
+   "hook": "Siyah Lama Kanca",
    "img": "img/260e4b6e8582.webp",
    "price": 133.25,
    "tiers": [
@@ -1588,6 +1612,7 @@
    "url": "https://faravisatelier.com/gold-ahsap-gold-kancali-gelinlik-triko-abiye-askisi",
    "colors": [],
    "hooks": [],
+   "hook": "Standart Gold Kanca",
    "img": "img/6aed6d1ba003.webp",
    "price": 133.25,
    "tiers": [
@@ -1625,6 +1650,7 @@
    "url": "https://faravisatelier.com/gold-ahsap-gold-lama-kancali-gelinlik-triko-abiye-askisi",
    "colors": [],
    "hooks": [],
+   "hook": "Gold Lama Kanca",
    "img": "img/547832d22c3f.webp",
    "price": 141.583333,
    "tiers": [
@@ -1752,6 +1778,7 @@
    "url": "https://faravisatelier.com/naturel-ahsap-bebek-elbise-pantolon-askisi",
    "colors": [],
    "hooks": [],
+   "hook": "Standart Gümüş Kanca",
    "img": "img/48a22d5afd77.webp",
    "price": 124.916667,
    "tiers": [
@@ -1856,21 +1883,21 @@
   {
    "mode": "gross",
    "imgs": {
-    "Beyaz|Gümüş Lama Kanca": "img/ff01ae09db6d.webp",
+    "Beyaz|Gümüş Amerikan Kanca": "img/ff01ae09db6d.webp",
     "Beyaz": "img/ff01ae09db6d.webp",
-    "Gümüş Lama Kanca": "img/ff01ae09db6d.webp",
-    "Siyah|Gümüş Lama Kanca": "img/7f03f7982347.webp",
+    "Gümüş Amerikan Kanca": "img/ff01ae09db6d.webp",
+    "Siyah|Gümüş Amerikan Kanca": "img/7f03f7982347.webp",
     "Siyah": "img/7f03f7982347.webp",
-    "Ceviz|Gümüş Lama Kanca": "img/e13a0fb77da5.webp",
+    "Ceviz|Gümüş Amerikan Kanca": "img/e13a0fb77da5.webp",
     "Ceviz": "img/e13a0fb77da5.webp",
-    "Beyaz|Gold Lama Kanca": "img/06ab1122317c.webp",
-    "Gold Lama Kanca": "img/06ab1122317c.webp",
-    "Siyah|Gold Lama Kanca": "img/725f3a2f7713.webp",
-    "Ceviz|Gold Lama Kanca": "img/ba3ef654d931.webp",
-    "Beyaz|Siyah Lama Kanca": "img/7fbe06618796.webp",
-    "Siyah Lama Kanca": "img/7fbe06618796.webp",
-    "Siyah|Siyah Lama Kanca": "img/a0dc8077a9e5.webp",
-    "Ceviz|Siyah Lama Kanca": "img/68840d34561d.webp"
+    "Beyaz|Gold Amerikan Kanca": "img/06ab1122317c.webp",
+    "Gold Amerikan Kanca": "img/06ab1122317c.webp",
+    "Siyah|Gold Amerikan Kanca": "img/725f3a2f7713.webp",
+    "Ceviz|Gold Amerikan Kanca": "img/ba3ef654d931.webp",
+    "Beyaz|Siyah Amerikan Kanca": "img/7fbe06618796.webp",
+    "Siyah Amerikan Kanca": "img/7fbe06618796.webp",
+    "Siyah|Siyah Amerikan Kanca": "img/a0dc8077a9e5.webp",
+    "Ceviz|Siyah Amerikan Kanca": "img/68840d34561d.webp"
    },
    "name": "Naturel Ahşap Çocuk ve Bebek Elbise Askısı Amerikan Kanca – Beyaz/Siyah/Ceviz",
    "sku": "",
@@ -1883,9 +1910,9 @@
     "Ceviz"
    ],
    "hooks": [
-    "Gümüş Lama Kanca",
-    "Gold Lama Kanca",
-    "Siyah Lama Kanca"
+    "Gümüş Amerikan Kanca",
+    "Gold Amerikan Kanca",
+    "Siyah Amerikan Kanca"
    ],
    "img": "img/ff01ae09db6d.webp",
    "price": 149.916667,
@@ -1917,13 +1944,13 @@
   {
    "mode": "gross",
    "imgs": {
-    "Naturel|Gümüş Lama Kanca": "img/633926262db7.webp",
+    "Naturel|Gümüş Amerikan Kanca": "img/633926262db7.webp",
     "Naturel": "img/633926262db7.webp",
-    "Gümüş Lama Kanca": "img/633926262db7.webp",
-    "Naturel|Gold Lama Kanca": "img/3e10a94c85d0.webp",
-    "Gold Lama Kanca": "img/3e10a94c85d0.webp",
-    "Naturel|Siyah Lama Kanca": "img/feecdfb3f797.webp",
-    "Siyah Lama Kanca": "img/feecdfb3f797.webp"
+    "Gümüş Amerikan Kanca": "img/633926262db7.webp",
+    "Naturel|Gold Amerikan Kanca": "img/3e10a94c85d0.webp",
+    "Gold Amerikan Kanca": "img/3e10a94c85d0.webp",
+    "Naturel|Siyah Amerikan Kanca": "img/feecdfb3f797.webp",
+    "Siyah Amerikan Kanca": "img/feecdfb3f797.webp"
    },
    "name": "Naturel Ahşap Çocuk ve Bebek Elbise Askısı Amerikan Kanca – Naturel",
    "sku": "",
@@ -1934,9 +1961,9 @@
     "Naturel"
    ],
    "hooks": [
-    "Gümüş Lama Kanca",
-    "Gold Lama Kanca",
-    "Siyah Lama Kanca"
+    "Gümüş Amerikan Kanca",
+    "Gold Amerikan Kanca",
+    "Siyah Amerikan Kanca"
    ],
    "img": "img/633926262db7.webp",
    "price": 124.916667,
@@ -2106,6 +2133,7 @@
    "url": "https://faravisatelier.com/naturel-ahsap-elbise-ve-pantolon-askisi-klasik-gold-kanca",
    "colors": [],
    "hooks": [],
+   "hook": "Standart Gold Kanca",
    "img": "img/e50e1accb042.webp",
    "price": 116.583333,
    "tiers": [
@@ -2143,6 +2171,7 @@
    "url": "https://faravisatelier.com/naturel-ahsap-elbise-ve-pantolon-askisi-klasik-gumus-kanca",
    "colors": [],
    "hooks": [],
+   "hook": "Standart Gümüş Kanca",
    "img": "img/7706fa0526ed.webp",
    "price": 116.583333,
    "tiers": [
@@ -2270,6 +2299,7 @@
    "url": "https://faravisatelier.com/naturel-ahsap-gumus-kancali-masali-elbise-pantolon-askisi",
    "colors": [],
    "hooks": [],
+   "hook": "Standart Gümüş Kanca",
    "img": "img/917c8dc01ac4.webp",
    "price": 133.25,
    "tiers": [
@@ -2344,6 +2374,7 @@
    "url": "https://faravisatelier.com/naturel-ahsap-pabuclu-ceket-takim-elbise-askisi",
    "colors": [],
    "hooks": [],
+   "hook": "Standart Gümüş Kanca",
    "img": "img/b028739d24e2.webp",
    "price": 299.833333,
    "tiers": [
@@ -2381,6 +2412,7 @@
    "url": "https://faravisatelier.com/naturel-ahsap-pabuclu-ceket-takim-elbise-askisi-gold-kanca",
    "colors": [],
    "hooks": [],
+   "hook": "Standart Gold Kanca",
    "img": "img/3da959c8009a.webp",
    "price": 299.833333,
    "tiers": [
@@ -2418,6 +2450,7 @@
    "url": "https://faravisatelier.com/naturel-ahsap-pantolon-etek-askisi-100-adet",
    "colors": [],
    "hooks": [],
+   "hook": "Standart Gümüş Kanca",
    "img": "img/e95ac72b0762.webp",
    "price": 116.99,
    "tiers": [],
@@ -2471,6 +2504,7 @@
    "url": "https://faravisatelier.com/siyah-ahsap-bebek-elbise-pantolon-askisi",
    "colors": [],
    "hooks": [],
+   "hook": "Standart Gümüş Kanca",
    "img": "img/2b835ebd37a1.webp",
    "price": 135.75,
    "tiers": [
@@ -2596,6 +2630,7 @@
    "url": "https://faravisatelier.com/siyah-ahsap-gold-kancali-elbise-pantolon-askisi",
    "colors": [],
    "hooks": [],
+   "hook": "Standart Gold Kanca",
    "img": "img/8c6962e37064.webp",
    "price": 133.25,
    "tiers": [
@@ -2633,6 +2668,7 @@
    "url": "https://faravisatelier.com/siyah-ahsap-gold-lama-kancali-elbise-pantolon-askisi",
    "colors": [],
    "hooks": [],
+   "hook": "Gold Lama Kanca",
    "img": "img/91723cfe2776.webp",
    "price": 149.916667,
    "tiers": [
@@ -2670,6 +2706,7 @@
    "url": "https://faravisatelier.com/siyah-ahsap-gumus-kancali-elbise-pantolon-askisi",
    "colors": [],
    "hooks": [],
+   "hook": "Standart Gümüş Kanca",
    "img": "img/f12c571b09d9.webp",
    "price": 133.25,
    "tiers": [
@@ -2707,6 +2744,7 @@
    "url": "https://faravisatelier.com/siyah-ahsap-gumus-lama-kancali-elbise-pantolon-askisi",
    "colors": [],
    "hooks": [],
+   "hook": "Gümüş Lama Kanca",
    "img": "img/01211701cebf.webp",
    "price": 149.916667,
    "tiers": [
@@ -2789,6 +2827,7 @@
    "url": "https://faravisatelier.com/siyah-ahsap-mandalli-pantolon-askisi-etek-askisi-ozel-seri-gold-lama-kancali",
    "colors": [],
    "hooks": [],
+   "hook": "Gold Lama Kanca",
    "img": "img/db8c7668ac97.webp",
    "price": 133.25,
    "tiers": [
@@ -2826,6 +2865,7 @@
    "url": "https://faravisatelier.com/siyah-ahsap-mandalli-pantolon-askisi-etek-askisi-ozel-seri-gumus-lama-kancali",
    "colors": [],
    "hooks": [],
+   "hook": "Gümüş Lama Kanca",
    "img": "img/47e52457cc7c.webp",
    "price": 133.25,
    "tiers": [
@@ -2863,6 +2903,7 @@
    "url": "https://faravisatelier.com/siyah-ahsap-mandalli-pantolon-askisi-etek-askisi-ozel-seri-siyah-lama-kancali",
    "colors": [],
    "hooks": [],
+   "hook": "Siyah Lama Kanca",
    "img": "img/c2e20abaa4b1.webp",
    "price": 133.25,
    "tiers": [
@@ -2900,6 +2941,7 @@
    "url": "https://faravisatelier.com/siyah-ahsap-pabuclu-ceket-takim-elbise-askisi",
    "colors": [],
    "hooks": [],
+   "hook": "Standart Gümüş Kanca",
    "img": "img/7ac3101d872e.webp",
    "price": 316.5,
    "tiers": [
@@ -2937,6 +2979,7 @@
    "url": "https://faravisatelier.com/siyah-ahsap-pabuclu-ceket-takim-elbise-askisi-gold-kanca",
    "colors": [],
    "hooks": [],
+   "hook": "Standart Gold Kanca",
    "img": "img/4b16364775af.webp",
    "price": 316.5,
    "tiers": [
@@ -2974,6 +3017,7 @@
    "url": "https://faravisatelier.com/siyah-ahsap-pantolon-etek-askisi-100-adet",
    "colors": [],
    "hooks": [],
+   "hook": "Standart Gümüş Kanca",
    "img": "img/800e018dae3e.webp",
    "price": 116.99,
    "tiers": [],
@@ -2990,6 +3034,7 @@
    "url": "https://faravisatelier.com/siyah-ahsap-siyah-lama-kancali-elbise-pantolon-askisi",
    "colors": [],
    "hooks": [],
+   "hook": "Siyah Lama Kanca",
    "img": "img/532a3abf1f4c.webp",
    "price": 149.916667,
    "tiers": [
@@ -3018,5 +3063,5 @@
    "imgSrc": "https://cdn.myikas.com/images/9dcb564a-4f9e-4196-8c5a-dbd56ef706ad/9590b592-4e9d-452c-8bda-564a58a054c3/image_1950.webp"
   }
  ],
- "version": "2026-10-11c"
+ "version": "2026-10-11d"
 }

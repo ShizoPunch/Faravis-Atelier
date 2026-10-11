@@ -672,7 +672,7 @@ details.more .form { padding-bottom: 6px; }
         <option value="">Renk</option>${COLORS.map((v) => `<option${!it.colorCustom && it.color === v ? " selected" : ""}>${v}</option>`).join("")}
         <option value="${CUSTOM}"${it.colorCustom ? " selected" : ""}>Özel renk…</option>
       </select>${it.colorCustom ? `<input class="chip-in" id="cc-${id}" data-f="color" value="${esc(it.color)}" placeholder="Rengi yazın" aria-label="Özel renk" autocomplete="off">` : ""}<select class="chip-sel${it.hook ? " on" : ""}" id="hk-${id}" data-f="hook" aria-label="Kanca">
-        <option value="">Kanca</option>${withSaved(HOOKS, it.hook).map((v) => `<option${it.hook === v ? " selected" : ""}>${esc(v)}</option>`).join("")}
+        <option value="">Kanca</option>${hookOptions(it).map((v) => `<option${it.hook === v ? " selected" : ""}>${esc(v)}</option>`).join("")}
       </select><select class="chip-sel${PERS[it.pers] ? " on" : ""}" id="x-${id}" data-f="pers" aria-label="Logo uygulaması">
         <option value="">Logo uygulaması yok</option>${Object.entries(PERS).map(([k, v]) => `<option value="${k}"${it.pers === k ? " selected" : ""}>+ ${v}</option>`).join("")}
       </select><span class="sub-txt" data-out="sub"></span></div>
@@ -747,10 +747,15 @@ details.more .form { padding-bottom: 6px; }
       if (v === CUSTOM) { it.colorCustom = true; it.color = ""; touched(); renderAll(); document.getElementById("cc-" + it.id)?.focus(); return; }
       it.colorCustom = false; it.color = v;
       document.getElementById("cc-" + it.id)?.remove(); // özel renk kutusu kapanır
-      if (switchColor(it, v)) { touched(); renderAll(); return; }
+      if (switchVariant(it, "color")) { touched(); renderAll(); return; }
       updateRow(it); updateTotals(); touched(); return;
     }
     it[f] = e.target.value;
+    if (f === "hook" && switchVariant(it, "hook")) { touched(); renderAll(); return; }
+    if (f === "color" && WOOD.some((w) => norm(w) === norm(it.color)) && switchVariant(it, "color")) {
+      touched(); renderAll();
+      const el = document.getElementById("cc-" + it.id); el?.focus(); el?.setSelectionRange(el.value.length, el.value.length); return;
+    }
     if (f === "name") { it.sku = ""; it.catId = ""; it.img = ""; openSuggest(e.target, it); }
     if (f === "price") it.manual = true;
     if (f === "qty" && applyTier(it)) { const pe = document.getElementById("p-" + it.id); if (pe) pe.value = it.price; }
@@ -901,28 +906,77 @@ details.more .form { padding-bottom: 6px; }
     if (!price) return false;
     it.price = plain.format(price); return true;
   }
-  // ikas'ta bazı ürünler her renk için ayrı ürün ("Ceviz Ahşap …", "Siyah Ahşap …"). Böyle bir üründe renk
-  // değişince satır aynı ailenin o renkteki ürününe geçer: ad, görsel ve fiyat birlikte değişir.
-  const colorOfName = (name) => String(name || "").split(/\s+/).find((w) => COLORS.includes(w)) || "";
-  function switchColor(it, color) {
+  // ikas'ta aynı askı çoğu zaman renk ve kanca başına ayrı ürün olarak girilmiş ("Ceviz Ahşap Gold Kancalı …",
+  // "Siyah Ahşap Gümüş Lama Kancalı …", "Naturel Ahşap … Klasik Gold Kanca"). Adlardan ahşap rengi, kanca tipi ve
+  // kanca rengi çıkarılınca geriye kalan kelimeler aileyi verir; satırda renk ya da kanca değişince satır ailenin
+  // uygun ürününe geçer: ad, görsel ve fiyat birlikte değişir.
+  const WOOD = [...COLORS, "Gold"];
+  const HOOK_COLOR = { gold: "Gold", "altın": "Gold", "gümüş": "Gümüş", siyah: "Siyah" };
+  const FILLER = new Set(["lama", "kanca", "kancalı", "klasik", "kalın", "standart", "ve", "-", "&", "ceket"]);
+  const famCache = new Map();
+  function parseName(name) {
+    if (famCache.has(name)) return famCache.get(name);
+    const w = String(name || "").split(" – ")[0].split(/\s+/).filter(Boolean), lw = w.map(norm);
+    const color = WOOD.includes(w[0]) ? w[0] : "";
+    const type = lw.includes("amerikan") ? "amerikan" : lw.includes("lama") ? "lama" : lw.some((x) => x.startsWith("kanca")) ? "standart" : "";
+    let hc = "";
+    const base = [];
+    lw.forEach((x, i) => {
+      if (i === 0 && color) return;
+      if (i > 0 && HOOK_COLOR[x] && /^(lama|kanca|kancalı|amerikan|standart)$/.test(lw[i + 1] || "")) { hc = hc || HOOK_COLOR[x]; return; }
+      if (!FILLER.has(x)) base.push(x);
+    });
+    const r = { color, type, hc, base: base.join(" ") };
+    famCache.set(name, r); return r;
+  }
+  const hookLabel = (type, c) => (type === "lama" ? `${c} Lama Kanca` : type === "amerikan" ? `${c} Amerikan Kanca` : `Standart ${c} Kanca`);
+  // Ürünün kendi varyant listesi varsa o geçerli, yoksa addan okunan renk / kanca; boş liste = bilinmiyor
+  const hookSet = (c) => { const p = parseName(c.name); return c.hooks?.length ? c.hooks : p.hc ? [hookLabel(p.type || "standart", p.hc)] : c.hook ? [c.hook] : []; };
+  const colorSet = (c) => { const p = parseName(c.name); return c.colors?.length ? c.colors : p.color ? [p.color] : []; };
+  const familyOf = (c) => { const b = parseName(c.name).base; return catalog.items.filter((x) => parseName(x.name).base === b); };
+  // Kanca menüsü: sabit beş seçenek + ailede geçen diğerleri (ör. Amerikan kanca)
+  const hookOptions = (it) => {
     const c = it.catId && catalog.items.find((x) => x.id === it.catId);
-    if (!c || !color || (c.imgs || {})[color]) return false;
-    const cur = colorOfName(c.name);
-    if (!cur || cur === color) return false;
-    const want = c.name.split(/\s+/).map((w) => (w === cur ? color : w)).join(" ");
-    const sib = catalog.items.find((x) => x.name === want);
-    if (!sib) { toast(`Listede ${color} renkli “${c.name.replace(cur, color)}” yok`); return false; }
-    Object.assign(it, { name: sib.name, sku: sib.sku || "", catId: sib.id, img: sib.img || "", rate: String(sib.rate ?? 20) });
-    if (!it.manual && sib.price) it.price = plain.format(catPrice(sib));
-    if (sib.cost != null) it.cost = plain.format(sib.cost);
+    const extra = c ? [...new Set(familyOf(c).flatMap(hookSet))].filter((h) => !HOOKS.includes(h)) : [];
+    return withSaved([...HOOKS, ...extra], it.hook);
+  };
+  function switchVariant(it, changed) {
+    const c = it.catId && catalog.items.find((x) => x.id === it.catId);
+    if (!c) return false;
+    const fam = familyOf(c);
+    if (fam.length < 2) return false;
+    const col = WOOD.find((w) => norm(w) === norm(it.color)) || (it.colorCustom ? "" : it.color), hook = it.hook, curType = parseName(c.name).type;
+    const score = (x) => {
+      const cs = colorSet(x), hs = hookSet(x), me = x === c ? 1 : 0;
+      if (col && cs.length && !cs.includes(col)) return -1;
+      let s = !hook ? 2 : hs.includes(hook) ? 4 : !hs.length ? 1 : -1;
+      if (s < 0) return -1;
+      if (col && !cs.length) s -= 0.5; // renk bilgisi olmayan ürün son çare
+      return s + me + (parseName(x.name).type === curType ? 0.25 : 0);
+    };
+    let best = null, bs = -1;
+    for (const x of fam) { const s = score(x); if (s > bs) { bs = s; best = x; } }
+    // Renk değiştiyse ve o renkte bu kanca yoksa: renk korunur, kanca o renkteki ürüne uyar (aynı kanca rengi öncelikli)
+    if (!best && changed === "color" && col) {
+      const hc = (h) => (h.match(/Gold|Gümüş|Siyah/) || [""])[0];
+      const alt = fam.filter((x) => colorSet(x).includes(col))
+        .map((x) => ({ x, h: hookSet(x).find((h) => hc(h) === hc(hook)) || hookSet(x)[0] || "" }))
+        .sort((a, b) => (hc(b.h) === hc(hook)) - (hc(a.h) === hc(hook)) || (parseName(b.x.name).type === curType) - (parseName(a.x.name).type === curType))[0];
+      if (alt) { best = alt.x; if (alt.h !== hook) { it.hook = alt.h; toast(`${col} renkte ${hook} yok` + (alt.h ? `, ${alt.h} seçildi` : ", kanca seçimi kaldırıldı")); } }
+    }
+    if (!best) { toast(`Bu askının ${[col, hook].filter(Boolean).join(" + ")} seçeneği listede yok`); return false; }
+    if (best === c) return !!changed && it.hook !== hook;
+    Object.assign(it, { name: best.name, sku: best.sku || "", catId: best.id, img: best.img || "", rate: String(best.rate ?? 20) });
+    if (!it.manual && best.price) it.price = plain.format(catPrice(best));
+    if (best.cost != null) it.cost = plain.format(best.cost);
     applyTier(it);
     return true;
   }
   function pick(it, c) {
     Object.assign(it, { name: c.name, sku: c.sku || "", catId: c.id, img: c.img || "", manual: false, price: c.price ? plain.format(catPrice(c)) : it.price, rate: String(c.rate ?? 20), cost: c.cost != null ? plain.format(c.cost) : it.cost });
     if (c.colors?.length === 1) { it.color = c.colors[0]; it.colorCustom = !COLORS.includes(c.colors[0]); }
-    else if (!c.colors?.length && colorOfName(c.name)) { it.color = colorOfName(c.name); it.colorCustom = false; }
-    if (c.hooks?.length === 1) it.hook = c.hooks[0];
+    else if (!c.colors?.length && parseName(c.name).color) { it.color = parseName(c.name).color; it.colorCustom = false; }
+    if (hookSet(c).length === 1) it.hook = hookSet(c)[0];
     applyTier(it);
     touched(); renderAll(); document.getElementById("q-" + it.id)?.select();
   }
@@ -1449,10 +1503,19 @@ details.more .form { padding-bottom: 6px; }
   }
   // ikas ürün Excel'i: her ürün grubu tek kayıt. "Adet Seçenekleri" paketleri adet başı fiyata ve kademelere dönüşür,
   // askı rengi ve kanca/lama rengi satırdaki seçeneklere; yalnızca fiyatı farklı olan renkler ayrı kayıt olur.
-  // ikas: "Kanca Renk" standart kanca, "Lama Renk" lama kanca
-  const hookName = (type, v) => {
+  // ikas: "Kanca Renk" standart kanca, "Lama Renk" lama kanca. Bazı ürünlerde varyant tipi yanlış girilmiş
+  // (adında "Lama Kancalı" yazan ürün "Kanca Renk" ile), bu yüzden ürün adındaki kanca tipi önce gelir.
+  const hookName = (type, v, name = "") => {
     const c = { gold: "Gold", "altın": "Gold", "gümüş": "Gümüş", siyah: "Siyah" }[norm(v)] || v;
-    return /lama/.test(norm(type)) ? `${c} Lama Kanca` : `Standart ${c} Kanca`;
+    const n = norm(name);
+    return /amerikan/.test(n) ? `${c} Amerikan Kanca` : /lama/.test(n) || /lama/.test(norm(type)) ? `${c} Lama Kanca` : `Standart ${c} Kanca`;
+  };
+  // Adında ve varyantlarında kanca bilgisi olmayan ürün: açıklamadaki "Kanca Tipi" tek bir renk söylüyorsa o
+  const descHook = (html) => {
+    const d = norm(String(html ?? "").replace(/<[^>]+>|&nbsp;/g, " "));
+    const m = d.match(/kanca tipi\s*:?\s*(.{0,70})/); if (!m || /veya|seçenek|,/.test(m[1])) return "";
+    const cs = [...new Set([["Gold", /gold|altın/], ["Gümüş", /gümüş|krom|nikel/], ["Siyah", /siyah/]].filter(([, r]) => r.test(m[1])).map(([c]) => c))];
+    return cs.length === 1 ? (/lama/.test(m[1]) ? `${cs[0]} Lama Kanca` : `Standart ${cs[0]} Kanca`) : "";
   };
   const isIkas = (rows) => rows.length && "Ürün Grup ID" in rows[0] && "Varyant Tip 1" in rows[0];
   function ikasToItems(rows) {
@@ -1497,7 +1560,7 @@ details.more .form { padding-bottom: 6px; }
           if (diff.length) name += " – " + diff.join(", ");
         }
         const colors = types.filter((t) => /askı renk|aski renk/.test(norm(t))).flatMap((t) => vals(sg.attrs, t));
-        const hooks = types.filter((t) => /kanca|lama/.test(norm(t))).flatMap((t) => vals(sg.attrs, t).map((v) => hookName(t, v)));
+        const hooks = types.filter((t) => /kanca|lama/.test(norm(t))).flatMap((t) => vals(sg.attrs, t).map((v) => hookName(t, v, rs[0]["İsim"])));
         const unit = (x) => Math.round((x.price / x.qty) * 1e6) / 1e6;
         const item = packs.length
           ? { price: unit(packs[0]), tiers: packs.slice(1).map((x) => ({ min: x.qty, price: unit(x) })), note: "Paket: " + packs.map((x) => x.qty).join(", ") + " adet" }
@@ -1507,14 +1570,14 @@ details.more .form { padding-bottom: 6px; }
         const colorT = types.filter((t) => /askı renk|aski renk/.test(norm(t))), hookT = types.filter((t) => /kanca|lama/.test(norm(t)));
         for (const x of sg.all) {
           if (!x.img) continue;
-          const c = colorT.map((t) => x.attrs[t]).find(Boolean), h = hookT.map((t) => x.attrs[t] && hookName(t, x.attrs[t])).find(Boolean);
+          const c = colorT.map((t) => x.attrs[t]).find(Boolean), h = hookT.map((t) => x.attrs[t] && hookName(t, x.attrs[t], rs[0]["İsim"])).find(Boolean);
           if (c && h && !imgs[c + "|" + h]) imgs[c + "|" + h] = x.img;
           if (c && !imgs[c]) imgs[c] = x.img;
           if (h && !imgs[h]) imgs[h] = x.img;
         }
         const slug = rs[0]["Slug"];
         out.push({ imgs, name, sku: "", rate: 20, mode: "gross", cost: sg.xs.find((x) => x.cost)?.cost ?? null, url: slug ? "https://faravisatelier.com/" + slug : "",
-          colors: [...new Set(colors)], hooks: [...new Set(hooks)], img: sg.xs.find((x) => x.img)?.img || "", ...item });
+          colors: [...new Set(colors)], hooks: [...new Set(hooks)], ...(!hooks.length && descHook(rs[0]["Açıklama"]) ? { hook: descHook(rs[0]["Açıklama"]) } : {}), img: sg.xs.find((x) => x.img)?.img || "", ...item });
       }
     }
     return out.sort((a, b) => a.name.localeCompare(b.name, "tr"));
