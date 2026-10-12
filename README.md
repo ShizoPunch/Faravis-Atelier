@@ -80,7 +80,3 @@ Logo dosyanız varsa `brand/` klasörüne eklenir, yazı logosunun yerine o kull
 - [ ] Gerçek doku fotoğrafları (traverten, keten, ahşap) ile sahne kütüphanesi
 - [ ] Yansıma (mermer zeminde), ürün üstüne sahne ışığı uyumu (color match)
 - [ ] Yapay zekâ ile üretilmiş bağlamsal sahneler (ürün bir masada, rafta, elde)
-
----
-
-Ayrıca: [`tvarsiv/`](tvarsiv/README.md), @tvarsiv_ Instagram hesabı için dikey video kurgu masası.
