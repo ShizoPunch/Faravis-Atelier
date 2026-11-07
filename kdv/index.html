@@ -315,6 +315,11 @@ details.more .form { padding-bottom: 6px; }
 .a4 .q-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; padding-bottom: 18px; border-bottom: 2px solid var(--p-ink); }
 .a4 .mark { color: #1E1B19; line-height: 0; }
 .a4 .mark svg, .a4 .mark img { height: 62px; width: auto; display: block; }
+.a4 .mark { display: flex; align-items: center; gap: 18px; }
+.a4 .mark .sep { width: 1px; height: 48px; background: var(--p-line); }
+.a4 .mark img.l2 { max-width: 230px; object-fit: contain; }
+.logo2-row { display: flex; align-items: center; gap: 8px; min-height: 40px; }
+.logo2-row img { height: 40px; max-width: 160px; object-fit: contain; background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 3px 6px; }
 .a4 .q-title { text-align: right; }
 .a4 .q-title h3 { margin: 0 0 10px; font-size: 26px; font-weight: 700; letter-spacing: .32em; margin-right: -.32em; }
 .a4 .meta { display: grid; grid-template-columns: auto auto; gap: 3px 14px; justify-content: end; font-size: 11px; }
@@ -479,6 +484,10 @@ details.more .form { padding-bottom: 6px; }
             <label class="field"><span>Hesap sahibi</span><input id="s_holder" data-s="holder" placeholder="IBAN'ın kayıtlı olduğu ad soyad" autocomplete="off"></label>
             <label class="field"><span>Banka</span><input id="s_bank" data-s="bank" placeholder="Banka adı"></label>
             <label class="field"><span>IBAN</span><input id="s_iban" data-s="iban" placeholder="TR00 0000 0000 0000 0000 0000 00" inputmode="text" autocapitalize="characters"></label>
+            <div class="field"><span>İkinci logo (proformada Faravis logosunun yanında)</span>
+              <div class="logo2-row"><img id="s_logo2Img" alt="İkinci logo" hidden>
+                <label class="btn" for="s_logo2">Logo seç</label><input id="s_logo2" type="file" accept="image/*" hidden>
+                <button class="btn ghost danger" type="button" id="s_logo2Del" hidden>Kaldır</button></div></div>
           </div>
         </details>
       </form>
@@ -1182,6 +1191,7 @@ details.more .form { padding-bottom: 6px; }
     dlgQ.querySelectorAll("[data-q]").forEach((el) => { el.value = getP(q, el.dataset.q) ?? ""; });
     dlgQ.querySelectorAll("[data-s]").forEach((el) => { el.value = settings.seller[el.dataset.s] ?? ""; });
     $("#q_img").checked = settings.pdfImg !== false;
+    renderLogo2();
     $("#sellerBox").open = !settings.seller.owner;
     $("#qStatus").textContent = settings.seller.owner ? "" : "Firma bilgilerime ad soyadınızı yazın; proformada satıcı ve hesap sahibi olarak görünür.";
     dlgQ.showModal(); renderQuote();
@@ -1217,6 +1227,22 @@ details.more .form { padding-bottom: 6px; }
   });
   $("#qForm").addEventListener("submit", (e) => e.preventDefault());
   $("#q_img").addEventListener("change", (e) => { settings.pdfImg = e.target.checked; saveSettings(); renderQuote(); });
+  // İkinci logo (ör. Elma Ahşap): küçültülüp PNG olarak ayarlarda saklanır, yedeğe de girer
+  function renderLogo2() {
+    const v = settings.seller.logo2 || "", im = $("#s_logo2Img");
+    im.hidden = !v; if (v) im.src = v; else im.removeAttribute("src"); $("#s_logo2Del").hidden = !v;
+  }
+  $("#s_logo2").addEventListener("change", async (e) => {
+    const f = e.target.files[0]; e.target.value = ""; if (!f) return;
+    try {
+      const url = URL.createObjectURL(f), im = new Image(); im.src = url; await im.decode();
+      const nw = im.naturalWidth || 600, nh = im.naturalHeight || 300, h = Math.min(240, nh), w = Math.round((nw * h) / nh);
+      const c = document.createElement("canvas"); c.width = w; c.height = h;
+      c.getContext("2d").drawImage(im, 0, 0, w, h); URL.revokeObjectURL(url);
+      settings.seller.logo2 = c.toDataURL("image/png"); saveSettings(); renderLogo2(); renderQuote();
+    } catch (err) { toast("Logo okunamadı; PNG veya JPG deneyin"); }
+  });
+  $("#s_logo2Del").addEventListener("click", () => { delete settings.seller.logo2; saveSettings(); renderLogo2(); renderQuote(); });
 
   // Tutarın yazıyla gösterimi ("Yalnız: …")
   function words(n) {
@@ -1288,7 +1314,7 @@ details.more .form { padding-bottom: 6px; }
     let n = 0;
     return `
       <div class="q-top">
-        <div class="mark">${logoPng ? `<img src="${logoPng}" alt="Faravis Atelier">` : LOGO}</div>
+        <div class="mark">${logoPng ? `<img src="${logoPng}" alt="Faravis Atelier">` : LOGO}${s.logo2 ? `<span class="sep"></span><img class="l2" src="${s.logo2}" alt="">` : ""}</div>
         <div class="q-title"><h3>PROFORMA</h3><div class="meta">
           <span>Proforma no</span><span><b>${esc(q.no)}</b></span>
           <span>Tarih</span><span>${esc(fmtDate(q.date))}</span>
