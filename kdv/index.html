@@ -317,7 +317,7 @@ details.more .form { padding-bottom: 6px; }
 .a4 .mark svg, .a4 .mark img { height: 62px; width: auto; display: block; }
 .a4 .mark { display: flex; align-items: center; gap: 18px; }
 .a4 .mark .sep { width: 1px; height: 48px; background: var(--p-line); }
-.a4 .mark img.l2 { max-width: 230px; object-fit: contain; }
+.a4 .mark img.l2 { height: 78px; max-width: 230px; object-fit: contain; margin: -8px 0; }
 .logo2-row { display: flex; align-items: center; gap: 8px; min-height: 40px; }
 .logo2-row img { height: 40px; max-width: 160px; object-fit: contain; background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 3px 6px; }
 .a4 .q-title { text-align: right; }
@@ -487,7 +487,8 @@ details.more .form { padding-bottom: 6px; }
             <div class="field"><span>İkinci logo (proformada Faravis logosunun yanında)</span>
               <div class="logo2-row"><img id="s_logo2Img" alt="İkinci logo" hidden>
                 <label class="btn" for="s_logo2">Logo seç</label><input id="s_logo2" type="file" accept="image/*" hidden>
-                <button class="btn ghost danger" type="button" id="s_logo2Del" hidden>Kaldır</button></div></div>
+                <button class="btn ghost danger" type="button" id="s_logo2Del" hidden>Kaldır</button>
+                <button class="btn ghost" type="button" id="s_logo2Elma" hidden>Elma Ahşap logosunu geri koy</button></div></div>
           </div>
         </details>
       </form>
@@ -1165,6 +1166,11 @@ details.more .form { padding-bottom: 6px; }
   // ---------- Proforma ----------
   const dlgQ = $("#dlgQuote");
   const LOGO = $("#logo").innerHTML;
+  // Elma Ahşap Askı logosu (brand/elma-ahsap-logo.png'den 240 px, 16 renk)
+  const ELMA_LOGO = "data:image/png;base64,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";
+  const logo2Of = (s) => (s.logo2Off ? "" : s.logo2 || ELMA_LOGO);
+  // Elma logosu görünürken web adresinin yanına elmaahsapaski.com da yazılır
+  const webs = (s) => [s.web, !s.logo2Off && !s.logo2 ? "elmaahsapaski.com" : ""].filter(Boolean).join(" · ");
   // PDF aracı satır içi SVG'yi doğru çizemiyor; logo bir kez PNG'ye çevrilip teklifte resim olarak kullanılır
   let logoPng = "";
   (async () => {
@@ -1227,10 +1233,12 @@ details.more .form { padding-bottom: 6px; }
   });
   $("#qForm").addEventListener("submit", (e) => e.preventDefault());
   $("#q_img").addEventListener("change", (e) => { settings.pdfImg = e.target.checked; saveSettings(); renderQuote(); });
-  // İkinci logo (ör. Elma Ahşap): küçültülüp PNG olarak ayarlarda saklanır, yedeğe de girer
+  // İkinci logo: varsayılan Elma Ahşap Askı (uygulamaya gömülü). Başka logo seçilirse küçültülüp PNG olarak
+  // ayarlarda saklanır (yedeğe de girer); "Kaldır" önce seçilen logoyu, sonra Elma logosunu kaldırır.
   function renderLogo2() {
-    const v = settings.seller.logo2 || "", im = $("#s_logo2Img");
-    im.hidden = !v; if (v) im.src = v; else im.removeAttribute("src"); $("#s_logo2Del").hidden = !v;
+    const v = logo2Of(settings.seller), im = $("#s_logo2Img");
+    im.hidden = !v; if (v) im.src = v; else im.removeAttribute("src");
+    $("#s_logo2Del").hidden = !v; $("#s_logo2Elma").hidden = !!v;
   }
   $("#s_logo2").addEventListener("change", async (e) => {
     const f = e.target.files[0]; e.target.value = ""; if (!f) return;
@@ -1239,10 +1247,11 @@ details.more .form { padding-bottom: 6px; }
       const nw = im.naturalWidth || 600, nh = im.naturalHeight || 300, h = Math.min(240, nh), w = Math.round((nw * h) / nh);
       const c = document.createElement("canvas"); c.width = w; c.height = h;
       c.getContext("2d").drawImage(im, 0, 0, w, h); URL.revokeObjectURL(url);
-      settings.seller.logo2 = c.toDataURL("image/png"); saveSettings(); renderLogo2(); renderQuote();
+      settings.seller.logo2 = c.toDataURL("image/png"); delete settings.seller.logo2Off; saveSettings(); renderLogo2(); renderQuote();
     } catch (err) { toast("Logo okunamadı; PNG veya JPG deneyin"); }
   });
-  $("#s_logo2Del").addEventListener("click", () => { delete settings.seller.logo2; saveSettings(); renderLogo2(); renderQuote(); });
+  $("#s_logo2Del").addEventListener("click", () => { if (settings.seller.logo2) delete settings.seller.logo2; else settings.seller.logo2Off = true; saveSettings(); renderLogo2(); renderQuote(); });
+  $("#s_logo2Elma").addEventListener("click", () => { delete settings.seller.logo2; delete settings.seller.logo2Off; saveSettings(); renderLogo2(); renderQuote(); });
 
   // Tutarın yazıyla gösterimi ("Yalnız: …")
   function words(n) {
@@ -1303,7 +1312,7 @@ details.more .form { padding-bottom: 6px; }
   };
   function quoteHTML() {
     const q = state.quote, s = settings.seller, c = q.cust || {}, t = totals();
-    const seller = [s.owner, s.address, [s.phone, s.email].filter(Boolean).join(" · "), s.web, s.tax].filter(Boolean).join("\n");
+    const seller = [s.owner, s.address, [s.phone, s.email].filter(Boolean).join(" · "), webs(s), s.tax].filter(Boolean).join("\n");
     const cust = [c.contact, c.address, c.tax].filter(Boolean).join("\n");
     const vd = parseInt(q.validDays, 10), until = vd > 0 && q.date ? addDays(q.date, vd) : "";
     const lead = parseInt(q.leadDays, 10), due = lead > 0 && q.date ? addWorkdays(q.date, lead) : "";
@@ -1314,7 +1323,7 @@ details.more .form { padding-bottom: 6px; }
     let n = 0;
     return `
       <div class="q-top">
-        <div class="mark">${logoPng ? `<img src="${logoPng}" alt="Faravis Atelier">` : LOGO}${s.logo2 ? `<span class="sep"></span><img class="l2" src="${s.logo2}" alt="">` : ""}</div>
+        <div class="mark">${logoPng ? `<img src="${logoPng}" alt="Faravis Atelier">` : LOGO}${logo2Of(s) ? `<span class="sep"></span><img class="l2" src="${logo2Of(s)}" alt="${s.logo2 ? "" : "Elma Ahşap Askı"}">` : ""}</div>
         <div class="q-title"><h3>PROFORMA</h3><div class="meta">
           <span>Proforma no</span><span><b>${esc(q.no)}</b></span>
           <span>Tarih</span><span>${esc(fmtDate(q.date))}</span>
@@ -1345,7 +1354,7 @@ details.more .form { padding-bottom: 6px; }
         </div>
       </div>
       <div class="foot">
-        <div>Bu belge proforma faturadır, resmi fatura yerine geçmez.${until ? `<br>Fiyatlar ${esc(until)} tarihine kadar geçerlidir.` : ""}<br>${esc([s.web, s.phone].filter(Boolean).join(" · "))}</div>
+        <div>Bu belge proforma faturadır, resmi fatura yerine geçmez.${until ? `<br>Fiyatlar ${esc(until)} tarihine kadar geçerlidir.` : ""}<br>${esc([webs(s), s.phone].filter(Boolean).join(" · "))}</div>
         <div class="sign"><div class="line">${esc(s.owner || s.name || "Faravis Atelier")}</div>Kaşe / İmza</div>
       </div>`;
   }
